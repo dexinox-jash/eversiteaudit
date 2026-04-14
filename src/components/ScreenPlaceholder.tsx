@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { useTheme } from '@components/ThemeProvider';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, StyleSheet } from 'react-native';
+import { Screen } from './Screen';
+import { Typography } from './Typography';
 
 interface ScreenPlaceholderProps {
   title: string;
@@ -9,37 +9,29 @@ interface ScreenPlaceholderProps {
 }
 
 export function ScreenPlaceholder({ title, subtitle }: ScreenPlaceholderProps): JSX.Element {
-  const { colors } = useTheme();
-
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
+    <Screen scrollable={false} pad>
       <View style={styles.content}>
-        <Text style={[styles.title, { color: colors.textPrimary }]}>{title}</Text>
+        <Typography variant="h1" color="primary" align="center">
+          {title}
+        </Typography>
         {subtitle ? (
-          <Text style={[styles.subtitle, { color: colors.textSecondary }]}>{subtitle}</Text>
+          <Typography variant="bodyLarge" color="secondary" align="center" style={styles.subtitle}>
+            {subtitle}
+          </Typography>
         ) : null}
       </View>
-    </SafeAreaView>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   content: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 24,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: '700',
-    marginBottom: 8,
   },
   subtitle: {
-    fontSize: 16,
-    textAlign: 'center',
+    marginTop: 12,
   },
 });

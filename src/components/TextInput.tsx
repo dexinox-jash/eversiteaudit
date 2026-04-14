@@ -12,7 +12,7 @@ import type { LucideIcon } from 'lucide-react-native';
 
 export interface TextInputProps extends Omit<RNTextInputProps, 'placeholderTextColor'> {
   label?: string;
-  error?: string;
+  error?: string | undefined;
   icon?: LucideIcon;
 }
 

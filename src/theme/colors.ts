@@ -1,67 +1,71 @@
 /**
  * Design tokens: Color palette
- * Source: design.md — Brand Foundation
+ * Source: .documentation/DESIGN.md — Design System Tokens
  */
 
-export const palette = {
-  // Primary
-  dark: '#141413',
-  light: '#faf9f5',
-  midGray: '#b0aea5',
-  lightGray: '#e8e6dc',
-
-  // Accents
-  orange: '#d97757',
-  blue: '#6a9bcc',
-  green: '#788c5d',
-
-  // Semantic extensions
-  danger: '#d97757',
-  success: '#788c5d',
-  info: '#6a9bcc',
-  warning: '#e4a010',
+export const severityColors = {
+  critical: '#FF4757',
+  high: '#FF8C42',
+  medium: '#FFD166',
+  low: '#06D6A0',
 } as const;
 
 export const colors = {
-  light: {
-    background: palette.light,
-    foreground: palette.dark,
-    muted: palette.midGray,
-    mutedForeground: palette.midGray,
-    border: palette.lightGray,
-    primary: palette.orange,
-    primaryForeground: palette.light,
-    secondary: palette.blue,
-    secondaryForeground: palette.light,
-    danger: palette.danger,
-    dangerForeground: palette.light,
-    success: palette.success,
-    successForeground: palette.light,
-    info: palette.info,
-    infoForeground: palette.light,
-    card: '#ffffff',
-    cardForeground: palette.dark,
-  },
   dark: {
-    background: palette.dark,
-    foreground: palette.light,
-    muted: '#2a2a28',
-    mutedForeground: palette.midGray,
-    border: '#2a2a28',
-    primary: palette.orange,
-    primaryForeground: palette.light,
-    secondary: palette.blue,
-    secondaryForeground: palette.light,
-    danger: palette.danger,
-    dangerForeground: palette.light,
-    success: palette.success,
-    successForeground: palette.light,
-    info: palette.info,
-    infoForeground: palette.light,
-    card: '#1c1c1b',
-    cardForeground: palette.light,
+    primary: '#4A9EFF',
+    primaryHover: '#6BB3FF',
+    primaryPressed: '#3A8EEF',
+    primarySubtle: '#1A3A5C',
+
+    success: '#06D6A0',
+    warning: '#FFD166',
+    error: '#FF4757',
+    info: '#4A9EFF',
+
+    background: '#0D1117',
+    backgroundSecondary: '#161B22',
+    backgroundTertiary: '#21262D',
+    backgroundElevated: '#30363D',
+    scrim: 'rgba(0,0,0,0.7)',
+
+    textPrimary: '#F0F6FC',
+    textSecondary: '#8B949E',
+    textTertiary: '#6E7681',
+    textDisabled: '#484F58',
+
+    border: '#30363D',
+    borderSubtle: '#21262D',
+
+    severity: severityColors,
+  },
+  light: {
+    primary: '#0066CC',
+    primaryHover: '#0052A3',
+    primaryPressed: '#004C99',
+    primarySubtle: '#E6F2FF',
+
+    success: '#059669',
+    warning: '#D97706',
+    error: '#DC2626',
+    info: '#0066CC',
+
+    background: '#FFFFFF',
+    backgroundSecondary: '#F6F8FA',
+    backgroundTertiary: '#E1E4E8',
+    backgroundElevated: '#FFFFFF',
+    scrim: 'rgba(0,0,0,0.5)',
+
+    textPrimary: '#1F2328',
+    textSecondary: '#656D76',
+    textTertiary: '#8C959F',
+    textDisabled: '#B7BDC5',
+
+    border: '#D0D7DE',
+    borderSubtle: '#E1E4E8',
+
+    severity: severityColors,
   },
 } as const;
 
 export type ColorTheme = keyof typeof colors;
-export type ColorTokens = typeof colors.light;
+export type ColorTokens = (typeof colors)[ColorTheme];

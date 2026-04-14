@@ -4,7 +4,7 @@ module.exports = {
   transformIgnorePatterns: [
     'node_modules/(?!((react-native|@react-native|expo|@expo|react-native-reanimated|react-native-gesture-handler|react-native-screens|react-native-safe-area-context)/.*))',
   ],
-  moduleNameMapping: {
+  moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^@app/(.*)$': '<rootDir>/src/app/$1',
     '^@components/(.*)$': '<rootDir>/src/components/$1',
@@ -16,6 +16,11 @@ module.exports = {
     '^@utils/(.*)$': '<rootDir>/src/utils/$1',
     '^@constants/(.*)$': '<rootDir>/src/constants/$1',
     '^@types/(.*)$': '<rootDir>/src/types/$1',
+  },
+  modulePathIgnorePatterns: ['<rootDir>/.skills/'],
+  testPathIgnorePatterns: ['/node_modules/', '/.skills/'],
+  haste: {
+    platforms: ['ios', 'android', 'native'],
   },
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',

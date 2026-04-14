@@ -24,8 +24,10 @@ module.exports = {
     },
   },
   env: {
-    'react-native/react-native': true,
+    es2022: true,
     jest: true,
+    browser: true,
+    node: true,
   },
   rules: {
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],

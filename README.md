@@ -15,6 +15,10 @@ This project is developed with an AI Agent Army following a strict hierarchy of 
 5. `safety.md` — Security protocols, OWASP standards, audit checklists
 6. `agents.md` — Agent army configuration, swarm rules, delegation protocols
 
+## Repository
+
+- **GitHub:** https://github.com/dexinox-jash/eversiteaudit.git
+
 ## Quick Start
 
 ```bash

@@ -10,3 +10,9 @@ export {
   type CreateIssuePayload,
   type UpdateIssuePayload,
 } from './IssueRepository';
+export {
+  PhotoRepository,
+  photoRepository,
+  type CreatePhotoPayload,
+  type UpdatePhotoPayload,
+} from './PhotoRepository';

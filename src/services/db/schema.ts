@@ -3,7 +3,7 @@
  * Source: .documentation/ARCHITECTURE.md — Data Architecture
  */
 
-export const CURRENT_SCHEMA_VERSION = 1;
+export const CURRENT_SCHEMA_VERSION = 5;
 
 export const CREATE_TABLES_SQL = `
 -- Schema version: ${CURRENT_SCHEMA_VERSION}
@@ -41,6 +41,8 @@ CREATE TABLE IF NOT EXISTS issues (
     resolution_notes TEXT,
     resolved_at INTEGER,
     resolved_by TEXT,
+    voice_note_url TEXT,
+    sort_order INTEGER DEFAULT 0,
     created_at INTEGER NOT NULL,
     updated_at INTEGER NOT NULL,
     is_deleted INTEGER DEFAULT 0,
@@ -65,7 +67,9 @@ CREATE TABLE IF NOT EXISTS photos (
     height INTEGER,
     file_size_bytes INTEGER,
     caption TEXT,
+    checksum TEXT,
     tags TEXT DEFAULT '[]',
+    sort_order INTEGER DEFAULT 0,
     created_at INTEGER NOT NULL,
     updated_at INTEGER NOT NULL,
     is_deleted INTEGER DEFAULT 0,

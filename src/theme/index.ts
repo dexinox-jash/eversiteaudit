@@ -10,8 +10,10 @@ export {
   fontSizes,
   lineHeights,
   fontWeights,
+  letterSpacing,
   type FontSizeToken,
   type FontWeightToken,
+  type LetterSpacingToken,
 } from './typography';
 export { shadows, type ShadowToken } from './shadows';
 export { radius, type RadiusToken } from './radius';

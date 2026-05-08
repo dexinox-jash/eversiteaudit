@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, type ViewProps } from 'react-native';
 import { useTheme } from '@components/ThemeProvider';
-import { spacing, radius, shadows } from '@theme/index';
+import { spacing, shadows, radius } from '@theme/index';
 
 export type CardElevation = '1' | '2' | '3' | '4';
 
@@ -23,13 +23,14 @@ export function Card({
 
   return (
     <View
+      testID="card"
       style={[
         {
-          backgroundColor: colors.backgroundSecondary,
-          borderRadius: radius.lg,
           padding: spacing[padding],
           borderWidth: 1,
           borderColor: colors.border,
+          borderRadius: radius.lg,
+          backgroundColor: colors.surfaceOverlay,
         },
         shadowStyle,
         style,

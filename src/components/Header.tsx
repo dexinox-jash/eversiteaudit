@@ -12,6 +12,8 @@ export interface HeaderProps {
   rightIcon?: LucideIcon;
   onRightPress?: () => void;
   rightElement?: React.ReactNode;
+  leftAccessibilityLabel?: string;
+  rightAccessibilityLabel?: string;
 }
 
 export function Header({
@@ -21,6 +23,8 @@ export function Header({
   rightIcon: RightIcon,
   onRightPress,
   rightElement,
+  leftAccessibilityLabel,
+  rightAccessibilityLabel,
 }: HeaderProps): JSX.Element {
   const { colors } = useTheme();
 
@@ -38,6 +42,7 @@ export function Header({
         {LeftIcon ? (
           <Pressable
             accessibilityRole="button"
+            accessibilityLabel={leftAccessibilityLabel ?? 'Go back'}
             onPress={onLeftPress}
             style={styles.button}
             hitSlop={8}
@@ -47,7 +52,13 @@ export function Header({
         ) : null}
       </View>
 
-      <Typography variant="h3" color="primary" style={styles.title} numberOfLines={1}>
+      <Typography
+        variant="headingSm"
+        accessibilityRole="header"
+        color="primary"
+        style={styles.title}
+        numberOfLines={1}
+      >
         {title}
       </Typography>
 
@@ -56,6 +67,7 @@ export function Header({
         {RightIcon ? (
           <Pressable
             accessibilityRole="button"
+            accessibilityLabel={rightAccessibilityLabel ?? 'Action'}
             onPress={onRightPress}
             style={styles.button}
             hitSlop={8}

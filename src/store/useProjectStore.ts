@@ -1,6 +1,10 @@
 import { create } from 'zustand';
 import type { Project, ProjectStatus } from '@/types/domain';
-import { projectRepository, type CreateProjectPayload, type UpdateProjectPayload } from '@services/db/repositories';
+import {
+  projectRepository,
+  type CreateProjectPayload,
+  type UpdateProjectPayload,
+} from '@services/db/repositories';
 
 export type ProjectFilter = ProjectStatus | 'all';
 
@@ -16,12 +20,22 @@ export interface ProjectStoreActions {
   createProject: (payload: CreateProjectPayload) => Promise<Project>;
   updateProject: (id: string, payload: UpdateProjectPayload) => Promise<Project>;
   deleteProject: (id: string) => Promise<void>;
+  loadDeletedProjects: () => Promise<void>;
+  restoreProject: (id: string) => Promise<void>;
+  permanentlyDeleteProject: (id: string) => Promise<void>;
   setFilter: (filter: ProjectFilter) => void;
   clearError: () => void;
 }
 
 export type ProjectStore = ProjectStoreState & ProjectStoreActions;
 
+/**
+ * Zustand store for project data.
+ *
+ * Usage:
+ *   const projects = useProjectStore((s) => s.projects);
+ *   const { loadProjects, createProject } = useProjectStore();
+ */
 export const useProjectStore = create<ProjectStore>((set, get) => ({
   projects: [],
   isLoading: false,
@@ -34,7 +48,10 @@ export const useProjectStore = create<ProjectStore>((set, get) => ({
       const data = await projectRepository.getAll();
       set({ projects: data, isLoading: false });
     } catch (err) {
-      set({ error: err instanceof Error ? err.message : 'Failed to load projects', isLoading: false });
+      set({
+        error: err instanceof Error ? err.message : 'Failed to load projects',
+        isLoading: false,
+      });
     }
   },
 
@@ -103,6 +120,39 @@ export const useProjectStore = create<ProjectStore>((set, get) => ({
         projects: [...state.projects, target].sort((a, b) => b.updatedAt - a.updatedAt),
         error: err instanceof Error ? err.message : 'Failed to delete project',
       }));
+      throw err;
+    }
+  },
+
+  loadDeletedProjects: async (): Promise<void> => {
+    set({ isLoading: true, error: null });
+    try {
+      const projects = await projectRepository.getDeleted();
+      set({ projects, isLoading: false });
+    } catch (err) {
+      set({
+        error: err instanceof Error ? err.message : 'Failed to load deleted projects',
+        isLoading: false,
+      });
+    }
+  },
+
+  restoreProject: async (id: string): Promise<void> => {
+    set({ error: null });
+    try {
+      await projectRepository.restore(id);
+    } catch (err) {
+      set({ error: err instanceof Error ? err.message : 'Failed to restore project' });
+      throw err;
+    }
+  },
+
+  permanentlyDeleteProject: async (id: string): Promise<void> => {
+    set({ error: null });
+    try {
+      await projectRepository.permanentlyDelete(id);
+    } catch (err) {
+      set({ error: err instanceof Error ? err.message : 'Failed to permanently delete project' });
       throw err;
     }
   },

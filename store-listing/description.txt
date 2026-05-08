@@ -1,0 +1,16 @@
+Short description:
+EverSiteAudit — Streamlined site inspections, issue tracking, and professional reporting on the go.
+
+Full description:
+EverSiteAudit is the all-in-one mobile companion for construction, facilities, and site audit professionals. Capture issues, annotate photos, manage projects, and generate polished PDF reports — all from your phone or tablet.
+
+Key features:
+• Project Management — Create and organize site audit projects in one place.
+• Issue Tracking — Log issues with severity, status, and detailed descriptions.
+• Photo Annotation — Capture and mark up photos directly in the app.
+• Gallery & PDF Preview — Review media and export-ready reports before sharing.
+• Professional Export — Generate and share PDF reports with stakeholders instantly.
+• Audit Templates — Speed up recurring inspections with reusable templates.
+• Secure & Offline-Ready — Your data stays protected and accessible, even on remote sites.
+
+Whether you're conducting building inspections, safety audits, or quality assurance reviews, EverSiteAudit keeps your workflow efficient and your documentation impeccable.

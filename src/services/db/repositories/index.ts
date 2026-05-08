@@ -16,3 +16,20 @@ export {
   type CreatePhotoPayload,
   type UpdatePhotoPayload,
 } from './PhotoRepository';
+export { TemplateRepository, templateRepository } from './TemplateRepository';
+export {
+  AnnotationRepository,
+  annotationRepository,
+  type CreateAnnotationPayload,
+  type UpdateAnnotationPayload,
+} from './AnnotationRepository';
+export {
+  SettingsRepository,
+  settingsRepository,
+  type SetSettingPayload,
+} from './SettingsRepository';
+export {
+  ExportHistoryRepository,
+  exportHistoryRepository,
+  type CreateExportHistoryPayload,
+} from './ExportHistoryRepository';

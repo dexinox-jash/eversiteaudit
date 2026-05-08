@@ -7,7 +7,7 @@ import { spacing } from '@theme/index';
 
 export interface ScreenProps extends ViewProps {
   children: React.ReactNode;
-  header?: HeaderProps;
+  header?: HeaderProps | React.ReactElement;
   scrollable?: boolean;
   pad?: boolean;
   safeAreaEdges?: Array<'top' | 'bottom' | 'left' | 'right'>;
@@ -40,12 +40,17 @@ export function Screen({
     </View>
   );
 
+  const headerNode = React.useMemo(() => {
+    if (!header) return null;
+    if (React.isValidElement(header)) {
+      return header;
+    }
+    return <Header {...(header as HeaderProps)} />;
+  }, [header]);
+
   return (
-    <SafeAreaView
-      edges={safeAreaEdges}
-      style={{ flex: 1, backgroundColor: colors.background }}
-    >
-      {header ? <Header {...header} /> : null}
+    <SafeAreaView edges={safeAreaEdges} style={{ flex: 1, backgroundColor: colors.background }}>
+      {headerNode}
       {scrollable ? (
         <ScrollView
           style={{ flex: 1 }}

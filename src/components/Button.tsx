@@ -1,23 +1,20 @@
 import React from 'react';
 import {
   Pressable,
+  Text,
   View,
   StyleSheet,
+  Platform,
   type PressableProps,
   type ViewStyle,
+  type TextStyle,
 } from 'react-native';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-} from 'react-native-reanimated';
 import * as Haptics from 'expo-haptics';
 import { useTheme } from '@components/ThemeProvider';
-import { Typography } from './Typography';
-import { spacing, radius, touchTargets } from '@theme/index';
+import { spacing, radius, fontWeights } from '@theme/index';
 import type { LucideIcon } from 'lucide-react-native';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'destructive' | 'ghost';
+export type ButtonVariant = 'primary' | 'secondary' | 'destructive' | 'ghost' | 'outline';
 export type ButtonSize = 'default' | 'small' | 'icon';
 
 export interface ButtonProps extends Omit<PressableProps, 'children'> {
@@ -29,9 +26,9 @@ export interface ButtonProps extends Omit<PressableProps, 'children'> {
   disabled?: boolean;
   fullWidth?: boolean;
   haptic?: boolean;
+  accessibilityLabel?: string;
+  accessibilityHint?: string;
 }
-
-const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 export function Button({
   variant = 'primary',
@@ -42,35 +39,18 @@ export function Button({
   disabled,
   fullWidth,
   haptic = true,
-  onPressIn,
-  onPressOut,
+  accessibilityLabel,
+  accessibilityHint,
   onPress,
   style,
   ...rest
 }: ButtonProps): JSX.Element {
-  const { colors } = useTheme();
-  const pressedValue = useSharedValue(1);
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: pressedValue.value }],
-    opacity: withTiming(disabled || loading ? 0.5 : 1, { duration: 150 }),
-  }));
-
-  const handlePressIn = (e: Parameters<NonNullable<PressableProps['onPressIn']>>[0]): void => {
-    pressedValue.value = withTiming(0.97, { duration: 100 });
-    onPressIn?.(e);
-  };
-
-  const handlePressOut = (e: Parameters<NonNullable<PressableProps['onPressOut']>>[0]): void => {
-    pressedValue.value = withTiming(1, { duration: 100 });
-    onPressOut?.(e);
-  };
-
+  const { reduceMotion, colors } = useTheme();
   const isDisabled = disabled ? true : loading === true;
   const isLoading = loading ?? false;
 
   const handlePress = (e: Parameters<NonNullable<PressableProps['onPress']>>[0]): void => {
-    if (haptic && !disabled && !loading) {
+    if (haptic && !disabled && !loading && !reduceMotion) {
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {
         // Ignore haptic errors on unsupported devices/simulators
       });
@@ -78,94 +58,124 @@ export function Button({
     onPress?.(e);
   };
 
-  const variantStyles: Record<ButtonVariant, ViewStyle> = {
+  const variantStyles: Record<
+    ButtonVariant,
+    { backgroundColor: string; color: string; borderColor: string }
+  > = {
     primary: {
       backgroundColor: colors.primary,
+      color: colors.primaryForeground,
+      borderColor: colors.primary,
     },
     secondary: {
-      backgroundColor: 'transparent',
-      borderWidth: 2,
-      borderColor: colors.border,
+      backgroundColor: colors.secondary,
+      color: colors.secondaryForeground,
+      borderColor: colors.secondary,
     },
     destructive: {
-      backgroundColor: colors.error,
+      backgroundColor: colors.destructive,
+      color: colors.destructiveForeground,
+      borderColor: colors.destructive,
     },
     ghost: {
+      backgroundColor: colors.surfaceOverlay,
+      color: colors.textPrimary,
+      borderColor: colors.border,
+    },
+    outline: {
       backgroundColor: 'transparent',
+      color: colors.textPrimary,
+      borderColor: colors.border,
     },
   };
 
-  const textColor: Record<ButtonVariant, string> = {
-    primary: '#FFFFFF',
-    secondary: colors.textPrimary,
-    destructive: '#FFFFFF',
-    ghost: colors.primary,
-  };
-
-  const sizeStyles: Record<ButtonSize, ViewStyle> = {
-    default: {
-      height: touchTargets.preferred,
-      paddingHorizontal: spacing['6'],
-    },
-    small: {
-      height: touchTargets.minimum,
-      paddingHorizontal: spacing['4'],
-    },
-    icon: {
-      width: touchTargets.preferred,
-      height: touchTargets.preferred,
-      paddingHorizontal: 0,
-    },
-  };
+  const currentVariant = variantStyles[variant];
 
   return (
-    <AnimatedPressable
-      accessibilityRole="button"
-      accessibilityLabel={title}
-      accessibilityState={{ disabled: isDisabled, busy: isLoading }}
-      disabled={isDisabled}
-      onPressIn={handlePressIn}
-      onPressOut={handlePressOut}
+    <Pressable
       onPress={handlePress}
-      style={[
+      disabled={isDisabled}
+      accessibilityLabel={accessibilityLabel ?? title}
+      accessibilityHint={accessibilityHint}
+      accessibilityRole="button"
+      accessibilityState={{ disabled: isDisabled, busy: isLoading }}
+      style={({ pressed }) => [
         styles.base,
-        variantStyles[variant],
-        sizeStyles[size],
+        size === 'default' && styles.sizeDefault,
+        size === 'small' && styles.sizeSmall,
+        size === 'icon' && styles.sizeIcon,
+        {
+          backgroundColor: currentVariant.backgroundColor,
+          borderColor: currentVariant.borderColor,
+          borderWidth: variant === 'ghost' || variant === 'outline' ? 1 : StyleSheet.hairlineWidth,
+          borderRadius: radius.md,
+        },
         fullWidth && styles.fullWidth,
-        animatedStyle,
+        pressed && !isDisabled && styles.pressed,
+        !reduceMotion && !isDisabled && { transform: [{ scale: pressed ? 0.98 : 1 }] },
+        isDisabled && styles.disabled,
         style as ViewStyle,
       ]}
+      android_ripple={
+        Platform.OS === 'android' ? { color: colors.surfaceOverlay, foreground: true } : undefined
+      }
       {...rest}
     >
-      {Icon && size === 'icon' ? (
-        <Icon size={24} color={textColor[variant]} />
+      {size === 'icon' && Icon ? (
+        <Icon size={20} color={currentVariant.color} />
       ) : (
         <View style={styles.content}>
-          {Icon ? <Icon size={20} color={textColor[variant]} style={styles.icon} /> : null}
-          <Typography variant={size === 'small' ? 'bodySmall' : 'bodyLarge'} weight="semibold" color={textColor[variant]}>
-            {title}
-          </Typography>
+          {Icon ? <Icon size={16} color={currentVariant.color} style={styles.icon} /> : null}
+          <Text style={[styles.text, { color: currentVariant.color }]} numberOfLines={1}>
+            {isLoading ? 'Loading...' : title}
+          </Text>
         </View>
       )}
-    </AnimatedPressable>
+    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   base: {
-    borderRadius: radius.lg,
-    justifyContent: 'center',
-    alignItems: 'center',
     alignSelf: 'flex-start',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   fullWidth: {
     alignSelf: 'stretch',
   },
+  sizeDefault: {
+    paddingVertical: spacing['2'],
+    paddingHorizontal: spacing['4'],
+    minHeight: 44,
+  },
+  sizeSmall: {
+    paddingVertical: spacing['1'],
+    paddingHorizontal: spacing['3'],
+    minHeight: 40,
+  },
+  sizeIcon: {
+    width: 44,
+    height: 44,
+    padding: spacing['2'],
+  },
   content: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   icon: {
     marginRight: spacing['2'],
+  },
+  text: {
+    fontSize: 15,
+    fontWeight: fontWeights.semibold as unknown as TextStyle['fontWeight'],
+    letterSpacing: -0.13,
+  },
+  pressed: {
+    opacity: 0.85,
+  },
+  disabled: {
+    opacity: 0.4,
   },
 });

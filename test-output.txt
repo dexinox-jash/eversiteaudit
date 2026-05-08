@@ -1,0 +1,89 @@
+﻿
+> eversiteaudit-mobile@0.0.1 test
+> jest --passWithNoTests --passWithNoTests
+
+node.exe : PASS tests/services/auth/biometricAuth.test.ts
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (PASS tests/serv...ricAuth.test.ts:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+PASS tests/services/db/repositories/ProjectRepository.test.ts
+PASS tests/services/export/exportHistory.test.ts
+PASS tests/store/useAnnotationStore.test.ts
+PASS tests/services/db/repositories/IssueRepository.test.ts
+PASS tests/store/usePhotoStore.test.ts
+PASS tests/services/export/csvExport.test.ts
+PASS tests/integration/captureToExport.test.ts
+PASS tests/services/deepLink/deepLinkHandler.test.ts
+PASS src/services/backup/__tests__/reminderService.test.ts
+PASS tests/store/useProjectStore.test.ts
+PASS tests/services/export/pdfExport.test.ts
+PASS tests/services/db/repositories/TemplateRepository.test.ts
+PASS tests/services/export/jsonExport.test.ts
+PASS tests/store/useIssueStore.test.ts
+PASS tests/store/usePreferenceStore.test.ts
+PASS tests/services/integrity/photoIntegrity.test.ts
+PASS tests/services/db/repositories/AnnotationRepository.test.ts
+PASS tests/services/db/repositories/PhotoRepository.test.ts
+PASS tests/services/export/zipExport.test.ts
+PASS tests/services/template/templateService.test.ts
+PASS tests/services/export/shareExport.test.ts
+PASS tests/services/security/fieldEncryption.test.ts
+PASS tests/services/os/shortcuts.test.ts
+PASS tests/services/storage/preferences.test.ts
+PASS tests/services/os/haptics.test.ts
+PASS tests/services/backup/crypto.test.ts
+PASS tests/services/backup/backupService.test.ts
+PASS tests/components/ThemeProvider.test.tsx
+PASS tests/accessibility/screenLabels.test.tsx
+PASS tests/app/tabs/settings.test.tsx
+
+<--- Last few GCs --->
+
+[38616:000002A5C97FA000]     3600 ms: Mark-Compact 3674.7 (4111.2) -> 3674.0 (4110.5) MB, pooled: 9.0 MB, 59.54 / 0.00 
+ms (average mu = 0.610, current mu = 0.107) allocation failure; scavenge might not succeed
+[38616:000002A5C97FA000]     3663 ms: Mark-Compact 3674.7 (4111.2) -> 3674.7 (4111.2) MB, pooled: 9.0 MB, 62.18 / 0.00 
+ms (average mu = 0.422, current mu = 0.005) allocation failure; scavenge might not succeed
+
+FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+FAIL tests/services/storage/cacheManager.test.ts
+  ΓùÅ Test suite failed to run
+
+    A jest worker process (pid=38616) was terminated by another process: signal=SIGTERM, exitCode=null. Operating 
+system logs may contain more information on why this occurred.
+
+      at ChildProcessWorker._onExit (node_modules/jest-worker/build/workers/ChildProcessWorker.js:370:23)
+
+PASS tests/app/photos/annotate.test.tsx (6.033 s)
+PASS tests/app/export/index.test.tsx (6.158 s)
+PASS tests/app/projects/list.test.tsx (6.258 s)
+PASS tests/app/issues/detail.test.tsx (6.277 s)
+PASS tests/app/photos/viewer.test.tsx (6.325 s)
+PASS tests/app/issues/edit.test.tsx (6.305 s)
+PASS tests/app/tabs/projects.test.tsx (6.325 s)
+PASS tests/app/onboarding.test.tsx (6.334 s)
+PASS tests/app/projects/new.test.tsx (6.309 s)
+PASS tests/app/tabs/gallery.test.tsx (6.312 s)
+PASS tests/app/camera.test.tsx (6.392 s)
+PASS tests/app/tabs/issues.test.tsx (6.406 s)
+PASS tests/app/projects/detail.test.tsx (6.419 s)
+
+Summary of all failing tests
+FAIL tests/services/storage/cacheManager.test.ts
+  ΓùÅ Test suite failed to run
+
+    A jest worker process (pid=38616) was terminated by another process: signal=SIGTERM, exitCode=null. Operating 
+system logs may contain more information on why this occurred.
+
+      at ChildProcessWorker._onExit (node_modules/jest-worker/build/workers/ChildProcessWorker.js:370:23)
+
+
+Test Suites: 1 failed, 44 passed, 45 total
+Tests:       294 passed, 294 total
+Snapshots:   0 total
+Time:        7.218 s, estimated 23 s
+Ran all test suites.

@@ -1,59 +1,127 @@
-import React, { useEffect } from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import React, { useEffect, useMemo, useState, useCallback } from 'react';
+import { View, Pressable, StyleSheet, RefreshControl } from 'react-native';
+import { FlashList } from '@shopify/flash-list';
 import { router } from 'expo-router';
-import { Folder, Plus, Search } from 'lucide-react-native';
-import { Screen, Typography, Card, EmptyState, FAB, Badge } from '@components/index';
+import { Folder, Plus, Search, Settings } from 'lucide-react-native';
+import {
+  Screen,
+  Typography,
+  EmptyState,
+  FAB,
+  Badge,
+  ScreenHeader,
+  ListItem,
+  Button,
+  AnimatedListItem,
+} from '@components/index';
 import { useTheme } from '@components/ThemeProvider';
-import { useProjectStore } from '@store/useProjectStore';
+import { useProjectStore, type ProjectFilter } from '@store/useProjectStore';
 import { spacing } from '@theme/index';
 import type { Project } from '@/types/domain';
 
-function ProjectItem({ project }: { project: Project }): JSX.Element {
+const FILTERS: { key: ProjectFilter; label: string }[] = [
+  { key: 'all', label: 'All' },
+  { key: 'active', label: 'Active' },
+  { key: 'completed', label: 'Completed' },
+  { key: 'archived', label: 'Archived' },
+];
+
+const ProjectItem = React.memo(function ProjectItem({
+  project,
+}: {
+  project: Project;
+}): JSX.Element {
   const { colors } = useTheme();
+  const isArchived = project.status === 'archived';
 
   return (
-    <Card style={styles.card}>
-      <View style={styles.cardRow}>
-        <View style={[styles.iconCircle, { backgroundColor: colors.primarySubtle }]}>
-          <Folder size={24} color={colors.primary} />
-        </View>
-        <View style={styles.cardContent}>
-          <Typography variant="h4" color="primary" numberOfLines={1}>
-            {project.name}
-          </Typography>
-          {project.siteAddress ? (
-            <Typography variant="caption" color="secondary" numberOfLines={1}>
-              {project.siteAddress}
-            </Typography>
-          ) : null}
-        </View>
-        <Badge
-          title={project.status}
-          variant={project.status === 'active' ? 'success' : project.status === 'completed' ? 'info' : 'default'}
-          size="small"
-        />
-      </View>
-    </Card>
+    <Pressable
+      onPress={() => router.push(`/projects/${project.id}`)}
+      accessibilityRole="button"
+      accessibilityLabel={`Open project ${project.name}`}
+      accessibilityHint="Double-tap to view project details"
+    >
+      <ListItem
+        icon={Folder}
+        iconColor={colors.primary}
+        iconBackground={colors.primarySubtle}
+        title={project.name}
+        subtitle={project.siteAddress ?? undefined}
+        rightElement={
+          <Badge
+            title={project.status}
+            variant={
+              project.status === 'active'
+                ? 'success'
+                : project.status === 'completed'
+                  ? 'info'
+                  : 'default'
+            }
+            size="small"
+          />
+        }
+        disabled={isArchived}
+      />
+    </Pressable>
   );
-}
+});
 
 export default function ProjectsScreen(): JSX.Element {
   const { colors } = useTheme();
-  const { projects, isLoading, error, loadProjects } = useProjectStore();
+  const { projects, isLoading, error, loadProjects, filter, setFilter } = useProjectStore();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     void loadProjects();
   }, [loadProjects]);
 
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    await loadProjects();
+    setRefreshing(false);
+  }, [loadProjects]);
+
+  const filteredProjects = useMemo(() => {
+    const statusFiltered =
+      filter === 'all' ? projects : projects.filter((p) => p.status === filter);
+    const query = searchQuery.trim().toLowerCase();
+    if (!query) return statusFiltered;
+    return statusFiltered.filter(
+      (p) => p.name.toLowerCase().includes(query) || p.siteAddress?.toLowerCase().includes(query)
+    );
+  }, [projects, filter, searchQuery]);
+
   return (
     <Screen
-      header={{
-        title: 'Projects',
-        rightIcon: Search,
-        onRightPress: () => {
-          // Search will be implemented in a future phase
-        },
-      }}
+      header={
+        <ScreenHeader
+          title="Projects"
+          searchProps={{
+            icon: Search,
+            placeholder: 'Search projects...',
+            value: searchQuery,
+            onChangeText: setSearchQuery,
+            accessibilityLabel: 'Search projects',
+          }}
+          filterChips={FILTERS.map((f) => ({
+            label: f.label,
+            active: filter === f.key,
+            onPress: () => setFilter(f.key),
+          }))}
+          rightElement={
+            <Button
+              title=""
+              icon={Settings}
+              variant="ghost"
+              size="icon"
+              onPress={() => router.push('/settings')}
+              accessibilityLabel="Open settings"
+              accessibilityHint="Double-tap to open app settings"
+            />
+          }
+        />
+      }
       scrollable={false}
       pad
     >
@@ -65,14 +133,34 @@ export default function ProjectsScreen(): JSX.Element {
           actionTitle="New Project"
           onAction={() => router.push('/projects/new')}
         />
+      ) : filteredProjects.length === 0 ? (
+        <EmptyState
+          icon={Search}
+          title="No projects match your search"
+          subtitle="Try adjusting your search terms or filters."
+          actionTitle="Clear Search"
+          onAction={() => setSearchQuery('')}
+        />
       ) : (
-        <FlatList
-          data={projects}
+        <FlashList
+          data={filteredProjects}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <ProjectItem project={item} />}
+          renderItem={({ item, index }) => (
+            <AnimatedListItem index={index} animate={!refreshing}>
+              <ProjectItem project={item} />
+            </AnimatedListItem>
+          )}
           contentContainerStyle={styles.list}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
           showsVerticalScrollIndicator={false}
+          estimatedItemSize={72}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={() => void onRefresh()}
+              tintColor={colors.primary}
+            />
+          }
         />
       )}
 
@@ -87,6 +175,7 @@ export default function ProjectsScreen(): JSX.Element {
       <FAB
         icon={Plus}
         accessibilityLabel="Create new project"
+        accessibilityHint="Double-tap to create a new audit project"
         onPress={() => router.push('/projects/new')}
       />
     </Screen>
@@ -95,29 +184,10 @@ export default function ProjectsScreen(): JSX.Element {
 
 const styles = StyleSheet.create({
   list: {
-    paddingBottom: 100,
+    paddingBottom: 152,
   },
   separator: {
     height: spacing['3'],
-  },
-  card: {
-    marginHorizontal: 0,
-  },
-  cardRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  iconCircle: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: spacing['3'],
-  },
-  cardContent: {
-    flex: 1,
-    justifyContent: 'center',
   },
   errorBanner: {
     position: 'absolute',

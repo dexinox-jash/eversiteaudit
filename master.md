@@ -1,206 +1,177 @@
-# MASTER.md — Supreme Authority for AAA-Grade Development
+# EverSiteAudit — Master Governance Document
 
-> **CRITICAL PROTOCOL: Every agent invocation, every command, every file modification MUST begin by reading this file. This document is the root of all truth for this project.**
-
----
-
-## 1. Project Identity & Vision
-
-**Project Name:** EverSiteAudit Mobile  
-**Classification:** AAA-Grade Mobile Application  
-**Platform:** Cross-Platform Mobile (iOS & Android via React Native / Expo)  
-**Quality Threshold:** Truth Score ≥ 0.95 (standard), ≥ 0.99 (security-critical paths)
-
-### What "AAA Grade" Means Here
-- **Architecture:** Deep modules, clean separation, DDD boundaries, testable interfaces.
-- **Design:** Distinctive, production-grade UI/UX with zero generic "AI slop" aesthetics.
-- **Security:** OWASP ASVS Level 3 compliance, agentic AI security (OWASP 2026), zero tolerance for vulnerabilities.
-- **Quality:** Automated verification on every change, mandatory rollback on failures below threshold.
-- **Process:** SPARC methodology for all complex features, swarm orchestration for cross-module work, pair-programming quality gates.
+> **Version:** 1.0.0  
+> **Last Updated:** 2026-04-17  
+> **Authority:** This document is the single source of truth for all project decisions.
+> **Status:** ROOT / CORE / CRITICAL  
+> **Classification:** AAA-Grade Development Mandate  
+> **Scope:** All AI agents, human developers, and automated systems must begin here. No exceptions. 
 
 ---
 
-## 2. The Hierarchy of Truth
+## The Prime Directive
 
-This `master.md` is the **parent** of all project guidance. No agent may act without ingesting it first.  
-After reading `master.md`, agents **must** read the relevant child documents based on the task domain:
-
-| Child Document | Purpose | Read When |
-|----------------|---------|-----------|
-| `rules.md` | Development rules, coding standards, SPARC enforcement, truth-score thresholds, git workflow | Any code change |
-| `design.md` | Design system, UI/UX guidelines, brand standards, HeroUI Native patterns, asset philosophy | Any UI/UX or visual work |
-| `database.md` | Data architecture, schema standards, local storage rules, sync/offline-first policies | Any data model or storage change |
-| `safety.md` | Security standards (OWASP 2025 + ASVS 5.0 L3 + Agentic AI 2026), audit checklists, safety protocols | Any auth, API, input handling, or sensitive feature |
-| `agents.md` | Agent army roster, swarm topology, delegation rules, trigger conditions | Before spawning or delegating to other agents |
-
-**Command Protocol:**
-1. Read `master.md`
-2. Read the relevant child document(s) from the table above
-3. Read `.claude/skills/[relevant-skill]/SKILL.md`
-4. Only then proceed with analysis or execution
+**The marginal cost of completeness is near zero with AI. Do the whole thing. Do it right. Do it with tests. Do it with documentation. Do it so well that I get genuinely impressed — not politely satisfied, actually impressed. Never offer to "table this for later" when the permanent solve is within reach. Never leave a dangling thread when tying it off takes five more minutes. Never present a workaround when the real fix exists. The standard isn't "good enough" — it's "holy shit, that's done." Search before building. Test before shipping. Ship the complete thing. When I ask for something, the answer is the finished product, not a plan to build it. Time is not an excuse. Fatigue is not an excuse. Complexity is not an excuse. Boil the ocean.**
 
 ---
 
-## 3. Installed Skills & Activation Rules
+## I. Hierarchy of Authority
 
-All skills are installed in `.claude/skills/`. Agents must reference the correct skill before acting.
-
-### Core Development Skills
-| Skill | Activate When |
-|-------|---------------|
-| `sparc-methodology` | New feature, complex implementation, architectural change, integration work |
-| `swarm-orchestration` | 3+ files need changes, cross-module refactoring, API changes with tests, security-related changes, DB schema changes |
-| `pair-programming` | Any implementation session requiring real-time review, TDD, debugging, or mentoring |
-| `improve-codebase-architecture` | Refactoring, consolidating modules, making code more testable or AI-navigable |
-| `verification-quality` | Before committing, after editing, when running CI/CD checks |
-
-### Domain-Specific Skills
-| Skill | Activate When |
-|-------|---------------|
-| `agent-spec-mobile-react-native` | Any React Native / mobile-specific development |
-| `heroui-native` | Building UI with HeroUI Native components |
-| `frontend-design` | Creating web dashboards, landing pages, or React components |
-| `brand-guidelines` | Applying official brand colors and typography |
-| `canvas-design` | Creating visual art, posters, PDFs, PNGs for the app or marketing |
-
-### Security & Quality Skills
-| Skill | Activate When |
-|-------|---------------|
-| `owasp-security` | Writing/reviewing auth, authorization, input handling, cryptography, API endpoints, agent systems |
-| `security-audit` | Authentication, authorization, payment processing, user data handling, file upload, DB queries, external APIs |
-| `performance-analysis` | Bottleneck detection, optimization recommendations |
-
-### Agent & Coordination Skills
-| Skill | Activate When |
-|-------|---------------|
-| `agent-coder` | General coding tasks |
-| `agent-reviewer` | Code review tasks |
-| `agent-tester` | Test generation and execution |
-| `agent-planner` | Planning and specification tasks |
-| `agent-architecture` | System design and architecture tasks |
-| `agent-code-analyzer` | Static analysis and code quality checks |
-| `swarm-advanced` | Advanced multi-agent workflows |
-| `hive-mind` / `hive-mind-advanced` | Distributed coordination and consensus |
-| `github-code-review` | GitHub PR reviews |
-| `github-project-management` | Issue tracking, project boards |
-| `github-workflow-automation` | CI/CD pipeline work |
-
-### Knowledge & Memory Skills
-| Skill | Activate When |
-|-------|---------------|
-| `memory-management` | Storing patterns, semantic search of past work, building knowledge base |
-| `embeddings` | Semantic search, pattern matching, similarity queries |
-| `reasoningbank-intelligence` / `reasoningbank-agentdb` | Adaptive learning, strategy optimization |
-| `neural-training` | Pattern learning, model optimization |
-| `workflow-automation` | Automating multi-step processes |
-| `stream-chain` | Multi-agent pipeline data transformation |
-
----
-
-## 4. Global Constraints (Non-Negotiable)
-
-### 4.1 Verification Gate
-- **No commit is valid without passing `verification-quality` checks.**
-- Default truth threshold: **0.95**
-- Security-critical code threshold: **0.99**
-- Auto-rollback is **ENABLED** for all changes.
-
-### 4.2 Security Gate
-- **All auth, input handling, and API work must invoke `owasp-security` and `security-audit` skills.**
-- ASVS Level 3 is the target for all sensitive paths.
-- Fail-closed is the only acceptable error-handling pattern.
-
-### 4.3 Design Gate
-- **No generic AI aesthetics.** Every UI decision must be intentional, distinctive, and context-specific.
-- HeroUI Native is the default component library for mobile screens.
-- All visual assets must follow the `canvas-design` philosophy of expert craftsmanship.
-
-### 4.4 Architecture Gate
-- Prefer **deep modules** over shallow ones.
-- Interfaces must hide complexity; implementation details must not leak.
-- Cross-boundary dependencies should use ports & adapters pattern.
-
-### 4.5 Agentic Gate
-- Complex tasks (3+ files, security, performance) **must** use `swarm-orchestration`.
-- Simple tasks (single file, 1-2 lines) may proceed directly.
-- All spawned agents must receive the full context of `master.md` and relevant child docs.
-
----
-
-## 5. Mobile Project Structure (Standard)
-
-All code and assets must reside within this structure:
+This `master.md` file is the **parent** of all project governance. Every instruction, every change, every decision must flow through this document. The hierarchy is:
 
 ```
-/
-├── master.md                 # ← YOU ARE HERE
-├── AGENTS.md                 # Kimi CLI entry point (references master.md)
-├── rules.md
-├── design.md
-├── database.md
-├── safety.md
-├── agents.md
-├── .claude/skills/           # Installed skills (DO NOT MODIFY)
-├── src/
-│   ├── app/                  # Entry point, providers, navigation root
-│   ├── screens/              # Screen-level components (one per route)
-│   ├── components/           # Reusable UI components
-│   ├── hooks/                # Custom React hooks
-│   ├── services/             # API clients, auth, local storage, analytics
-│   ├── store/                # State management (Zustand / Redux / Context)
-│   ├── theme/                # Design tokens, colors, typography, spacing
-│   ├── utils/                # Pure utility functions
-│   ├── constants/            # App-wide constants
-│   └── types/                # TypeScript types and interfaces
-├── assets/
-│   ├── images/               # PNGs, JPGs, SVGs
-│   ├── fonts/                # Custom font files
-│   └── icons/                # Icon sets
-├── tests/
-│   ├── unit/                 # Jest unit tests
-│   ├── integration/          # Integration tests
-│   └── e2e/                  # Detox / Maestro E2E tests
-├── docs/
-│   ├── architecture/         # ADRs, diagrams
-│   ├── api/                  # API documentation
-│   └── decisions/            # Decision records
-├── scripts/                  # Build, setup, and utility scripts
-└── .github/workflows/        # CI/CD automation
+master.md (THIS FILE — absolute authority)
+├── rules/
+│   ├── coding-standards.md
+│   ├── architecture-rules.md
+│   ├── testing-rules.md
+│   ├── review-rules.md
+│   └── deployment-rules.md
+├── design/
+│   ├── DESIGN.md (primary design system)
+│   ├── brand-guidelines.md
+│   └── ui-patterns.md
+├── database/
+│   ├── schema-principles.md
+│   ├── migration-rules.md
+│   └── data-safety.md
+├── safety/
+│   ├── security-protocols.md
+│   ├── owasp-compliance.md
+│   └── privacy-guarantees.md
+└── agents/
+    ├── agent-roles.md
+    ├── coordination-protocol.md
+    └── quality-gates.md
 ```
 
----
-
-## 6. How to Handle User Requests
-
-When the user asks for anything, follow this exact order:
-
-1. **Read `master.md`** (this file).
-2. **Classify the request:** Is it about rules, design, database, safety, or agents?
-3. **Read the relevant child document(s).**
-4. **Read the relevant skill(s)** from `.claude/skills/`.
-5. **Decide on execution mode:**
-   - Simple / single-file → Proceed directly.
-   - Complex / 3+ files / security / architecture → Enter plan mode or spawn swarm.
-6. **Execute with verification.** Always run `verification-quality` checks before finishing.
-7. **Report truth score** to the user.
+**RULE:** If a child document contradicts `master.md`, `master.md` wins. Always.
 
 ---
 
-## 7. AAA-Grade Definition Checklist
+## II. Project Identity
 
-Before marking any task complete, verify:
-
-- [ ] Code follows the project structure above
-- [ ] Relevant child documents and skills were consulted
-- [ ] SPARC methodology was applied if the task was complex
-- [ ] Security audit passed (if applicable)
-- [ ] Design follows distinctive, non-generic aesthetics
-- [ ] Truth score ≥ 0.95 (≥ 0.99 for security-critical)
-- [ ] Tests exist and pass
-- [ ] Documentation is updated
-- [ ] No secrets, no stack traces exposed, no fail-open patterns
+**Name:** EverSiteAudit  
+**Type:** Cross-platform mobile application for construction/site inspection professionals  
+**Stack:** React Native 0.76 + Expo SDK 52 + SQLite + TypeScript  
+**Philosophy:** Offline-first. Predictable. Professional. No animations. No fluff.
 
 ---
 
-**End of Master Document.**  
-*Remember: This file is the root. Every change starts here.*
+## III. Non-Negotiable Rules
+
+### 1. Zero Tolerance for Patch Work
+- Workarounds are forbidden when a real fix exists.
+- If a fix takes five more minutes than a workaround, do the real fix.
+- Every change must be explainable in terms of long-term architecture.
+
+### 2. The Verification Gate
+- `npm run verify` is the single source of truth for project health.
+- It must pass with **zero warnings** and **100% of tests green** before any change is considered complete.
+- TypeScript (`tsc --noEmit`), ESLint, and Jest must all pass.
+
+### 3. No Animation Libraries
+- `react-native-reanimated` and `react-native-gesture-handler` are banned.
+- All interactions are static, deterministic, and immediate.
+- Professionals need reliability, not visual flair.
+
+### 4. Dependency Immutability
+- NEVER run `npm audit fix --force` on this project.
+- Expo SDK 52 and React Native 0.76 compatibility is protected by `.npmrc` and `package.json` overrides.
+- See `rules/deployment-rules.md` for the full defense strategy.
+
+### 5. Data Ownership
+- The user owns 100% of their data.
+- No cloud sync. No telemetry. No analytics.
+- Backups are encrypted, user-controlled, and optionally shared by the user.
+
+### A. Absolute Requirements
+1. **Highest Standards Only** — No shortcuts. No compromises. No "it works for now."
+2. **Safety First, Always** — Security is not a feature; it is the foundation.
+3. **Best Design, Always** — Every pixel, every interaction, every API response must be intentional and polished.
+4. **Permanent Solutions Only** — Patchwork is forbidden. Fix the root cause.
+5. **Zero Mistakes Tolerance** — Verify everything. Assume nothing.
+6. **Facts Over Assumptions** — Every decision must be grounded in evidence, documentation, or verified behavior.
+
+### B. The Completeness Mandate
+- Every feature must be **fully implemented**, not scaffolded.
+- Every API must be **documented** and **tested**.
+- Every UI component must be **accessible**, **responsive**, and **animated** where appropriate.
+- Every database change must have **migrations** and **rollback plans**.
+- Every security-sensitive path must have **input validation**, **output encoding**, and **audit logging**.
+
+---
+
+## IV. Change Protocol
+
+1. **Plan before coding.** Use plan mode for any non-trivial change.
+2. **Read before editing.** Understand the file before modifying it.
+3. **Test before shipping.** `npm run verify` must pass.
+4. **Document before finishing.** Update the relevant child document if the change affects architecture, design, security, or data handling.
+
+---
+
+## V. Knowledge Graph Protocol
+
+The EverSiteAudit Knowledge Graph (`EverSiteAudit-KnowledgeGraph/`) is a living, queryable map of the entire codebase, architecture, and governance. It is not optional documentation — it is a **co-equal authority with the code itself**. Out-of-date graph notes are treated as bugs.
+
+### 1. Consult Before Changing
+
+Before modifying any code, you MUST:
+
+1. Open `EverSiteAudit-KnowledgeGraph/EverSiteAudit Index.md`.
+2. Navigate to the relevant domain index(es):
+   - `App Navigation Index` — for routes, screens, layouts
+   - `Services Index` — for business logic, exports, backup, media
+   - `UI Components Index` — for components, themes, design tokens
+   - `Data Layer Index` — for stores, repositories, schema, migrations
+   - `Security Index` — for encryption, auth, integrity
+   - `Architecture Index` — for structural decisions, coupling, friction
+   - `Design Index` — for brand, patterns, specifications
+   - `Rules Index` — for standards, testing, review, deployment
+3. Read all notes linked from those indexes that relate to the files you will modify.
+4. Check for known friction points, documented discrepancies, and architectural decisions that constrain your change.
+5. If the graph does not cover the area you are modifying, treat that as a signal that your change requires new documentation.
+
+### 2. Update After Changing
+
+After `npm run verify` passes, you MUST update the Knowledge Graph:
+
+1. Modify any existing vault notes affected by your change.
+2. Create new notes for new components, services, screens, routes, hooks, or architectural decisions.
+3. Update domain index notes to link to new or modified notes.
+4. Ensure every new note is linked from at least one index or cross-reference note (**zero orphans**).
+5. Ensure every wikilink resolves to an existing note (**zero broken links**).
+6. If your change introduces a new discrepancy between documentation and code, create an analysis note documenting it.
+
+### 3. Scope Triggers
+
+Knowledge Graph maintenance is mandatory for:
+
+- **New features** — any new file, route, screen, component, service, or hook
+- **Refactoring** — any moved, renamed, or deleted file
+- **API changes** — any new or modified exported function, class, or interface
+- **Security changes** — any crypto, auth, validation, or permission logic
+- **Database changes** — schema alterations, migrations, new repositories, new stores
+- **Configuration changes** — `app.json`, `eas.json`, build scripts, CI/CD workflows
+- **Governance changes** — any modification to `master.md` or child documents
+
+### 4. Health Standards
+
+The graph must always satisfy:
+
+- **Zero orphaned files** — every note must be reachable via wikilink from at least one other note
+- **Zero broken links** — every wikilink must resolve to an existing `.md` file
+- **Cross-domain linking** — notes should link across domains (e.g., a service note links to its store, repository, and screen notes)
+- **Traceability** — every architectural claim must trace to actual code; no speculation
+
+**Failure to maintain the graph is treated as an incomplete task. A code change is not "done" until the graph reflects it.**
+
+---
+
+## VI. Emergency Override
+
+In the event of a critical production bug that threatens data loss or app usability, the change protocol may be bypassed **only** if:
+1. The fix is verified by `npm run verify` immediately after.
+2. The fix is documented retroactively within the same session.
+3. A permanent solution replaces any emergency workaround within 24 hours.

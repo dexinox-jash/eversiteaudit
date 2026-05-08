@@ -1,0 +1,10 @@
+Version 1.0.0
+
+• Initial release of EverSiteAudit.
+• Project creation and management.
+• Issue logging with detail view and editing.
+• Camera capture with in-app photo annotation.
+• Gallery for reviewing captured media.
+• PDF export and preview for professional reporting.
+• Reusable audit templates to accelerate inspections.
+• Secure data handling with OWASP-aligned practices.

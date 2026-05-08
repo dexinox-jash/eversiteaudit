@@ -1,11 +1,11 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
 import { useTheme } from '@components/ThemeProvider';
-import { Folder, AlertCircle, Image as ImageIcon, Settings } from 'lucide-react-native';
+import { Folder, Activity } from 'lucide-react-native';
 
 /**
  * Main tab navigation layout.
- * Tabs: Projects | Issues | Gallery | Settings
+ * Tabs: Projects | Activity | Settings
  */
 export default function TabLayout(): JSX.Element {
   const { colors } = useTheme();
@@ -38,24 +38,16 @@ export default function TabLayout(): JSX.Element {
         }}
       />
       <Tabs.Screen
-        name="issues"
+        name="activity"
         options={{
-          title: 'Issues',
-          tabBarIcon: ({ color, size }) => <AlertCircle size={size} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="gallery"
-        options={{
-          title: 'Gallery',
-          tabBarIcon: ({ color, size }) => <ImageIcon size={size} color={color} />,
+          title: 'Activity',
+          tabBarIcon: ({ color, size }) => <Activity size={size} color={color} />,
         }}
       />
       <Tabs.Screen
         name="settings"
         options={{
-          title: 'Settings',
-          tabBarIcon: ({ color, size }) => <Settings size={size} color={color} />,
+          href: null,
         }}
       />
     </Tabs>

@@ -1,0 +1,1135 @@
+{
+  "in_degree_files": [
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\core\\logger.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\core\\logger.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\core\\logger.ts",
+      "kind": "File",
+      "in_degree": 134
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\types.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\types.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\types.ts",
+      "kind": "File",
+      "in_degree": 61
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\react\\src\\utils\\compose.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\react\\src\\utils\\compose.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\react\\src\\utils\\compose.ts",
+      "kind": "File",
+      "in_degree": 57
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\utils\\types.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\utils\\types.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\utils\\types.ts",
+      "kind": "File",
+      "in_degree": 53
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\utils\\helpers.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\utils\\helpers.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\utils\\helpers.ts",
+      "kind": "File",
+      "in_degree": 51
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\output.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\output.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\output.ts",
+      "kind": "File",
+      "in_degree": 49
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\apps\\docs\\src\\utils\\cn.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\apps\\docs\\src\\utils\\cn.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\apps\\docs\\src\\utils\\cn.ts",
+      "kind": "File",
+      "in_degree": 45
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\core\\event-bus.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\core\\event-bus.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\core\\event-bus.ts",
+      "kind": "File",
+      "in_degree": 43
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\neural\\src\\types.js",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\neural\\src\\types.js",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\neural\\src\\types.js",
+      "kind": "File",
+      "in_degree": 42
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\tremor-main\\src\\utils\\cx.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\tremor-main\\src\\utils\\cx.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\tremor-main\\src\\utils\\cx.ts",
+      "kind": "File",
+      "in_degree": 41
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\utils.js",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\utils.js",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\utils.js",
+      "kind": "File",
+      "in_degree": 41
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\react\\src\\components\\button\\index.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\react\\src\\components\\button\\index.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\react\\src\\components\\button\\index.ts",
+      "kind": "File",
+      "in_degree": 39
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\mcp\\types.js",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\mcp\\types.js",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\mcp\\types.js",
+      "kind": "File",
+      "in_degree": 38
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\swarm\\types.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\swarm\\types.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\swarm\\types.ts",
+      "kind": "File",
+      "in_degree": 36
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\memory\\src\\types.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\memory\\src\\types.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\memory\\src\\types.ts",
+      "kind": "File",
+      "in_degree": 32
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\react\\src\\components\\label\\index.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\react\\src\\components\\label\\index.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\react\\src\\components\\label\\index.ts",
+      "kind": "File",
+      "in_degree": 32
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\react\\src\\components\\surface\\index.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\react\\src\\components\\surface\\index.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\react\\src\\components\\surface\\index.ts",
+      "kind": "File",
+      "in_degree": 31
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\mcp-tools\\types.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\mcp-tools\\types.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\mcp-tools\\types.ts",
+      "kind": "File",
+      "in_degree": 29
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\apps\\docs\\src\\app\\themes\\constants.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\apps\\docs\\src\\app\\themes\\constants.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\apps\\docs\\src\\app\\themes\\constants.ts",
+      "kind": "File",
+      "in_degree": 29
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\utils\\errors.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\utils\\errors.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\utils\\errors.ts",
+      "kind": "File",
+      "in_degree": 25
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\react\\src\\components\\description\\index.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\react\\src\\components\\description\\index.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\react\\src\\components\\description\\index.ts",
+      "kind": "File",
+      "in_degree": 23
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\tremor-main\\src\\components\\Button\\Button.tsx",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\tremor-main\\src\\components\\Button\\Button.tsx",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\tremor-main\\src\\components\\Button\\Button.tsx",
+      "kind": "File",
+      "in_degree": 21
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\guidance\\src\\types.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\guidance\\src\\types.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\guidance\\src\\types.ts",
+      "kind": "File",
+      "in_degree": 21
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\node-compat.js",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\node-compat.js",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\node-compat.js",
+      "kind": "File",
+      "in_degree": 21
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\react\\src\\components\\icons.tsx",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\react\\src\\components\\icons.tsx",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\react\\src\\components\\icons.tsx",
+      "kind": "File",
+      "in_degree": 21
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\apps\\docs\\src\\lib\\source.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\apps\\docs\\src\\lib\\source.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\apps\\docs\\src\\lib\\source.ts",
+      "kind": "File",
+      "in_degree": 20
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\mcp\\src\\types.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\mcp\\src\\types.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\mcp\\src\\types.ts",
+      "kind": "File",
+      "in_degree": 19
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\react\\src\\utils\\assertion.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\react\\src\\utils\\assertion.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\react\\src\\utils\\assertion.ts",
+      "kind": "File",
+      "in_degree": 19
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\plugins\\src\\types\\index.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\plugins\\src\\types\\index.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\plugins\\src\\types\\index.ts",
+      "kind": "File",
+      "in_degree": 18
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\prompt.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\prompt.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\prompt.ts",
+      "kind": "File",
+      "in_degree": 18
+    }
+  ],
+  "out_degree_files": [
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\__tests__\\mcp-tools-deep.test.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\__tests__\\mcp-tools-deep.test.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\__tests__\\mcp-tools-deep.test.ts",
+      "kind": "File",
+      "out_degree": 123
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\guidance\\src\\analyzer.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\guidance\\src\\analyzer.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\guidance\\src\\analyzer.ts",
+      "kind": "File",
+      "out_degree": 105
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\apps\\docs\\src\\demos\\index.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\apps\\docs\\src\\demos\\index.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\apps\\docs\\src\\demos\\index.ts",
+      "kind": "File",
+      "out_degree": 72
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\commands\\index.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\commands\\index.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\commands\\index.ts",
+      "kind": "File",
+      "out_degree": 70
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\__tests__\\plugins-transfer-deep.test.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\__tests__\\plugins-transfer-deep.test.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\__tests__\\plugins-transfer-deep.test.ts",
+      "kind": "File",
+      "out_degree": 70
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\hive-mind.js",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\hive-mind.js",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\hive-mind.js",
+      "kind": "File",
+      "out_degree": 69
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\bin\\hive-mind.js",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\bin\\hive-mind.js",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\bin\\hive-mind.js",
+      "kind": "File",
+      "out_degree": 68
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\mcp-tools\\hooks-tools.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\mcp-tools\\hooks-tools.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\mcp-tools\\hooks-tools.ts",
+      "kind": "File",
+      "out_degree": 67
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\__tests__\\commands.test.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\__tests__\\commands.test.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\__tests__\\commands.test.ts",
+      "kind": "File",
+      "out_degree": 66
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\ruflo\\src\\ruvocal\\mcp-bridge\\index.js",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\ruflo\\src\\ruvocal\\mcp-bridge\\index.js",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\ruflo\\src\\ruvocal\\mcp-bridge\\index.js",
+      "kind": "File",
+      "out_degree": 66
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\__tests__\\p1-commands.test.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\__tests__\\p1-commands.test.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\__tests__\\p1-commands.test.ts",
+      "kind": "File",
+      "out_degree": 63
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\.claude\\helpers\\context-persistence-hook.mjs",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\.claude\\helpers\\context-persistence-hook.mjs",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\.claude\\helpers\\context-persistence-hook.mjs",
+      "kind": "File",
+      "out_degree": 63
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\commands\\hooks.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\commands\\hooks.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\commands\\hooks.ts",
+      "kind": "File",
+      "out_degree": 59
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\__tests__\\commands-deep.test.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\__tests__\\commands-deep.test.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\__tests__\\commands-deep.test.ts",
+      "kind": "File",
+      "out_degree": 57
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\verification\\api\\graphql\\resolvers.js",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\verification\\api\\graphql\\resolvers.js",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\verification\\api\\graphql\\resolvers.js",
+      "kind": "File",
+      "out_degree": 57
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\benchmark\\tests\\conftest.py",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\benchmark\\tests\\conftest.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\benchmark\\tests\\conftest.py",
+      "kind": "File",
+      "out_degree": 57
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\plugins\\code-intelligence\\src\\mcp-tools.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\plugins\\code-intelligence\\src\\mcp-tools.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\plugins\\code-intelligence\\src\\mcp-tools.ts",
+      "kind": "File",
+      "out_degree": 54
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\plugins\\legal-contracts\\src\\mcp-tools.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\plugins\\legal-contracts\\src\\mcp-tools.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\plugins\\legal-contracts\\src\\mcp-tools.ts",
+      "kind": "File",
+      "out_degree": 52
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\ruflo\\src\\ruvocal\\src\\lib\\utils\\marked.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\ruflo\\src\\ruvocal\\src\\lib\\utils\\marked.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\ruflo\\src\\ruvocal\\src\\lib\\utils\\marked.ts",
+      "kind": "File",
+      "out_degree": 52
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\ruflo\\src\\mcp-bridge\\index.js",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\ruflo\\src\\mcp-bridge\\index.js",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\ruflo\\src\\mcp-bridge\\index.js",
+      "kind": "File",
+      "out_degree": 52
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\init\\index.js",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\init\\index.js",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\init\\index.js",
+      "kind": "File",
+      "out_degree": 51
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\guidance\\tests\\analyzer.test.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\guidance\\tests\\analyzer.test.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\guidance\\tests\\analyzer.test.ts",
+      "kind": "File",
+      "out_degree": 50
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\claims\\src\\api\\mcp-tools.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\claims\\src\\api\\mcp-tools.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\claims\\src\\api\\mcp-tools.ts",
+      "kind": "File",
+      "out_degree": 50
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\plugins\\perf-optimizer\\src\\mcp-tools.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\plugins\\perf-optimizer\\src\\mcp-tools.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\plugins\\perf-optimizer\\src\\mcp-tools.ts",
+      "kind": "File",
+      "out_degree": 49
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\hooks\\src\\workers\\index.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\hooks\\src\\workers\\index.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\hooks\\src\\workers\\index.ts",
+      "kind": "File",
+      "out_degree": 49
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\memory\\memory-initializer.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\memory\\memory-initializer.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\src\\memory\\memory-initializer.ts",
+      "kind": "File",
+      "out_degree": 49
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\benchmark\\src\\swarm_benchmark\\cli\\main.py",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\benchmark\\src\\swarm_benchmark\\cli\\main.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\benchmark\\src\\swarm_benchmark\\cli\\main.py",
+      "kind": "File",
+      "out_degree": 49
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\testing\\src\\helpers\\test-utils.ts",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\testing\\src\\helpers\\test-utils.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\testing\\src\\helpers\\test-utils.ts",
+      "kind": "File",
+      "out_degree": 48
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\agent.js",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\agent.js",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\agent.js",
+      "kind": "File",
+      "out_degree": 48
+    },
+    {
+      "qualified_name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\bin\\init\\index.js",
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\bin\\init\\index.js",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\bin\\init\\index.js",
+      "kind": "File",
+      "out_degree": 48
+    }
+  ],
+  "largest_functions": [
+    {
+      "name": "SwarmCoordinator",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\swarm\\coordinator.ts",
+      "kind": "Class",
+      "line_count": 3212,
+      "line_start": 33,
+      "line_end": 3244
+    },
+    {
+      "name": "CodeParser",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\code_review_graph\\parser.py",
+      "kind": "Class",
+      "line_count": 2493,
+      "line_start": 279,
+      "line_end": 2771
+    },
+    {
+      "name": "setupCommands",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\commands\\index.ts",
+      "kind": "Function",
+      "line_count": 2483,
+      "line_start": 56,
+      "line_end": 2538
+    },
+    {
+      "name": "ClaudeFlowMCPServer",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\mcp\\mcp-server.js",
+      "kind": "Class",
+      "line_count": 2476,
+      "line_start": 65,
+      "line_end": 2540
+    },
+    {
+      "name": "TeammateBridge",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\plugins\\teammate-plugin\\src\\teammate-bridge.ts",
+      "kind": "Class",
+      "line_count": 2138,
+      "line_start": 247,
+      "line_end": 2384
+    },
+    {
+      "name": "main",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-cli.js",
+      "kind": "Function",
+      "line_count": 1964,
+      "line_start": 218,
+      "line_end": 2181
+    },
+    {
+      "name": "main",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-cli.ts",
+      "kind": "Function",
+      "line_count": 1894,
+      "line_start": 182,
+      "line_end": 2075
+    },
+    {
+      "name": "SparcRefinement",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\bin\\sparc\\refinement.js",
+      "kind": "Class",
+      "line_count": 1849,
+      "line_start": 6,
+      "line_end": 1854
+    },
+    {
+      "name": "SparcRefinement",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\sparc\\refinement.js",
+      "kind": "Class",
+      "line_count": 1849,
+      "line_start": 6,
+      "line_end": 1854
+    },
+    {
+      "name": "SparcCompletion",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\bin\\sparc\\completion.js",
+      "kind": "Class",
+      "line_count": 1824,
+      "line_start": 6,
+      "line_end": 1829
+    },
+    {
+      "name": "SparcCompletion",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\sparc\\completion.js",
+      "kind": "Class",
+      "line_count": 1824,
+      "line_start": 6,
+      "line_end": 1829
+    },
+    {
+      "name": "SparcArchitecture",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\bin\\sparc\\architecture.js",
+      "kind": "Class",
+      "line_count": 1743,
+      "line_start": 6,
+      "line_end": 1748
+    },
+    {
+      "name": "SparcArchitecture",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\sparc\\architecture.js",
+      "kind": "Class",
+      "line_count": 1743,
+      "line_start": 6,
+      "line_end": 1748
+    },
+    {
+      "name": "UnifiedSwarmCoordinator",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\swarm\\src\\unified-coordinator.ts",
+      "kind": "Class",
+      "line_count": 1703,
+      "line_start": 136,
+      "line_end": 1838
+    },
+    {
+      "name": "SparcTaskExecutor",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\swarm\\sparc-executor.ts",
+      "kind": "Class",
+      "line_count": 1624,
+      "line_start": 24,
+      "line_end": 1647
+    },
+    {
+      "name": "AgentManager",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\agents\\agent-manager.ts",
+      "kind": "Class",
+      "line_count": 1611,
+      "line_start": 125,
+      "line_end": 1735
+    },
+    {
+      "name": "QueenCoordinator",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\swarm\\src\\queen-coordinator.ts",
+      "kind": "Class",
+      "line_count": 1508,
+      "line_start": 500,
+      "line_end": 2007
+    },
+    {
+      "name": "WorkflowExecutor",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\bin\\automation-executor.js",
+      "kind": "Class",
+      "line_count": 1493,
+      "line_start": 22,
+      "line_end": 1514
+    },
+    {
+      "name": "WorkflowExecutor",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\automation-executor.js",
+      "kind": "Class",
+      "line_count": 1493,
+      "line_start": 22,
+      "line_end": 1514
+    },
+    {
+      "name": "NeuralDomainMapper",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\neural\\NeuralDomainMapper.ts",
+      "kind": "Class",
+      "line_count": 1412,
+      "line_start": 255,
+      "line_end": 1666
+    },
+    {
+      "name": "ResourceManager",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\resources\\resource-manager.ts",
+      "kind": "Class",
+      "line_count": 1407,
+      "line_start": 327,
+      "line_end": 1733
+    },
+    {
+      "name": "swarmCommand",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\swarm.js",
+      "kind": "Function",
+      "line_count": 1315,
+      "line_start": 261,
+      "line_end": 1575
+    },
+    {
+      "name": "swarmCommand",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\bin\\swarm.js",
+      "kind": "Function",
+      "line_count": 1302,
+      "line_start": 253,
+      "line_end": 1554
+    },
+    {
+      "name": "Memory",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\hive-mind\\core\\Memory.ts",
+      "kind": "Class",
+      "line_count": 1277,
+      "line_start": 161,
+      "line_end": 1437
+    },
+    {
+      "name": "MCPToolWrapper",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\bin\\hive-mind\\mcp-wrapper.js",
+      "kind": "Class",
+      "line_count": 1243,
+      "line_start": 119,
+      "line_end": 1361
+    },
+    {
+      "name": "MCPToolWrapper",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\hive-mind\\mcp-wrapper.js",
+      "kind": "Class",
+      "line_count": 1243,
+      "line_start": 119,
+      "line_end": 1361
+    },
+    {
+      "name": "AuditManager",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\enterprise\\audit-manager.ts",
+      "kind": "Class",
+      "line_count": 1229,
+      "line_start": 383,
+      "line_end": 1611
+    },
+    {
+      "name": "DirectTaskExecutor",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\swarm\\direct-executor.ts",
+      "kind": "Class",
+      "line_count": 1212,
+      "line_start": 21,
+      "line_end": 1232
+    },
+    {
+      "name": "TruthAlertManager",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\verification\\alert-manager.ts",
+      "kind": "Class",
+      "line_count": 1204,
+      "line_start": 120,
+      "line_end": 1323
+    },
+    {
+      "name": "SwarmMemoryManager",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\swarm\\memory.ts",
+      "kind": "Class",
+      "line_count": 1184,
+      "line_start": 92,
+      "line_end": 1275
+    }
+  ],
+  "test_files": [
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\code-review-graph-vscode\\test\\sqlite.test.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\code-review-graph-vscode\\test\\sqlite.test.ts",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\fixtures\\sample_vitest.test.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\fixtures\\sample_vitest.test.ts",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\fixtures\\test_sample.R",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\fixtures\\test_sample.R",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\fixtures\\test_sample.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\fixtures\\test_sample.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_changes.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_changes.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_communities.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_communities.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_embeddings.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_embeddings.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_eval.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_eval.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_flows.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_flows.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_graph.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_graph.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_hints.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_hints.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_incremental.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_incremental.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_integration_git.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_integration_git.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_integration_v2.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_integration_v2.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_migrations.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_migrations.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_multilang.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_multilang.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_notebook.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_notebook.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_parser.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_parser.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_prompts.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_prompts.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_refactor.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_refactor.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_registry.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_registry.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_search.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_search.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_skills.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_skills.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_tools.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_tools.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_tsconfig_resolver.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_tsconfig_resolver.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_visualization.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_visualization.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_wiki.py",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_wiki.py",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\ruflo\\src\\ruvocal\\src\\lib\\components\\chat\\MarkdownRenderer.svelte.test.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\ruflo\\src\\ruvocal\\src\\lib\\components\\chat\\MarkdownRenderer.svelte.test.ts",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\ruflo\\src\\ruvocal\\src\\lib\\migrations\\migrations.spec.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\ruflo\\src\\ruvocal\\src\\lib\\migrations\\migrations.spec.ts",
+      "kind": "File"
+    },
+    {
+      "name": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\ruflo\\src\\ruvocal\\src\\lib\\migrations\\routines\\09-delete-empty-conversations.spec.ts",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\ruflo\\src\\ruvocal\\src\\lib\\migrations\\routines\\09-delete-empty-conversations.spec.ts",
+      "kind": "File"
+    }
+  ],
+  "most_connected_functions": [
+    {
+      "name": "main",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-cli.js",
+      "kind": "Function",
+      "outgoing_calls": 1036,
+      "incoming_calls": 0
+    },
+    {
+      "name": "main",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-cli.ts",
+      "kind": "Function",
+      "outgoing_calls": 1007,
+      "incoming_calls": 0
+    },
+    {
+      "name": "setupCommands",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\commands\\index.ts",
+      "kind": "Function",
+      "outgoing_calls": 791,
+      "incoming_calls": 1
+    },
+    {
+      "name": "log",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\hive-mind.js",
+      "kind": "Function",
+      "outgoing_calls": 3,
+      "incoming_calls": 312
+    },
+    {
+      "name": "log",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\bin\\hive-mind.js",
+      "kind": "Function",
+      "outgoing_calls": 3,
+      "incoming_calls": 298
+    },
+    {
+      "name": "generateConfigToml",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\codex\\src\\generators\\config-toml.ts",
+      "kind": "Function",
+      "outgoing_calls": 289,
+      "incoming_calls": 2
+    },
+    {
+      "name": "executeTool",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\mcp\\mcp-server.js",
+      "kind": "Function",
+      "outgoing_calls": 281,
+      "incoming_calls": 1
+    },
+    {
+      "name": "swarmCommand",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\swarm.js",
+      "kind": "Function",
+      "outgoing_calls": 255,
+      "incoming_calls": 20
+    },
+    {
+      "name": "swarmCommand",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\bin\\swarm.js",
+      "kind": "Function",
+      "outgoing_calls": 251,
+      "incoming_calls": 20
+    },
+    {
+      "name": "log",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\mcp.js",
+      "kind": "Function",
+      "outgoing_calls": 2,
+      "incoming_calls": 226
+    },
+    {
+      "name": "printError",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\utils.js",
+      "kind": "Function",
+      "outgoing_calls": 1,
+      "incoming_calls": 222
+    },
+    {
+      "name": "enhancedClaudeFlowInit",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\init\\index.js",
+      "kind": "Function",
+      "outgoing_calls": 219,
+      "incoming_calls": 1
+    },
+    {
+      "name": "printSuccess",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\utils.js",
+      "kind": "Function",
+      "outgoing_calls": 1,
+      "incoming_calls": 214
+    },
+    {
+      "name": "initCommand",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\init\\index.js",
+      "kind": "Function",
+      "outgoing_calls": 154,
+      "incoming_calls": 58
+    },
+    {
+      "name": "main",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\plugins\\examples\\ruvector\\quantization.ts",
+      "kind": "Function",
+      "outgoing_calls": 171,
+      "incoming_calls": 0
+    },
+    {
+      "name": "main",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\plugins\\examples\\ruvector\\hyperbolic-hierarchies.ts",
+      "kind": "Function",
+      "outgoing_calls": 168,
+      "incoming_calls": 0
+    },
+    {
+      "name": "main",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\hooks\\src\\cli\\guidance-cli.ts",
+      "kind": "Function",
+      "outgoing_calls": 164,
+      "incoming_calls": 0
+    },
+    {
+      "name": "registerCommands",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\code-review-graph-vscode\\src\\extension.ts",
+      "kind": "Function",
+      "outgoing_calls": 163,
+      "incoming_calls": 1
+    },
+    {
+      "name": "main",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\plugins\\examples\\ruvector\\self-learning.ts",
+      "kind": "Function",
+      "outgoing_calls": 161,
+      "incoming_calls": 0
+    },
+    {
+      "name": "enhancedClaudeFlowInit",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\bin\\init\\index.js",
+      "kind": "Function",
+      "outgoing_calls": 159,
+      "incoming_calls": 1
+    },
+    {
+      "name": "main",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\code_review_graph\\cli.py",
+      "kind": "Function",
+      "outgoing_calls": 155,
+      "incoming_calls": 0
+    },
+    {
+      "name": "spawnSwarm",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\hive-mind.js",
+      "kind": "Function",
+      "outgoing_calls": 145,
+      "incoming_calls": 3
+    },
+    {
+      "name": "main",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\plugins\\examples\\ruvector\\attention-patterns.ts",
+      "kind": "Function",
+      "outgoing_calls": 146,
+      "incoming_calls": 0
+    },
+    {
+      "name": "initCommand",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\bin\\init\\index.js",
+      "kind": "Function",
+      "outgoing_calls": 146,
+      "incoming_calls": 0
+    },
+    {
+      "name": "buildThemeCssVars",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\heroui-3\\packages\\storybook\\.storybook\\utils\\apcach-colors.ts",
+      "kind": "Function",
+      "outgoing_calls": 140,
+      "incoming_calls": 2
+    },
+    {
+      "name": "generateEnhancedMarkdown",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\testing\\src\\v2-compat\\report-generator.ts",
+      "kind": "Function",
+      "outgoing_calls": 139,
+      "incoming_calls": 1
+    },
+    {
+      "name": "spawnClaudeCodeInstances",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\cli\\simple-commands\\hive-mind.js",
+      "kind": "Function",
+      "outgoing_calls": 137,
+      "incoming_calls": 2
+    },
+    {
+      "name": "spawnSwarm",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\bin\\hive-mind.js",
+      "kind": "Function",
+      "outgoing_calls": 136,
+      "incoming_calls": 3
+    },
+    {
+      "name": "main",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\plugins\\examples\\ruvector\\gnn-analysis.ts",
+      "kind": "Function",
+      "outgoing_calls": 137,
+      "incoming_calls": 0
+    },
+    {
+      "name": "spawnClaudeCodeInstances",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\bin\\hive-mind.js",
+      "kind": "Function",
+      "outgoing_calls": 131,
+      "incoming_calls": 1
+    }
+  ],
+  "top_flows": [],
+  "most_tested": [
+    {
+      "name": "test:to render a barlist with bar, label and value@L15",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\tremor-main\\src\\components\\BarList\\barlist.spec.ts",
+      "test_count": 85
+    },
+    {
+      "name": "test_full_pipeline",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\code-review-graph-main\\tests\\test_integration_v2.py",
+      "test_count": 55
+    },
+    {
+      "name": "test_claude_optimizer",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\benchmark\\tests\\integration\\test_claude_optimizer.py",
+      "test_count": 53
+    },
+    {
+      "name": "test_real_claude_flow",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\benchmark\\tests\\integration\\test_real_simple.py",
+      "test_count": 52
+    },
+    {
+      "name": "test_nested_compound_models",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\benchmark\\test_separability_bug.py",
+      "test_count": 47
+    },
+    {
+      "name": "it:generates a full project scaffold with all features@L623",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\guidance\\tests\\generators.test.ts",
+      "test_count": 41
+    },
+    {
+      "name": "it:should work with actual session manager patterns@L343",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\tests\\session-serialization.test.js",
+      "test_count": 41
+    },
+    {
+      "name": "it:should persist full event structure accurately@L348",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\guidance\\tests\\persistence.test.ts",
+      "test_count": 40
+    },
+    {
+      "name": "test_official_integration",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\benchmark\\test_swe_bench_official.py",
+      "test_count": 40
+    },
+    {
+      "name": "it:should export all core commands synchronously@L539",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\cli\\__tests__\\commands-deep.test.ts",
+      "test_count": 38
+    },
+    {
+      "name": "test:to render presets@L70",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\tremor-main\\src\\components\\DatePicker\\datepicker.spec.ts",
+      "test_count": 37
+    },
+    {
+      "name": "describe:Provider Manager@L271",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\providers\\src\\__tests__\\provider-integration.test.ts",
+      "test_count": 37
+    },
+    {
+      "name": "it:should categorize hooks correctly@L554",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\testing\\src\\v2-compat\\hooks-compat.test.ts",
+      "test_count": 36
+    },
+    {
+      "name": "it:should handle propose -> simulate -> compare -> stage -> advance -> promote@L702",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\guidance\\tests\\evolution.test.ts",
+      "test_count": 36
+    },
+    {
+      "name": "it:should create an artifact with correct fields and signature@L63",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\guidance\\tests\\artifacts.test.ts",
+      "test_count": 36
+    },
+    {
+      "name": "it:should spawn 8 specialized agents with correct types@L82",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\src\\maestro\\tests\\native-hive-mind-integration.test.ts",
+      "test_count": 36
+    },
+    {
+      "name": "test_real_executor",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\benchmark\\archive\\old-files\\test_real_integration.py",
+      "test_count": 36
+    },
+    {
+      "name": "test:to render presets@L228",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\tremor-main\\src\\components\\DatePicker\\datepicker.spec.ts",
+      "test_count": 35
+    },
+    {
+      "name": "it:should create a capability with correct fields@L51",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v3\\@claude-flow\\guidance\\tests\\capabilities.test.ts",
+      "test_count": 34
+    },
+    {
+      "name": "test:monitor.js should exist and contain real metrics collection@L13",
+      "file_path": "C:\\Users\\Dexinox\\Documents\\kimi code\\EverSiteAudit\\.skills\\ruflo-main\\v2\\tests\\integration\\real-metrics.test.js",
+      "test_count": 34
+    }
+  ]
+}

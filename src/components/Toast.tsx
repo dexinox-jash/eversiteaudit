@@ -1,10 +1,5 @@
-import React, { useEffect } from 'react';
-import { StyleSheet } from 'react-native';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-} from 'react-native-reanimated';
+import React, { useEffect, useRef, useState } from 'react';
+import { StyleSheet, Animated } from 'react-native';
 import { useTheme } from '@components/ThemeProvider';
 import { Typography } from './Typography';
 import { spacing, radius, shadows } from '@theme/index';
@@ -18,7 +13,10 @@ export interface ToastProps {
   icon?: LucideIcon;
   duration?: number;
   onDismiss?: () => void;
+  accessibilityLabel?: string;
 }
+
+const EXIT_DURATION = 150;
 
 export function Toast({
   message,
@@ -26,28 +24,56 @@ export function Toast({
   icon: Icon,
   duration = 3000,
   onDismiss,
-}: ToastProps): JSX.Element {
-  const { colors } = useTheme();
-  const translateY = useSharedValue(100);
-  const opacity = useSharedValue(0);
+  accessibilityLabel,
+}: ToastProps): JSX.Element | null {
+  const { colors, reduceMotion } = useTheme();
+  const [dismissed, setDismissed] = useState(false);
+  const animValue = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    translateY.value = withTiming(0, { duration: 250 });
-    opacity.value = withTiming(1, { duration: 250 });
+    if (reduceMotion) {
+      animValue.setValue(1);
+    } else {
+      Animated.timing(animValue, {
+        toValue: 1,
+        duration: 200,
+        useNativeDriver: false,
+      }).start();
+    }
 
-    const hideTimeout = setTimeout((): void => {
-      translateY.value = withTiming(100, { duration: 200 });
-      opacity.value = withTiming(0, { duration: 200 });
-      if (onDismiss) {
-        setTimeout(onDismiss, 200);
+    const visibleDuration = Math.max(duration - EXIT_DURATION, 0);
+
+    const exitTimeout = setTimeout((): void => {
+      if (!reduceMotion) {
+        Animated.timing(animValue, {
+          toValue: 0,
+          duration: EXIT_DURATION,
+          useNativeDriver: false,
+        }).start();
       }
+    }, visibleDuration);
+
+    const dismissTimeout = setTimeout((): void => {
+      setDismissed(true);
+      onDismiss?.();
     }, duration);
 
-    return (): void => clearTimeout(hideTimeout);
-  }, [duration, onDismiss, translateY, opacity]);
+    return (): void => {
+      clearTimeout(exitTimeout);
+      clearTimeout(dismissTimeout);
+    };
+  }, [duration, onDismiss, reduceMotion, animValue]);
+
+  if (dismissed) {
+    return null;
+  }
 
   const variantMap: Record<ToastVariant, { bg: string; border: string; iconColor: string }> = {
-    default: { bg: colors.backgroundElevated, border: colors.border, iconColor: colors.textPrimary },
+    default: {
+      bg: colors.backgroundElevated,
+      border: colors.border,
+      iconColor: colors.textPrimary,
+    },
     success: { bg: `${colors.success}15`, border: colors.success, iconColor: colors.success },
     error: { bg: `${colors.error}15`, border: colors.error, iconColor: colors.error },
     warning: { bg: `${colors.warning}15`, border: colors.warning, iconColor: colors.warning },
@@ -55,12 +81,10 @@ export function Toast({
 
   const { bg, border, iconColor } = variantMap[variant];
 
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: translateY.value }],
-    opacity: opacity.value,
-  }));
-
-  const ResolvedIcon = Icon;
+  const translateY = animValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [20, 0],
+  });
 
   return (
     <Animated.View
@@ -69,15 +93,17 @@ export function Toast({
         {
           backgroundColor: bg,
           borderColor: border,
+          opacity: animValue,
+          transform: [{ translateY }],
         },
         shadows['2'],
-        animatedStyle,
       ]}
       pointerEvents="none"
+      accessibilityRole="alert"
+      accessibilityLabel={accessibilityLabel ?? message}
+      accessibilityLiveRegion="polite"
     >
-      {ResolvedIcon ? (
-        <ResolvedIcon size={20} color={iconColor} style={styles.icon} />
-      ) : null}
+      {Icon ? <Icon size={20} color={iconColor} style={styles.icon} /> : null}
       <Typography variant="bodySmall" color="primary">
         {message}
       </Typography>

@@ -1,19 +1,36 @@
 import React, { useState } from 'react';
 import {
-  TextInput as RNTextInput,
   View,
+  Text,
+  TextInput as RNTextInput,
   StyleSheet,
   type TextInputProps as RNTextInputProps,
 } from 'react-native';
+import { spacing, radius } from '@theme/index';
 import { useTheme } from '@components/ThemeProvider';
-import { Typography } from './Typography';
-import { spacing, radius, touchTargets } from '@theme/index';
 import type { LucideIcon } from 'lucide-react-native';
 
+function extractTextFromNode(node: React.ReactNode): string {
+  if (node === null || node === undefined) return '';
+  if (typeof node === 'string' || typeof node === 'number') return String(node);
+  if (Array.isArray(node)) return node.map(extractTextFromNode).join('');
+  if (React.isValidElement(node)) {
+    return extractTextFromNode(
+      (
+        (node as React.ReactElement<{ children?: React.ReactNode }>).props as {
+          children?: React.ReactNode;
+        }
+      ).children
+    );
+  }
+  return '';
+}
+
 export interface TextInputProps extends Omit<RNTextInputProps, 'placeholderTextColor'> {
-  label?: string;
+  label?: React.ReactNode;
   error?: string | undefined;
   icon?: LucideIcon;
+  accessibilityHint?: string;
 }
 
 export function TextInput({
@@ -21,6 +38,9 @@ export function TextInput({
   error,
   icon: Icon,
   style,
+  accessibilityHint,
+  accessibilityLabel,
+  maxLength,
   onFocus,
   onBlur,
   ...rest
@@ -28,54 +48,43 @@ export function TextInput({
   const { colors } = useTheme();
   const [isFocused, setIsFocused] = useState(false);
 
-  const handleFocus = (e: Parameters<NonNullable<RNTextInputProps['onFocus']>>[0]): void => {
-    setIsFocused(true);
-    onFocus?.(e);
-  };
-
-  const handleBlur = (e: Parameters<NonNullable<RNTextInputProps['onBlur']>>[0]): void => {
-    setIsFocused(false);
-    onBlur?.(e);
-  };
-
   return (
-    <View style={[styles.container, style]}>
-      {label ? (
-        <Typography variant="caption" color="secondary" style={styles.label}>
-          {label}
-        </Typography>
-      ) : null}
+    <View style={[styles.container, style as never]}>
+      {label ? <Text style={[styles.label, { color: colors.textPrimary }]}>{label}</Text> : null}
       <View
         style={[
-          styles.inputContainer,
+          styles.inputRow,
           {
-            backgroundColor: colors.backgroundTertiary,
             borderColor: error ? colors.error : isFocused ? colors.primary : colors.border,
+            backgroundColor: colors.backgroundSecondary,
           },
         ]}
       >
-        {Icon ? <Icon size={20} color={colors.textTertiary} style={styles.icon} /> : null}
+        {Icon ? (
+          <View style={styles.iconContainer}>
+            <Icon size={20} color={colors.textSecondary} />
+          </View>
+        ) : null}
         <RNTextInput
-          accessibilityLabel={label}
-          accessibilityState={{}}
-          placeholderTextColor={colors.textTertiary}
-          style={[
-            styles.input,
-            {
-              color: colors.textPrimary,
-              minHeight: touchTargets.preferred,
-            },
-          ]}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
+          accessibilityLabel={
+            accessibilityLabel ?? (label ? extractTextFromNode(label) : undefined)
+          }
+          accessibilityHint={accessibilityHint}
+          placeholderTextColor={colors.textSecondary}
+          style={[styles.input, { color: colors.textPrimary }]}
+          maxLength={maxLength ?? 500}
+          onFocus={(e): void => {
+            setIsFocused(true);
+            onFocus?.(e);
+          }}
+          onBlur={(e): void => {
+            setIsFocused(false);
+            onBlur?.(e);
+          }}
           {...rest}
         />
       </View>
-      {error ? (
-        <Typography variant="captionSmall" color={colors.error} style={styles.error}>
-          {error}
-        </Typography>
-      ) : null}
+      {error ? <Text style={[styles.error, { color: colors.error }]}>{error}</Text> : null}
     </View>
   );
 }
@@ -85,16 +94,19 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   label: {
+    fontSize: 14,
     marginBottom: spacing['1'],
   },
-  inputContainer: {
+  inputRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: radius.md,
     borderWidth: 1,
-    paddingHorizontal: spacing['4'],
+    borderRadius: radius.lg,
+    paddingHorizontal: spacing['3'],
+    paddingVertical: spacing['2'],
+    minHeight: 44,
   },
-  icon: {
+  iconContainer: {
     marginRight: spacing['2'],
   },
   input: {
@@ -103,6 +115,7 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
   },
   error: {
+    fontSize: 14,
     marginTop: spacing['1'],
   },
 });

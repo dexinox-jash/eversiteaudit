@@ -14,7 +14,7 @@ export async function getOrCreateEncryptionKey(): Promise<string> {
       return existing;
     }
 
-    const bytes = await Crypto.getRandomBytesAsync(32);
+    const bytes = Crypto.getRandomValues(new Uint8Array(32));
     const key = Array.from(bytes)
       .map((b) => b.toString(16).padStart(2, '0'))
       .join('');

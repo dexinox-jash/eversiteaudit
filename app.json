@@ -2,10 +2,13 @@
   "expo": {
     "name": "EverSiteAudit",
     "slug": "eversiteaudit-mobile",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "userInterfaceStyle": "automatic",
+    "scheme": "eversiteaudit",
+    "newArchEnabled": true,
+    "backgroundColor": "#faf9f5",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
@@ -15,9 +18,18 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.eversiteaudit.mobile",
-      "buildNumber": "0.0.1",
+      "buildNumber": "1",
       "config": {
         "usesNonExemptEncryption": false
+      },
+      "associatedDomains": [],
+      "infoPlist": {
+        "NSFileProtectionComplete": true,
+        "NSCameraUsageDescription": "EverSiteAudit uses the camera to capture site inspection photos for your projects.",
+        "NSPhotoLibraryUsageDescription": "EverSiteAudit accesses your photo library so you can attach existing images to inspection issues.",
+        "NSLocationWhenInUseUsageDescription": "EverSiteAudit tags your inspection photos and issues with GPS coordinates for accurate site documentation.",
+        "NSMicrophoneUsageDescription": "EverSiteAudit uses the microphone to record voice notes for your inspection issues.",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
@@ -26,14 +38,36 @@
         "backgroundColor": "#faf9f5"
       },
       "package": "com.eversiteaudit.mobile",
-      "versionCode": 1
+      "versionCode": 1,
+      "allowBackup": false,
+      "permissions": ["CAMERA", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"],
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "eversiteaudit",
+              "host": "*"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        },
+        {
+          "action": "android.media.action.IMAGE_CAPTURE",
+          "category": ["DEFAULT"]
+        }
+      ]
     },
     "web": {
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router",
+      "expo-quick-actions",
+      "./plugins/backup-exclusion.js"
+    ],
     "experiments": {
       "typedRoutes": true
     },

@@ -1,50 +1,34 @@
 import React from 'react';
-import {
-  Pressable,
-  StyleSheet,
-  type PressableProps,
-} from 'react-native';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-  interpolateColor,
-} from 'react-native-reanimated';
+import { Switch as RNSwitch, type SwitchProps as RNSwitchProps } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import { useTheme } from '@components/ThemeProvider';
-import { radius } from '@theme/index';
 
-const TRACK_WIDTH = 52;
-const TRACK_HEIGHT = 32;
-const KNOB_SIZE = 28;
-const KNOB_PADDING = 2;
-
-const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
-
-export interface SwitchProps extends Omit<PressableProps, 'onPress'> {
+export interface SwitchProps {
   value: boolean;
   onValueChange: (value: boolean) => void;
+  disabled?: boolean;
   haptic?: boolean;
+  accessibilityLabel?: string;
+  accessibilityHint?: string;
+  testID?: string;
+  style?: RNSwitchProps['style'];
 }
 
 export function Switch({
   value,
   onValueChange,
-  haptic = true,
   disabled,
-  ...rest
+  haptic = true,
+  accessibilityLabel,
+  accessibilityHint,
+  testID,
+  style,
 }: SwitchProps): JSX.Element {
-  const { colors } = useTheme();
-  const toggleValue = useSharedValue(value ? 1 : 0);
+  const { reduceMotion } = useTheme();
 
-  React.useEffect(() => {
-    toggleValue.value = withTiming(value ? 1 : 0, { duration: 200 });
-  }, [value, toggleValue]);
-
-  const handlePress = (): void => {
+  const handleValueChange = (newValue: boolean): void => {
     if (disabled) return;
-    const newValue = !value;
-    if (haptic) {
+    if (haptic && !reduceMotion) {
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {
         // Ignore haptic errors
       });
@@ -52,58 +36,17 @@ export function Switch({
     onValueChange(newValue);
   };
 
-  const trackAnimatedStyle = useAnimatedStyle(() => ({
-    backgroundColor: interpolateColor(
-      toggleValue.value,
-      [0, 1],
-      [colors.backgroundElevated, colors.primary]
-    ),
-    opacity: disabled ? 0.5 : 1,
-  }));
-
-  const knobAnimatedStyle = useAnimatedStyle(() => ({
-    transform: [
-      {
-        translateX: withTiming(
-          value ? TRACK_WIDTH - KNOB_SIZE - KNOB_PADDING : KNOB_PADDING,
-          { duration: 200 }
-        ),
-      },
-    ],
-  }));
-
   return (
-    <AnimatedPressable
-      accessibilityRole="switch"
-      accessibilityState={{ checked: value, disabled: disabled ?? undefined }}
+    <RNSwitch
+      value={value}
+      onValueChange={handleValueChange}
       disabled={disabled}
-      onPress={handlePress}
-      style={[styles.track, trackAnimatedStyle]}
-      {...rest}
-    >
-      <Animated.View
-        style={[
-          styles.knob,
-          { backgroundColor: colors.textPrimary },
-          knobAnimatedStyle,
-        ]}
-      />
-    </AnimatedPressable>
+      accessibilityLabel={accessibilityLabel}
+      accessibilityHint={accessibilityHint}
+      accessibilityRole="switch"
+      accessibilityState={{ checked: value, disabled: !!disabled }}
+      testID={testID}
+      style={style}
+    />
   );
 }
-
-const styles = StyleSheet.create({
-  track: {
-    width: TRACK_WIDTH,
-    height: TRACK_HEIGHT,
-    borderRadius: radius.full,
-    justifyContent: 'center',
-  },
-  knob: {
-    width: KNOB_SIZE,
-    height: KNOB_SIZE,
-    borderRadius: radius.full,
-    position: 'absolute',
-    left: 0,
-  },
-});

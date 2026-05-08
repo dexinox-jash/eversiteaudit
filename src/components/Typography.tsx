@@ -1,14 +1,13 @@
 import React from 'react';
 import { Text, type TextProps, type TextStyle } from 'react-native';
 import { useTheme } from '@components/ThemeProvider';
-import { fontSizes, lineHeights, fontWeights, fontFamily } from '@theme/index';
+import { fontSizes, lineHeights, fontWeights, fontFamily, letterSpacing } from '@theme/index';
 
 export type TextVariant =
-  | 'hero'
-  | 'h1'
-  | 'h2'
-  | 'h3'
-  | 'h4'
+  | 'display'
+  | 'headingLg'
+  | 'headingMd'
+  | 'headingSm'
   | 'bodyLarge'
   | 'body'
   | 'bodySmall'
@@ -24,18 +23,88 @@ export interface TypographyProps extends TextProps {
   children: React.ReactNode;
 }
 
+function fw(w: string): TextStyle['fontWeight'] {
+  return w as unknown as TextStyle['fontWeight'];
+}
+
+function getFontFamily(variant: TextVariant, weight?: keyof typeof fontWeights): string {
+  const isHeading =
+    variant === 'display' ||
+    variant === 'headingLg' ||
+    variant === 'headingMd' ||
+    variant === 'headingSm';
+  if (isHeading) {
+    if (weight === 'bold') return fontFamily.headingBold;
+    return fontFamily.heading;
+  }
+  if (weight === 'medium' || weight === 'semibold' || weight === 'bold') {
+    return fontFamily.bodyMedium;
+  }
+  return fontFamily.body;
+}
+
 const variantStyles: Record<TextVariant, TextStyle> = {
-  hero: { fontSize: fontSizes.hero, lineHeight: lineHeights.hero, fontWeight: fontWeights.bold },
-  h1: { fontSize: fontSizes.h1, lineHeight: lineHeights.h1, fontWeight: fontWeights.bold },
-  h2: { fontSize: fontSizes.h2, lineHeight: lineHeights.h2, fontWeight: fontWeights.semibold },
-  h3: { fontSize: fontSizes.h3, lineHeight: lineHeights.h3, fontWeight: fontWeights.semibold },
-  h4: { fontSize: fontSizes.h4, lineHeight: lineHeights.h4, fontWeight: fontWeights.semibold },
-  bodyLarge: { fontSize: fontSizes.bodyLarge, lineHeight: lineHeights.bodyLarge, fontWeight: fontWeights.regular },
-  body: { fontSize: fontSizes.body, lineHeight: lineHeights.body, fontWeight: fontWeights.regular },
-  bodySmall: { fontSize: fontSizes.bodySmall, lineHeight: lineHeights.bodySmall, fontWeight: fontWeights.regular },
-  caption: { fontSize: fontSizes.caption, lineHeight: lineHeights.caption, fontWeight: fontWeights.regular },
-  captionSmall: { fontSize: fontSizes.captionSmall, lineHeight: lineHeights.captionSmall, fontWeight: fontWeights.medium },
-  overline: { fontSize: fontSizes.overline, lineHeight: lineHeights.overline, fontWeight: fontWeights.semibold, textTransform: 'uppercase', letterSpacing: 0.5 },
+  display: {
+    fontSize: fontSizes.display,
+    lineHeight: lineHeights.display,
+    fontWeight: fw(fontWeights.medium),
+    letterSpacing: letterSpacing.display,
+  },
+  headingLg: {
+    fontSize: fontSizes.headingLg,
+    lineHeight: lineHeights.headingLg,
+    fontWeight: fw(fontWeights.medium),
+    letterSpacing: letterSpacing.headingLg,
+  },
+  headingMd: {
+    fontSize: fontSizes.headingMd,
+    lineHeight: lineHeights.headingMd,
+    fontWeight: fw(fontWeights.semibold),
+    letterSpacing: letterSpacing.headingMd,
+  },
+  headingSm: {
+    fontSize: fontSizes.headingSm,
+    lineHeight: lineHeights.headingSm,
+    fontWeight: fw(fontWeights.medium),
+    letterSpacing: letterSpacing.headingSm,
+  },
+  bodyLarge: {
+    fontSize: fontSizes.bodyLarge,
+    lineHeight: lineHeights.bodyLarge,
+    fontWeight: fw(fontWeights.regular),
+    letterSpacing: letterSpacing.bodyLarge,
+  },
+  body: {
+    fontSize: fontSizes.body,
+    lineHeight: lineHeights.body,
+    fontWeight: fw(fontWeights.regular),
+    letterSpacing: letterSpacing.body,
+  },
+  bodySmall: {
+    fontSize: fontSizes.bodySmall,
+    lineHeight: lineHeights.bodySmall,
+    fontWeight: fw(fontWeights.regular),
+    letterSpacing: letterSpacing.bodySmall,
+  },
+  caption: {
+    fontSize: fontSizes.caption,
+    lineHeight: lineHeights.caption,
+    fontWeight: fw(fontWeights.medium),
+    letterSpacing: letterSpacing.caption,
+  },
+  captionSmall: {
+    fontSize: fontSizes.captionSmall,
+    lineHeight: lineHeights.captionSmall,
+    fontWeight: fw(fontWeights.medium),
+    letterSpacing: letterSpacing.captionSmall,
+  },
+  overline: {
+    fontSize: fontSizes.overline,
+    lineHeight: lineHeights.overline,
+    fontWeight: fw(fontWeights.medium),
+    letterSpacing: letterSpacing.overline,
+    textTransform: 'uppercase',
+  },
 };
 
 export function Typography({
@@ -60,11 +129,11 @@ export function Typography({
   const baseStyle = variantStyles[variant];
 
   const computedStyle: TextStyle = {
-    fontFamily: fontFamily.primary,
+    fontFamily: getFontFamily(variant, weight),
     color: resolvedColor,
     textAlign: align,
     ...baseStyle,
-    ...(weight ? { fontWeight: fontWeights[weight] } : undefined),
+    ...(weight ? { fontWeight: fw(fontWeights[weight]) } : undefined),
   };
 
   return (

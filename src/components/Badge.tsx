@@ -1,9 +1,8 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { useTheme } from '@components/ThemeProvider';
-import { Typography } from './Typography';
-import { spacing, radius } from '@theme/index';
+import { View, Text } from 'react-native';
 import type { LucideIcon } from 'lucide-react-native';
+import { useTheme } from '@components/ThemeProvider';
+import { fontSizes } from '@theme/index';
 
 export type BadgeVariant = 'critical' | 'high' | 'medium' | 'low' | 'default' | 'info' | 'success';
 export type BadgeSize = 'default' | 'small';
@@ -15,52 +14,57 @@ export interface BadgeProps {
   icon?: LucideIcon;
 }
 
-export function Badge({ title, variant = 'default', size = 'default', icon: Icon }: BadgeProps): JSX.Element {
+export function Badge({
+  title,
+  variant = 'default',
+  size = 'default',
+  icon: Icon,
+}: BadgeProps): JSX.Element {
   const { colors } = useTheme();
 
-  const variantMap: Record<BadgeVariant, { bg: string; text: string }> = {
-    critical: { bg: `${colors.severity.critical}20`, text: colors.severity.critical },
-    high: { bg: `${colors.severity.high}20`, text: colors.severity.high },
-    medium: { bg: `${colors.severity.medium}30`, text: colors.severity.medium },
-    low: { bg: `${colors.severity.low}20`, text: colors.severity.low },
-    default: { bg: colors.backgroundElevated, text: colors.textSecondary },
-    info: { bg: `${colors.info}20`, text: colors.info },
-    success: { bg: `${colors.success}20`, text: colors.success },
+  function getContrastText(hexColor: string): string {
+    const hex = hexColor.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    return luminance > 0.55 ? '#000000' : '#FFFFFF';
+  }
+
+  const variantStyles: Record<BadgeVariant, { bg: string; text: string }> = {
+    critical: { bg: colors.error, text: getContrastText(colors.error) },
+    high: { bg: colors.warning, text: getContrastText(colors.warning) },
+    medium: { bg: colors.warning, text: getContrastText(colors.warning) },
+    low: { bg: colors.success, text: getContrastText(colors.success) },
+    default: { bg: colors.backgroundSecondary, text: colors.textPrimary },
+    info: { bg: colors.info, text: getContrastText(colors.info) },
+    success: { bg: colors.success, text: getContrastText(colors.success) },
   };
 
-  const { bg, text } = variantMap[variant];
+  const { bg, text } = variantStyles[variant];
+
+  const paddingVertical = size === 'small' ? 2 : 4;
+  const paddingHorizontal = size === 'small' ? 6 : 8;
+  const fontSize = size === 'small' ? fontSizes.overline : fontSizes.captionSmall;
+  const iconSize = size === 'small' ? 12 : 14;
 
   return (
     <View
-      style={[
-        styles.container,
-        {
-          backgroundColor: bg,
-          paddingVertical: size === 'small' ? 2 : 4,
-          paddingHorizontal: size === 'small' ? 6 : 10,
-        },
-      ]}
+      accessibilityLabel={Icon ? `${title} with icon` : title}
+      accessibilityRole="text"
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        alignSelf: 'flex-start',
+        backgroundColor: bg,
+        paddingVertical,
+        paddingHorizontal,
+        borderRadius: 9999,
+        gap: 4,
+      }}
     >
-      {Icon ? <Icon size={size === 'small' ? 12 : 14} color={text} style={styles.icon} /> : null}
-      <Typography
-        variant={size === 'small' ? 'captionSmall' : 'caption'}
-        weight="semibold"
-        color={text}
-      >
-        {title}
-      </Typography>
+      {Icon ? <Icon size={iconSize} color={text} accessibilityElementsHidden /> : null}
+      <Text style={{ color: text, fontSize, fontWeight: '500' }}>{title}</Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'flex-start',
-    borderRadius: radius.md,
-  },
-  icon: {
-    marginRight: spacing['1'],
-  },
-});

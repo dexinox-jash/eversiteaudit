@@ -54,6 +54,8 @@ export interface Issue extends BaseEntity, SoftDeletable {
   resolutionNotes: string | null;
   resolvedAt: number | null;
   resolvedBy: string | null;
+  voiceNoteUrl: string | null;
+  sortOrder: number;
 }
 
 // ------------------------------------------------------------------
@@ -75,7 +77,9 @@ export interface Photo extends BaseEntity, SoftDeletable {
   height: number | null;
   fileSizeBytes: number | null;
   caption: string | null;
+  checksum: string | null;
   tags: string; // JSON array string
+  sortOrder: number;
 }
 
 // ------------------------------------------------------------------
@@ -126,7 +130,7 @@ export interface Setting {
 // ------------------------------------------------------------------
 // Export History
 // ------------------------------------------------------------------
-export type ExportType = 'pdf' | 'zip' | 'json';
+export type ExportType = 'pdf' | 'zip' | 'json' | 'csv';
 
 export interface ExportHistory {
   id: string;

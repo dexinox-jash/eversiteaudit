@@ -12,6 +12,7 @@ export interface EmptyStateProps {
   subtitle?: string;
   actionTitle?: string;
   onAction?: () => void;
+  accessibilityLabel?: string;
 }
 
 export function EmptyState({
@@ -20,15 +21,21 @@ export function EmptyState({
   subtitle,
   actionTitle,
   onAction,
+  accessibilityLabel,
 }: EmptyStateProps): JSX.Element {
   const { colors } = useTheme();
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} accessibilityLabel={accessibilityLabel ?? title}>
       <View style={[styles.iconContainer, { backgroundColor: colors.backgroundTertiary }]}>
         <Icon size={40} color={colors.primary} />
       </View>
-      <Typography variant="h3" color="primary" style={styles.title}>
+      <Typography
+        variant="headingMd"
+        accessibilityRole="header"
+        color="primary"
+        style={styles.title}
+      >
         {title}
       </Typography>
       {subtitle ? (
@@ -38,7 +45,12 @@ export function EmptyState({
       ) : null}
       {actionTitle ? (
         <View style={styles.action}>
-          <Button title={actionTitle} onPress={onAction} />
+          <Button
+            title={actionTitle}
+            onPress={onAction}
+            accessibilityLabel={actionTitle}
+            accessibilityHint={`Double-tap to ${actionTitle.toLowerCase()}`}
+          />
         </View>
       ) : null}
     </View>
@@ -53,9 +65,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing['6'],
   },
   iconContainer: {
-    width: 88,
-    height: 88,
-    borderRadius: 44,
+    width: 72,
+    height: 72,
+    borderRadius: 36,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: spacing['5'],

@@ -253,4 +253,30 @@ All project skills are located in `.claude/skills/`. Key skills include:
 
 ---
 
+## 10. Current Project Status (EverSiteAudit)
+
+### Completed Features
+- **Foundation**: React Native 0.76 + Expo 52 + TypeScript 5.6, SQLite with migrations (schema v3)
+- **Security**: AES-256-GCM encrypted backups, SHA-256 photo integrity, optional biometric auth
+- **Camera**: Burst mode, flash toggle, grid overlay, real-time review strip, severity tagging
+- **Media**: Photo annotations (5 tools + undo/redo), gallery import, captions, GPS tagging
+- **Issues**: Full CRUD, voice notes, GPS coordinates, drag-and-drop reordering, bulk operations
+- **Projects**: Templates, search/filter, detail views with quick actions, PDF/ZIP/JSON/CSV export
+- **Exports**: Password-protected files, company branding in PDFs, share sheet integration
+- **Platform**: Deep linking, OS share extension, device migration wizard, backup reminders
+- **Design**: HeroUI-3 + Tailwind CSS v4 + Uniwind, dark/light/high-contrast themes
+
+### Quality Metrics
+- `npm run verify`: **PASSING** (0 type errors, 0 lint errors)
+- Tests: **126 tests** across **25 suites**
+- Pre-existing warnings: 19 `explicit-function-return-type` warnings in legacy files
+
+### Key Services (for agent reference)
+- `src/services/media/voiceRecorder.ts` — Audio recording with `expo-av`
+- `src/services/media/imagePicker.ts` — Gallery import with `expo-image-picker`
+- `src/services/integrity/photoIntegrity.ts` — SHA-256 checksums with `expo-crypto`
+- `src/services/auth/biometricAuth.ts` — Biometric auth with `expo-local-authentication`
+- `src/services/export/pdfExport.ts` — PDF generation with branding support
+- `src/services/export/zipExport.ts` — ZIP creation with optional password encryption
+
 **End of agents.md**

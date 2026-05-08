@@ -12,7 +12,7 @@ export function ScreenPlaceholder({ title, subtitle }: ScreenPlaceholderProps): 
   return (
     <Screen scrollable={false} pad>
       <View style={styles.content}>
-        <Typography variant="h1" color="primary" align="center">
+        <Typography variant="headingLg" accessibilityRole="header" color="primary" align="center">
           {title}
         </Typography>
         {subtitle ? (

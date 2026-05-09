@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>EverSiteAudit — Simulator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ===== CSS VARIABLES ===== */
+:root {
+  --primary: #5e6ad2;
+  --bg: #08090a;
+  --bg-secondary: #0f1011;
+  --bg-tertiary: #191a1b;
+  --bg-elevated: #28282c;
+  --text-primary: #f7f8f8;
+  --text-secondary: #d0d6e0;
+  --text-tertiary: #8a8f98;
+  --border: rgba(255,255,255,0.08);
+  --critical: #FF4757;
+  --high: #FF8C42;
+  --medium: #FFD166;
+  --low: #06D6A0;
+  --radius-card: 12px;
+  --radius-btn: 8px;
+  --radius-pill: 9999px;
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Lora', serif;
+  --shadow: 0 25px 80px rgba(0,0,0,0.6);
+  --notch-height: 28px;
+}
+
+:root.light {
+  --bg: #f5f6f8;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #eef0f3;
+  --bg-elevated: #e4e6eb;
+  --text-primary: #0b0d10;
+  --text-secondary: #3c4049;
+  --text-tertiary: #6b7280;
+  --border: rgba(0,0,0,0.08);
+}
+
+/* ===== RESET & BASE ===== */
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html, body { height:100%; }
+body {
+  font-family: var(--font-body);
+  background: #111;
+  color: var(--text-primary);
+  display:flex; align-items:center; justify-content:center;
+  min-height:100vh; overflow:hidden;
+}
+button { font-family: var(--font-heading); border:none; background:none; cursor:pointer; }
+
+/* ===== PHONE FRAME ===== */
+.phone-frame {
+  width:380px; height:780px;
+  background:#1a1a1a;
+  border-radius:52px;
+  padding:12px;
+  box-shadow: var(--shadow), 0 0 0 2px #333;
+  position:relative;
+  flex-shrink:0;
+  transition: transform 0.3s ease;
+}
+.phone-bezel {
+  width:100%; height:100%;
+  background: var(--bg);
+  border-radius:44px;
+  overflow:hidden;
+  position:relative;
+  display:flex; flex-direction:column;
+  transition: background 0.35s ease;
+}
+.notch {
+  position:absolute; top:0; left:50%; transform:translateX(-50%);
+  width:160px; height:var(--notch-height);
+  background:#000;
+  border-radius:0 0 20px 20px;
+  z-index:100;
+  display:flex; align-items:center; justify-content:center; gap:6px;
+}
+.notch-speaker { width:48px; height:4px; background:#333; border-radius:2px; }
+.notch-cam { width:10px; height:10px; background:#222; border-radius:50%; border:1px solid #333; }
+
+/* ===== SCREEN SYSTEM ===== */
+.screens-container {
+  flex:1;
+  position:relative;
+  overflow:hidden;
+}
+.screen {
+  position:absolute; inset:0;
+  display:none; flex-direction:column;
+  background: var(--bg);
+  transition: background 0.35s ease;
+}
+.screen.active { display:flex; }
+.screen-content {
+  flex:1; overflow-y:auto; overflow-x:hidden;
+  padding: 0 16px 100px;
+  scrollbar-width:none;
+}
+.screen-content::-webkit-scrollbar { display:none; }
+
+/* ===== TRANSITIONS ===== */
+.fade-in { animation: fadeIn 0.28s ease both; }
+.slide-up { animation: slideUp 0.32s cubic-bezier(0.22,1,0.36,1) both; }
+.slide-right { animation: slideRight 0.28s ease both; }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes slideUp { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
+@keyframes slideRight { from { opacity:0; transform:translateX(30px); } to { opacity:1; transform:translateX(0); } }
+
+/* ===== TYPOGRAPHY ===== */
+h1, h2, h3, h4, .font-heading { font-family: var(--font-heading); }
+h1 { font-size:26px; font-weight:700; }
+h2 { font-size:20px; font-weight:600; }
+h3 { font-size:15px; font-weight:600; }
+.text-secondary { color: var(--text-secondary); }
+.text-tertiary { color: var(--text-tertiary); }
+
+/* ===== HEADER ===== */
+.header {
+  padding: calc(var(--notch-height) + 14px) 16px 10px;
+  display:flex; align-items:center; justify-content:space-between;
+  position:sticky; top:0; z-index:50;
+  background: rgba(var(--bg),0.85);
+  backdrop-filter: blur(12px);
+  border-bottom:1px solid var(--border);
+  transition: background 0.35s ease;
+}
+.header-btn {
+  width:36px; height:36px; border-radius:10px;
+  background: var(--bg-tertiary);
+  display:flex; align-items:center; justify-content:center;
+  color: var(--text-primary);
+  transition: background 0.2s, color 0.35s;
+}
+.header-btn:active { transform:scale(0.92); }
+
+/* ===== TAB BAR ===== */
+.tab-bar {
+  position:absolute; bottom:0; left:0; right:0;
+  height:74px; padding-bottom:18px;
+  background: rgba(var(--bg),0.88);
+  backdrop-filter: blur(16px);
+  border-top:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-around;
+  z-index:90;
+  transition: background 0.35s ease, border-color 0.35s;
+}
+.tab-btn {
+  display:flex; flex-direction:column; align-items:center; gap:3px;
+  color: var(--text-tertiary);
+  font-size:10px; font-weight:500;
+  font-family: var(--font-heading);
+  transition: color 0.2s;
+  padding:4px 12px;
+}
+.tab-btn svg { width:22px; height:22px; stroke-width:1.8; }
+.tab-btn.active { color: var(--primary); }
+.tab-btn:active { transform:scale(0.92); }
+
+/* ===== CARDS ===== */
+.card {
+  background: var(--bg-secondary);
+  border:1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding:16px;
+  margin-bottom:12px;
+  transition: background 0.35s, border-color 0.35s, transform 0.15s;
+}
+.card:active { transform:scale(0.98); }
+
+/* ===== BADGES ===== */
+.badge {
+  display:inline-flex; align-items:center; gap:4px;
+  padding:3px 10px; border-radius: var(--radius-pill);
+  font-family: var(--font-heading); font-size:11px; font-weight:600;
+}
+.badge-critical { background:rgba(255,71,87,0.15); color:var(--critical); }
+.badge-high { background:rgba(255,140,66,0.15); color:var(--high); }
+.badge-medium { background:rgba(255,209,102,0.15); color:#c9a22a; }
+.badge-low { background:rgba(6,214,160,0.15); color:var(--low); }
+.badge-active { background:rgba(94,106,210,0.15); color:var(--primary); }
+.badge-completed { background:rgba(6,214,160,0.15); color:var(--low); }
+.badge-archived { background:rgba(138,143,152,0.15); color:var(--text-tertiary); }
+.badge-open { background:rgba(255,71,87,0.12); color:var(--critical); }
+.badge-inprogress { background:rgba(255,209,102,0.15); color:#c9a22a; }
+.badge-resolved { background:rgba(6,214,160,0.15); color:var(--low); }
+
+/* ===== PROGRESS BAR ===== */
+.progress-track {
+  height:6px; background: var(--bg-tertiary);
+  border-radius: var(--radius-pill); overflow:hidden; margin-top:10px;
+}
+.progress-fill {
+  height:100%; background: var(--primary);
+  border-radius: var(--radius-pill); transition: width 0.6s ease;
+}
+
+/* ===== FILTER TABS ===== */
+.filter-row {
+  display:flex; gap:6px; padding:10px 0 6px;
+  overflow-x:auto; scrollbar-width:none;
+}
+.filter-row::-webkit-scrollbar { display:none; }
+.filter-chip {
+  padding:7px 16px; border-radius: var(--radius-pill);
+  font-family: var(--font-heading); font-size:13px; font-weight:500;
+  background: var(--bg-tertiary); color: var(--text-secondary);
+  white-space:nowrap; transition: all 0.2s;
+  border:1px solid transparent;
+}
+.filter-chip.active { background: var(--primary); color:#fff; }
+.filter-chip:active { transform:scale(0.95); }
+
+/* ===== PROJECT CARD ===== */
+.project-header { display:flex; justify-content:space-between; align-items:flex-start; }
+.project-name { font-family: var(--font-heading); font-size:15px; font-weight:600; line-height:1.35; }
+.project-meta { font-size:13px; color: var(--text-tertiary); margin-top:4px; }
+.project-footer { display:flex; align-items:center; justify-content:space-between; margin-top:10px; }
+.issue-count { font-size:12px; color: var(--text-secondary); font-family: var(--font-heading); }
+
+/* ===== STATS ROW ===== */
+.stats-row {
+  display:flex; gap:10px; margin:12px 0;
+}
+.stat-box {
+  flex:1; background: var(--bg-tertiary);
+  border-radius: var(--radius-card); padding:14px 10px;
+  text-align:center; border:1px solid var(--border);
+  transition: background 0.35s, border-color 0.35s;
+}
+.stat-value { font-family: var(--font-heading); font-size:20px; font-weight:700; color: var(--primary); }
+.stat-label { font-size:11px; color: var(--text-tertiary); margin-top:2px; font-family: var(--font-heading); }
+
+/* ===== ISSUE ITEM ===== */
+.issue-item {
+  display:flex; align-items:center; gap:12px;
+  padding:14px; background: var(--bg-secondary);
+  border:1px solid var(--border); border-radius: var(--radius-card);
+  margin-bottom:10px; transition: background 0.35s, border-color 0.35s, transform 0.15s;
+}
+.issue-item:active { transform:scale(0.98); }
+.issue-avatar {
+  width:36px; height:36px; border-radius:50%;
+  background: var(--bg-elevated); color: var(--text-primary);
+  display:flex; align-items:center; justify-content:center;
+  font-family: var(--font-heading); font-size:13px; font-weight:600;
+  flex-shrink:0; border:1px solid var(--border);
+}
+.issue-info { flex:1; min-width:0; }
+.issue-title { font-family: var(--font-heading); font-size:14px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.issue-sub { font-size:12px; color: var(--text-tertiary); margin-top:2px; }
+.issue-badges { display:flex; gap:6px; margin-top:6px; }
+
+/* ===== FAB ===== */
+.fab {
+  position:absolute; right:16px; bottom:90px;
+  width:56px; height:56px; border-radius:50%;
+  background: var(--primary); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow: 0 6px 24px rgba(94,106,210,0.4);
+  z-index:80; transition: transform 0.2s, background 0.35s;
+}
+.fab:active { transform:scale(0.9); }
+
+/* ===== LOCK SCREEN ===== */
+.lock-screen {
+  background: var(--bg); align-items:center; justify-content:center; text-align:center; padding:40px 30px;
+}
+.lock-logo {
+  width:72px; height:72px; border-radius:20px;
+  background: linear-gradient(135deg, var(--primary), #8b5cf6);
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto 24px; box-shadow: 0 8px 32px rgba(94,106,210,0.3);
+}
+.lock-title { font-family: var(--font-heading); font-size:24px; font-weight:700; }
+.lock-subtitle { color: var(--text-tertiary); font-size:14px; margin-top:8px; }
+.fingerprint {
+  width:64px; height:64px; margin:32px auto 16px;
+  color: var(--text-tertiary); cursor:pointer;
+  transition: color 0.3s, transform 0.3s;
+}
+.fingerprint:hover, .fingerprint:active { color: var(--primary); transform:scale(1.08); }
+.fingerprint-anim { animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:0.5;transform:scale(1);} 50%{opacity:1;transform:scale(1.08);} }
+.lock-hint { font-size:13px; color: var(--text-tertiary); margin-top:8px; }
+
+/* ===== ISSUE DETAIL ===== */
+.detail-section { margin-top:16px; }
+.detail-label { font-family: var(--font-heading); font-size:11px; font-weight:600; color: var(--text-tertiary); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; }
+.detail-text { font-size:14px; line-height:1.6; color: var(--text-secondary); }
+.gps-box {
+  background: var(--bg-tertiary); border:1px solid var(--border);
+  border-radius: var(--radius-card); padding:12px;
+  font-family: monospace; font-size:13px; color: var(--text-secondary);
+  display:flex; align-items:center; gap:8px;
+  transition: background 0.35s, border-color 0.35s;
+}
+.photo-grid {
+  display:grid; grid-template-columns: repeat(3, 1fr); gap:8px; margin-top:8px;
+}
+.photo-thumb {
+  aspect-ratio:1; border-radius: var(--radius-btn);
+  background: var(--bg-elevated); overflow:hidden;
+  position:relative; cursor:pointer; border:1px solid var(--border);
+}
+.photo-thumb img { width:100%; height:100%; object-fit:cover; filter: brightness(0.65); transition: filter 0.2s; }
+.photo-thumb:hover img, .photo-thumb:active img { filter: brightness(0.85); }
+.photo-overlay {
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:10px; font-family: var(--font-heading); opacity:0.7;
+}
+
+/* ===== PHOTO ANNOTATION ===== */
+.annotate-screen .screen-content { padding:0; }
+.annotate-toolbar {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 16px; background: var(--bg-secondary);
+  border-bottom:1px solid var(--border);
+}
+.tool-group { display:flex; gap:6px; }
+.tool-btn {
+  width:40px; height:40px; border-radius:10px;
+  background: var(--bg-tertiary); color: var(--text-secondary);
+  display:flex; align-items:center; justify-content:center;
+  transition: all 0.2s; border:1px solid transparent;
+}
+.tool-btn.active { background: rgba(94,106,210,0.2); color: var(--primary); border-color: rgba(94,106,210,0.4); }
+.tool-btn:active { transform:scale(0.92); }
+.color-dots { display:flex; gap:6px; }
+.color-dot {
+  width:22px; height:22px; border-radius:50%; cursor:pointer;
+  border:2px solid transparent; transition: transform 0.15s;
+}
+.color-dot.active { border-color: var(--text-primary); transform:scale(1.15); }
+.annotate-canvas-wrap {
+  flex:1; position:relative; background:#000; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+}
+.annotate-canvas-wrap canvas { touch-action:none; }
+.annotate-actions {
+  display:flex; gap:12px; padding:12px 16px;
+  background: var(--bg-secondary); border-top:1px solid var(--border);
+}
+.action-btn {
+  flex:1; height:44px; border-radius: var(--radius-btn);
+  background: var(--bg-tertiary); color: var(--text-primary);
+  font-family: var(--font-heading); font-size:14px; font-weight:500;
+  display:flex; align-items:center; justify-content:center; gap:6px;
+  transition: background 0.2s;
+}
+.action-btn:active { transform:scale(0.96); }
+.action-btn.primary { background: var(--primary); color:#fff; }
+
+/* ===== ACTIVITY TIMELINE ===== */
+.timeline-item {
+  display:flex; gap:12px; padding:14px 0;
+  border-bottom:1px solid var(--border);
+  transition: border-color 0.35s;
+}
+.timeline-item:last-child { border-bottom:none; }
+.timeline-icon {
+  width:36px; height:36px; border-radius:10px;
+  background: var(--bg-tertiary); color: var(--primary);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; border:1px solid var(--border);
+}
+.timeline-body { flex:1; }
+.timeline-text { font-size:14px; line-height:1.45; color: var(--text-secondary); }
+.timeline-text strong { color: var(--text-primary); font-weight:600; }
+.timeline-time { font-size:11px; color: var(--text-tertiary); margin-top:4px; font-family: var(--font-heading); }
+
+/* ===== SETTINGS ===== */
+.settings-section { margin-bottom:18px; }
+.settings-title {
+  font-family: var(--font-heading); font-size:11px; font-weight:600;
+  color: var(--text-tertiary); text-transform:uppercase; letter-spacing:0.6px;
+  padding: 14px 4px 8px;
+}
+.settings-row {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px; background: var(--bg-secondary);
+  border:1px solid var(--border); border-radius: var(--radius-card);
+  margin-bottom:8px; transition: background 0.35s, border-color 0.35s;
+}
+.settings-row-label { font-family: var(--font-heading); font-size:14px; font-weight:500; }
+.settings-row-desc { font-size:12px; color: var(--text-tertiary); margin-top:2px; }
+
+/* Toggle switch */
+.toggle {
+  width:50px; height:28px; border-radius:14px;
+  background: var(--bg-elevated); position:relative; cursor:pointer;
+  transition: background 0.25s; border:1px solid var(--border);
+}
+.toggle.on { background: var(--primary); }
+.toggle-knob {
+  width:22px; height:22px; border-radius:50%;
+  background:#fff; position:absolute; top:2px; left:2px;
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.toggle.on .toggle-knob { transform:translateX(22px); }
+
+/* Theme chips */
+.theme-chips { display:flex; gap:8px; }
+.theme-chip {
+  padding:7px 16px; border-radius: var(--radius-pill);
+  font-family: var(--font-heading); font-size:13px; font-weight:500;
+  background: var(--bg-tertiary); color: var(--text-secondary);
+  border:1px solid transparent; transition: all 0.2s;
+}
+.theme-chip.active { border-color: var(--primary); color: var(--primary); background: rgba(94,106,210,0.1); }
+.theme-chip:active { transform:scale(0.95); }
+
+/* ===== EXPORT PREVIEW ===== */
+.export-progress {
+  flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px;
+}
+.spinner {
+  width:56px; height:56px; border-radius:50%;
+  border:3px solid var(--bg-elevated);
+  border-top-color: var(--primary);
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform:rotate(360deg); } }
+.export-title { font-family: var(--font-heading); font-size:18px; font-weight:600; margin-top:24px; }
+.export-sub { font-size:14px; color: var(--text-tertiary); margin-top:6px; text-align:center; }
+.progress-line {
+  width:100%; max-width:220px; height:4px; background: var(--bg-elevated);
+  border-radius:2px; margin-top:20px; overflow:hidden;
+}
+.progress-line-fill {
+  height:100%; background: var(--primary); border-radius:2px;
+  width:0%; animation: loadProgress 2s ease forwards;
+}
+@keyframes loadProgress { to { width:100%; } }
+
+.pdf-preview {
+  flex:1; overflow-y:auto; padding:16px; background: var(--bg);
+}
+.pdf-page {
+  background: #fff; color:#1a1a1a; border-radius:8px;
+  padding:24px; min-height:480px; box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+.pdf-header { display:flex; align-items:center; gap:10px; border-bottom:2px solid #eee; padding-bottom:14px; }
+.pdf-logo {
+  width:36px; height:36px; border-radius:8px;
+  background: linear-gradient(135deg, #5e6ad2, #8b5cf6);
+  display:flex; align-items:center; justify-content:center; color:#fff; font-family: var(--font-heading); font-weight:700; font-size:14px;
+}
+.pdf-title { font-family: var(--font-heading); font-size:16px; font-weight:700; color:#111; }
+.pdf-meta { font-size:12px; color:#666; margin-top:2px; }
+.pdf-table { width:100%; border-collapse:collapse; margin-top:16px; font-size:12px; }
+.pdf-table th { text-align:left; padding:8px; background:#f5f5f5; font-family: var(--font-heading); font-weight:600; border-bottom:2px solid #ddd; }
+.pdf-table td { padding:8px; border-bottom:1px solid #eee; }
+.pdf-sev { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:6px; }
+.pdf-thumbs { display:flex; gap:8px; margin-top:16px; }
+.pdf-thumb { width:64px; height:48px; border-radius:4px; background:#eee; overflow:hidden; }
+.pdf-thumb img { width:100%; height:100%; object-fit:cover; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:480px) {
+  body { align-items:flex-start; padding-top:10px; background:#0a0a0a; }
+  .phone-frame { width:100%; height:100vh; max-height:900px; border-radius:0; padding:0; box-shadow:none; border:none; }
+  .phone-bezel { border-radius:0; }
+  .notch { display:none; }
+}
+
+/* ===== UTILITIES ===== */
+.gap-4 { gap:4px; }
+.gap-8 { gap:8px; }
+.mt-8 { margin-top:8px; }
+.mt-12 { margin-top:12px; }
+.mb-4 { margin-bottom:4px; }
+.flex { display:flex; }
+.items-center { align-items:center; }
+.justify-between { justify-content:space-between; }
+.hidden { display:none !important; }
+</style>
+</head>
+<body>
+
+<div class="phone-frame" id="phoneFrame">
+  <div class="phone-bezel" id="phoneBezel">
+    <div class="notch"><div class="notch-speaker"></div><div class="notch-cam"></div></div>
+
+    <div class="screens-container" id="screensContainer">
+
+      <!-- ===== LOCK SCREEN ===== -->
+      <div class="screen lock-screen active" id="screen-lock">
+        <div class="lock-logo">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="lock-title">EverSiteAudit</div>
+        <div class="lock-subtitle">Construction Site Intelligence</div>
+        <svg class="fingerprint fingerprint-anim" id="fingerprintBtn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.131A8 8 0 008 3.239c-5.34 2.266-9.174 7.485-9.174 13.761"/><path d="M12 11V3"/>
+        </svg>
+        <div class="lock-hint">Tap to authenticate</div>
+      </div>
+
+      <!-- ===== PROJECTS TAB ===== -->
+      <div class="screen" id="screen-projects">
+        <div class="header">
+          <h2>Projects</h2>
+          <div class="flex gap-8">
+            <button class="header-btn" aria-label="Search">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
+            <button class="header-btn" aria-label="Add project">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="screen-content">
+          <div class="filter-row">
+            <button class="filter-chip active" data-filter="all">All</button>
+            <button class="filter-chip" data-filter="active">Active</button>
+            <button class="filter-chip" data-filter="completed">Completed</button>
+            <button class="filter-chip" data-filter="archived">Archived</button>
+          </div>
+          <div id="projectsList"></div>
+        </div>
+      </div>
+
+      <!-- ===== PROJECT DETAIL ===== -->
+      <div class="screen" id="screen-project-detail">
+        <div class="header">
+          <button class="header-btn" id="backProject" aria-label="Back">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          </button>
+          <h2 style="font-size:16px;">Project</h2>
+          <div style="width:36px;"></div>
+        </div>
+        <div class="screen-content" id="projectDetailContent"></div>
+        <button class="fab" id="fabNewIssue" aria-label="New issue">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+      </div>
+
+      <!-- ===== ISSUE DETAIL ===== -->
+      <div class="screen" id="screen-issue-detail">
+        <div class="header">
+          <button class="header-btn" id="backIssue" aria-label="Back">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          </button>
+          <h2 style="font-size:16px;">Issue</h2>
+          <button class="header-btn" id="exportIssueBtn" aria-label="Export">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </button>
+        </div>
+        <div class="screen-content" id="issueDetailContent"></div>
+      </div>
+
+      <!-- ===== PHOTO ANNOTATION ===== -->
+      <div class="screen annotate-screen" id="screen-annotate">
+        <div class="header">
+          <button class="header-btn" id="backAnnotate" aria-label="Back">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          </button>
+          <h2 style="font-size:16px;">Annotate</h2>
+          <div style="width:36px;"></div>
+        </div>
+        <div class="annotate-toolbar">
+          <div class="tool-group">
+            <button class="tool-btn active" data-tool="pen" title="Pen"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></button>
+            <button class="tool-btn" data-tool="arrow" title="Arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+            <button class="tool-btn" data-tool="circle" title="Circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></button>
+            <button class="tool-btn" data-tool="rect" title="Rectangle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg></button>
+            <button class="tool-btn" data-tool="text" title="Text"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V5h16v2"/><path d="M9 7v10"/><path d="M15 7v10"/></svg></button>
+          </div>
+          <div class="color-dots">
+            <div class="color-dot active" style="background:#FF4757" data-color="#FF4757"></div>
+            <div class="color-dot" style="background:#FF8C42" data-color="#FF8C42"></div>
+            <div class="color-dot" style="background:#FFD166" data-color="#FFD166"></div>
+            <div class="color-dot" style="background:#06D6A0" data-color="#06D6A0"></div>
+            <div class="color-dot" style="background:#3b82f6" data-color="#3b82f6"></div>
+            <div class="color-dot" style="background:#ffffff" data-color="#ffffff"></div>
+          </div>
+        </div>
+        <div class="annotate-canvas-wrap" id="canvasWrap">
+          <canvas id="annotateCanvas"></canvas>
+        </div>
+        <div class="annotate-actions">
+          <button class="action-btn" id="undoBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            Undo
+          </button>
+          <button class="action-btn" id="redoBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            Redo
+          </button>
+          <button class="action-btn primary" id="saveAnnotBtn">Save</button>
+        </div>
+      </div>
+
+      <!-- ===== ACTIVITY TAB ===== -->
+      <div class="screen" id="screen-activity">
+        <div class="header">
+          <h2>Activity</h2>
+          <button class="header-btn" id="clearActivity" aria-label="Clear">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          </button>
+        </div>
+        <div class="screen-content" id="activityList"></div>
+      </div>
+
+      <!-- ===== SETTINGS TAB ===== -->
+      <div class="screen" id="screen-settings">
+        <div class="header"><h2>Settings</h2><div style="width:36px;"></div></div>
+        <div class="screen-content">
+          <div class="settings-section">
+            <div class="settings-title">Appearance</div>
+            <div class="settings-row">
+              <div>
+                <div class="settings-row-label">Theme</div>
+                <div class="settings-row-desc">Choose your preferred look</div>
+              </div>
+              <div class="theme-chips">
+                <button class="theme-chip active" data-theme="dark">Dark</button>
+                <button class="theme-chip" data-theme="light">Light</button>
+                <button class="theme-chip" data-theme="auto">Auto</button>
+              </div>
+            </div>
+          </div>
+          <div class="settings-section">
+            <div class="settings-title">Security</div>
+            <div class="settings-row">
+              <div>
+                <div class="settings-row-label">Biometric Unlock</div>
+                <div class="settings-row-desc">Use fingerprint or face ID</div>
+              </div>
+              <div class="toggle on" id="toggleBiometric"><div class="toggle-knob"></div></div>
+            </div>
+            <div class="settings-row">
+              <div>
+                <div class="settings-row-label">Auto-Lock</div>
+                <div class="settings-row-desc">Lock after 5 minutes</div>
+              </div>
+              <div class="toggle on" id="toggleAutolock"><div class="toggle-knob"></div></div>
+            </div>
+          </div>
+          <div class="settings-section">
+            <div class="settings-title">Data</div>
+            <div class="settings-row" id="btnExport" style="cursor:pointer;">
+              <div>
+                <div class="settings-row-label">Export Reports</div>
+                <div class="settings-row-desc">Generate and download PDFs</div>
+              </div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+            <div class="settings-row">
+              <div>
+                <div class="settings-row-label">Cloud Backup</div>
+                <div class="settings-row-desc">Sync to secure cloud storage</div>
+              </div>
+              <div class="toggle" id="toggleBackup"><div class="toggle-knob"></div></div>
+            </div>
+            <div class="settings-row">
+              <div>
+                <div class="settings-row-label">Migrate Data</div>
+                <div class="settings-row-desc">Transfer from another device</div>
+              </div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+          </div>
+          <div class="settings-section">
+            <div class="settings-title">About</div>
+            <div class="settings-row">
+              <div>
+                <div class="settings-row-label">Version</div>
+                <div class="settings-row-desc">1.0.0 (Build 2024.11.4)</div>
+              </div>
+            </div>
+            <div class="settings-row">
+              <div>
+                <div class="settings-row-label">EverSiteAudit</div>
+                <div class="settings-row-desc">Construction site intelligence platform</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== EXPORT PREVIEW ===== -->
+      <div class="screen" id="screen-export">
+        <div class="header">
+          <button class="header-btn" id="backExport" aria-label="Back">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          </button>
+          <h2 style="font-size:16px;">Export</h2>
+          <div style="width:36px;"></div>
+        </div>
+        <div class="screen-content" style="padding:0; display:flex; flex-direction:column;">
+          <div class="export-progress" id="exportProgress">
+            <div class="spinner"></div>
+            <div class="export-title">Generating Report…</div>
+            <div class="export-sub">Compiling issues, photos, and annotations</div>
+            <div class="progress-line"><div class="progress-line-fill"></div></div>
+          </div>
+          <div class="pdf-preview hidden" id="pdfPreview">
+            <div class="pdf-page">
+              <div class="pdf-header">
+                <div class="pdf-logo">E</div>
+                <div>
+                  <div class="pdf-title" id="pdfProjectName">Project Report</div>
+                  <div class="pdf-meta" id="pdfDate">November 4, 2024</div>
+                </div>
+              </div>
+              <table class="pdf-table">
+                <thead><tr><th>Severity</th><th>Issue</th><th>Status</th><th>Assignee</th></tr></thead>
+                <tbody id="pdfTableBody"></tbody>
+              </table>
+              <div class="pdf-thumbs" id="pdfThumbs"></div>
+            </div>
+            <div style="display:flex; gap:10px; margin-top:16px;">
+              <button class="action-btn primary" style="flex:1;" id="btnDownloadPDF">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download PDF
+              </button>
+              <button class="action-btn" style="flex:1;" id="btnSharePDF">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                Share
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /screens-container -->
+
+    <!-- ===== BOTTOM TAB BAR ===== -->
+    <nav class="tab-bar" id="tabBar">
+      <button class="tab-btn active" data-tab="projects">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        Projects
+      </button>
+      <button class="tab-btn" data-tab="activity">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Activity
+      </button>
+      <button class="tab-btn" data-tab="settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Settings
+      </button>
+    </nav>
+
+  </div><!-- /phone-bezel -->
+</div><!-- /phone-frame -->
+
+<script>
+/* ===================== DATA ===================== */
+const projects = [
+  { id:1, name:"Riverside Tower — Phase 2", address:"1234 River Rd, Austin TX", status:"active", issues:12, progress:42, photos:34 },
+  { id:2, name:"Skyline Offices Renovation", address:"567 Downtown Blvd, Seattle WA", status:"active", issues:8, progress:67, photos:21 },
+  { id:3, name:"Metro Station Extension", address:"89 Transit Way, Chicago IL", status:"completed", issues:24, progress:100, photos:56 },
+  { id:4, name:"Harbor Bridge Maintenance", address:"321 Port St, Boston MA", status:"archived", issues:15, progress:100, photos:38 },
+  { id:5, name:"Greenfield Data Center", address:"9900 Server Ln, Phoenix AZ", status:"active", issues:5, progress:18, photos:12 }
+];
+
+const issuesData = {
+  1: [
+    { id:101, title:"Foundation crack — northeast corner", severity:"critical", status:"Open", assignee:"JD", desc:"Structural engineer identified a 14-inch crack in the foundation northeast corner. Requires immediate inspection and epoxy injection.", gps:"30.2672° N, 97.7431° W", photos:[1,2,3], due:"Nov 12, 2024" },
+    { id:102, title:"Exterior paint peeling — west facade", severity:"medium", status:"In Progress", assignee:"MK", desc:"Paint peeling observed on west facade between floors 4–6. Likely due to moisture ingress. Scrape and repaint recommended.", gps:"30.2670° N, 97.7429° W", photos:[4], due:"Nov 18, 2024" },
+    { id:103, title:"HVAC vent misalignment — floor 3", severity:"high", status:"Open", assignee:"AL", desc:"Supply vent on floor 3 east wing is offset by 8 inches from ductwork. Airflow reduced by ~30%.", gps:"30.2673° N, 97.7430° W", photos:[5,6], due:"Nov 10, 2024" },
+    { id:104, title:"Loose handrail — stairwell B", severity:"low", status:"Resolved", assignee:"JD", desc:"Handrail bracket loose on landing 2. Tightened and verified stability.", gps:"30.2671° N, 97.7432° W", photos:[7], due:"Nov 05, 2024" },
+    { id:105, title:"Missing fire extinguisher — loading dock", severity:"high", status:"Open", assignee:"MK", desc:"Extinguisher cabinet empty per OSHA 1910.157. Replace immediately.", gps:"30.2669° N, 97.7433° W", photos:[8], due:"Nov 09, 2024" }
+  ],
+  2: [
+    { id:201, title:"Asbestos-containing material found", severity:"critical", status:"Open", assignee:"AL", desc:"Suspected ACM discovered behind drywall in south wing. Sampling sent to lab; area cordoned off.", gps:"47.6062° N, 122.3321° W", photos:[1,2], due:"Nov 08, 2024" },
+    { id:202, title:"Exposed wiring — ceiling cavity", severity:"high", status:"In Progress", assignee:"JD", desc:"Unshielded 240V conductors visible in ceiling cavity near conference room. Temporarily taped.", gps:"47.6060° N, 122.3323° W", photos:[3], due:"Nov 14, 2024" },
+    { id:203, title:"Elevator certification expired", severity:"medium", status:"Open", assignee:"MK", desc:"Service elevator certificate expired Oct 15. Schedule reinspection.", gps:"47.6061° N, 122.3320° W", photos:[], due:"Nov 20, 2024" }
+  ],
+  3: [
+    { id:301, title:"Platform edge gap exceeds tolerance", severity:"medium", status:"Resolved", assignee:"JD", desc:"Gap between platform and train door exceeded 2-inch spec. Shimmed and re-tested.", gps:"41.8781° N, 87.6298° W", photos:[1], due:"Oct 28, 2024" },
+    { id:302, title:"Lighting flicker — tunnel section C", severity:"low", status:"Resolved", assignee:"AL", desc:"LED driver replaced; flicker eliminated.", gps:"41.8780° N, 87.6295° W", photos:[2,3], due:"Oct 25, 2024" }
+  ],
+  4: [
+    { id:401, title:"Corrosion on main cable anchor", severity:"high", status:"Resolved", assignee:"MK", desc:"Anchor bolts showed 15% section loss. Hot-dip galvanized replacement installed.", gps:"42.3601° N, 71.0589° W", photos:[1], due:"Sep 15, 2024" }
+  ],
+  5: [
+    { id:501, title:"Soil compaction test failed — zone A", severity:"critical", status:"Open", assignee:"JD", desc:"Proctor test at 87% of standard. Requires re-compaction and re-test before slab pour.", gps:"33.4484° N, 112.0740° W", photos:[1,2,3,4], due:"Nov 16, 2024" },
+    { id:502, title:"Utility marker missing — north perimeter", severity:"low", status:"In Progress", assignee:"AL", desc:"Underground gas line marker stake missing. Replace with tracer wire and above-ground post.", gps:"33.4482° N, 112.0738° W", photos:[5], due:"Nov 22, 2024" }
+  ]
+};
+
+const activities = [
+  { icon:"plus", text:"Created issue <strong>Crack in foundation</strong> in Riverside Tower", time:"2 min ago" },
+  { icon:"file", text:"Exported PDF report for <strong>Skyline Offices Renovation</strong>", time:"1 hour ago" },
+  { icon:"image", text:"Photo annotated in <strong>Metro Station</strong> project", time:"3 hours ago" },
+  { icon:"check", text:"Issue resolved <strong>Loose handrail — stairwell B</strong>", time:"5 hours ago" },
+  { icon:"user", text:"Assigned <strong>Asbestos discovery</strong> to AL", time:"Yesterday" },
+  { icon:"file", text:"Exported PDF report for <strong>Harbor Bridge</strong>", time:"2 days ago" },
+  { icon:"plus", text:"Created project <strong>Greenfield Data Center</strong>", time:"3 days ago" },
+  { icon:"image", text:"Photo annotated in <strong>Riverside Tower</strong>", time:"4 days ago" }
+];
+
+const activityIcons = {
+  plus: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
+  file: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+  image: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
+  check: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>',
+  user: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'
+};
+
+const severityMeta = {
+  critical:{ cls:'badge-critical', label:'Critical' },
+  high:{ cls:'badge-high', label:'High' },
+  medium:{ cls:'badge-medium', label:'Medium' },
+  low:{ cls:'badge-low', label:'Low' }
+};
+
+const statusMeta = {
+  'Open':{ cls:'badge-open', label:'Open' },
+  'In Progress':{ cls:'badge-inprogress', label:'In Progress' },
+  'Resolved':{ cls:'badge-resolved', label:'Resolved' }
+};
+
+/* ===================== STATE ===================== */
+let currentTab = 'projects';
+let currentProjectId = null;
+let currentIssueId = null;
+let currentFilter = 'all';
+let theme = localStorage.getItem('esa_theme') || 'dark';
+let isAuthenticated = localStorage.getItem('esa_auth') === 'true';
+
+/* ===================== DOM ===================== */
+const $ = id => document.getElementById(id);
+const $$ = (sel, root=document) => root.querySelectorAll(sel);
+
+function applyTheme(t) {
+  theme = t;
+  const root = document.documentElement;
+  if (t === 'light') root.classList.add('light');
+  else root.classList.remove('light');
+  localStorage.setItem('esa_theme', t);
+  document.querySelectorAll('.theme-chip').forEach(c => c.classList.toggle('active', c.dataset.theme === t));
+}
+
+function showScreen(id, anim='fadeIn') {
+  $$('.screen').forEach(s => s.classList.remove('active'));
+  const el = $(id);
+  el.classList.add('active');
+  el.classList.remove('fade-in','slide-up','slide-right');
+  void el.offsetWidth;
+  el.classList.add(anim==='slideUp'?'slide-up':anim==='slideRight'?'slide-right':'fade-in');
+}
+
+function setTab(name) {
+  currentTab = name;
+  $$('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+  if (name === 'projects') { showScreen('screen-projects'); renderProjects(); }
+  else if (name === 'activity') { showScreen('screen-activity'); renderActivity(); }
+  else if (name === 'settings') { showScreen('screen-settings'); }
+}
+
+/* ===================== RENDERERS ===================== */
+function renderProjects() {
+  const list = $('projectsList');
+  const filtered = currentFilter === 'all' ? projects : projects.filter(p => p.status === currentFilter);
+  list.innerHTML = filtered.map(p => `
+    <div class="card" onclick="openProject(${p.id})" style="cursor:pointer;">
+      <div class="project-header">
+        <div style="min-width:0;">
+          <div class="project-name">${p.name}</div>
+          <div class="project-meta">${p.address}</div>
+        </div>
+        <span class="badge badge-${p.status}">${p.status.charAt(0).toUpperCase()+p.status.slice(1)}</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" style="width:${p.progress}%"></div></div>
+      <div class="project-footer">
+        <span class="issue-count">${p.issues} issues · ${p.photos} photos</span>
+        <span class="text-tertiary" style="font-size:11px; font-family:var(--font-heading);">Updated today</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openProject(pid) {
+  currentProjectId = pid;
+  const p = projects.find(x=>x.id===pid);
+  const issues = issuesData[pid]||[];
+  $('projectDetailContent').innerHTML = `
+    <div class="slide-up">
+      <h1 style="font-size:22px; margin-top:4px;">${p.name}</h1>
+      <div class="text-secondary" style="font-size:13px; margin-top:2px;">${p.address}</div>
+      <div class="stats-row">
+        <div class="stat-box"><div class="stat-value">${p.issues}</div><div class="stat-label">Issues</div></div>
+        <div class="stat-box"><div class="stat-value">${p.photos}</div><div class="stat-label">Photos</div></div>
+        <div class="stat-box"><div class="stat-value">Today</div><div class="stat-label">Updated</div></div>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:space-between; margin:14px 0 8px;">
+        <h3>Issues</h3>
+        <span class="text-tertiary" style="font-size:12px;">${issues.length} total</span>
+      </div>
+      ${issues.map(i => {
+        const sev = severityMeta[i.severity];
+        const st = statusMeta[i.status]||{cls:'badge-open',label:i.status};
+        return `
+        <div class="issue-item" onclick="openIssue(${pid},${i.id})" style="cursor:pointer;">
+          <div class="issue-avatar">${i.assignee}</div>
+          <div class="issue-info">
+            <div class="issue-title">${i.title}</div>
+            <div class="issue-sub">Due ${i.due}</div>
+            <div class="issue-badges">
+              <span class="badge ${sev.cls}">${sev.label}</span>
+              <span class="badge ${st.cls}">${st.label}</span>
+            </div>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>`;
+      }).join('')}
+    </div>
+  `;
+  showScreen('screen-project-detail', 'slideRight');
+}
+
+function openIssue(pid, iid) {
+  currentIssueId = iid;
+  const issue = issuesData[pid].find(i=>i.id===iid);
+  const sev = severityMeta[issue.severity];
+  const st = statusMeta[issue.status]||{cls:'badge-open',label:issue.status};
+  const photoPlaceholders = issue.photos.length ? issue.photos.map((_,idx)=>`
+    <div class="photo-thumb" onclick="openAnnotate(${pid},${iid},${idx})">
+      <img src="https://picsum.photos/seed/e${pid}${iid}${idx}/300/300" alt="Site photo" loading="lazy">
+      <div class="photo-overlay">Tap to view</div>
+    </div>
+  `).join('') : '<div class="text-tertiary" style="grid-column:1/-1; font-size:13px; padding:12px 0;">No photos yet</div>';
+
+  $('issueDetailContent').innerHTML = `
+    <div class="slide-up">
+      <div style="display:flex; align-items:flex-start; gap:10px; flex-wrap:wrap; margin-top:4px;">
+        <h1 style="font-size:20px; flex:1; line-height:1.3;">${issue.title}</h1>
+        <span class="badge ${sev.cls}">${sev.label}</span>
+      </div>
+      <div class="issue-badges mt-8">
+        <span class="badge ${st.cls}">${st.label}</span>
+        <span class="badge" style="background:var(--bg-elevated); color:var(--text-secondary);">Due ${issue.due}</span>
+      </div>
+      <div class="detail-section">
+        <div class="detail-label">Description</div>
+        <div class="detail-text">${issue.desc}</div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-label">GPS Location</div>
+        <div class="gps-box">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          ${issue.gps}
+        </div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-label">Assignee</div>
+        <div class="issue-item" style="cursor:default; margin-bottom:0;">
+          <div class="issue-avatar">${issue.assignee}</div>
+          <div class="issue-info">
+            <div class="issue-title">${issue.assignee==='JD'?'John Doe':issue.assignee==='MK'?'Maria Kim':issue.assignee==='AL'?'Alex Lee':'Unassigned'}</div>
+            <div class="issue-sub">Site Inspector</div>
+          </div>
+        </div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-label">Photos (${issue.photos.length})</div>
+        <div class="photo-grid">${photoPlaceholders}</div>
+        <button class="action-btn mt-8" style="width:100%; margin-top:10px;" onclick="addPhotoPlaceholder()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          Add Photo
+        </button>
+      </div>
+    </div>
+  `;
+  showScreen('screen-issue-detail', 'slideRight');
+}
+
+function renderActivity() {
+  $('activityList').innerHTML = activities.map(a => `
+    <div class="timeline-item">
+      <div class="timeline-icon">${activityIcons[a.icon]}</div>
+      <div class="timeline-body">
+        <div class="timeline-text">${a.text}</div>
+        <div class="timeline-time">${a.time}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function addPhotoPlaceholder() {
+  alert('Camera capture simulated — photo added to issue.');
+}
+
+/* ===================== EXPORT ===================== */
+function openExport(pid) {
+  const p = projects.find(x=>x.id===pid) || projects[0];
+  const issues = issuesData[pid] || [];
+  $('pdfProjectName').textContent = p.name + ' — Audit Report';
+  $('pdfDate').textContent = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  $('pdfTableBody').innerHTML = issues.map(i => {
+    const color = i.severity==='critical'?'#FF4757':i.severity==='high'?'#FF8C42':i.severity==='medium'?'#FFD166':'#06D6A0';
+    return `<tr><td><span class="pdf-sev" style="background:${color}"></span>${i.severity.toUpperCase()}</td><td>${i.title}</td><td>${i.status}</td><td>${i.assignee}</td></tr>`;
+  }).join('') || '<tr><td colspan="4" style="color:#999;">No issues</td></tr>';
+  $('pdfThumbs').innerHTML = issues.slice(0,4).map((_,idx)=>`<div class="pdf-thumb"><img src="https://picsum.photos/seed/exp${pid}${idx}/200/150" alt=""></div>`).join('');
+
+  $('exportProgress').classList.remove('hidden');
+  $('pdfPreview').classList.add('hidden');
+  showScreen('screen-export', 'slideUp');
+
+  setTimeout(() => {
+    $('exportProgress').classList.add('hidden');
+    $('pdfPreview').classList.remove('hidden');
+    $('pdfPreview').classList.add('fade-in');
+  }, 2200);
+}
+
+/* ===================== CANVAS ANNOTATION ===================== */
+let canvas, ctx, isDrawing=false, tool='pen', color='#FF4757', strokes=[], redoStack=[];
+let startX, startY, bgImage=null;
+
+function initCanvas() {
+  canvas = $('annotateCanvas');
+  const wrap = $('canvasWrap');
+  canvas.width = wrap.clientWidth;
+  canvas.height = wrap.clientHeight;
+  ctx = canvas.getContext('2d');
+  ctx.lineCap='round'; ctx.lineJoin='round'; ctx.lineWidth=3;
+
+  // Background image
+  bgImage = new Image();
+  bgImage.crossOrigin = 'anonymous';
+  bgImage.onload = () => drawCanvas();
+  bgImage.src = `https://picsum.photos/seed/e${currentProjectId}${currentIssueId}/600/800`;
+
+  canvas.addEventListener('pointerdown', onDown);
+  canvas.addEventListener('pointermove', onMove);
+  canvas.addEventListener('pointerup', onUp);
+  canvas.addEventListener('pointerleave', onUp);
+}
+
+function drawCanvas() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  if (bgImage) {
+    const s = Math.max(canvas.width/bgImage.width, canvas.height/bgImage.height);
+    const w = bgImage.width*s, h = bgImage.height*s;
+    ctx.drawImage(bgImage, (canvas.width-w)/2, (canvas.height-h)/2, w, h);
+  }
+  // Redraw strokes
+  strokes.forEach(s => drawStroke(s));
+}
+
+function drawStroke(s) {
+  ctx.strokeStyle = s.color; ctx.lineWidth = s.tool==='text'?1:3;
+  if (s.tool==='pen'||s.tool==='arrow') {
+    ctx.beginPath(); ctx.moveTo(s.points[0].x, s.points[0].y);
+    s.points.forEach(p=>ctx.lineTo(p.x,p.y)); ctx.stroke();
+  } else if (s.tool==='circle') {
+    const r = Math.hypot(s.ex-s.sx, s.ey-s.sy);
+    ctx.beginPath(); ctx.arc(s.sx, s.sy, r, 0, Math.PI*2); ctx.stroke();
+  } else if (s.tool==='rect') {
+    ctx.strokeRect(s.sx, s.sy, s.ex-s.sx, s.ey-s.sy);
+  } else if (s.tool==='text') {
+    ctx.font = 'bold 18px Poppins,sans-serif'; ctx.fillStyle = s.color;
+    ctx.fillText(s.text, s.sx, s.sy);
+  }
+  if (s.tool==='arrow' && s.points.length>1) {
+    const pts=s.points, last=pts[pts.length-1], prev=pts[pts.length-2];
+    const angle = Math.atan2(last.y-prev.y, last.x-prev.x);
+    const head = 10;
+    ctx.beginPath(); ctx.moveTo(last.x,last.y);
+    ctx.lineTo(last.x-head*Math.cos(angle-0.5), last.y-head*Math.sin(angle-0.5));
+    ctx.moveTo(last.x,last.y);
+    ctx.lineTo(last.x-head*Math.cos(angle+0.5), last.y-head*Math.sin(angle+0.5));
+    ctx.stroke();
+  }
+}
+
+function onDown(e) {
+  isDrawing=true; const r=canvas.getBoundingClientRect();
+  startX=e.clientX-r.left; startY=e.clientY-r.top;
+  if (tool==='text') {
+    const txt = prompt('Enter annotation text:'); if(!txt) return;
+    strokes.push({tool:'text',color,text:txt,sx:startX,sy:startY});
+    isDrawing=false; drawCanvas(); redoStack=[]; return;
+  }
+  if (tool==='pen'||tool==='arrow') strokes.push({tool,color,points:[{x:startX,y:startY}]});
+  else strokes.push({tool,color,sx:startX,sy:startY,ex:startX,ey:startY});
+  redoStack=[];
+}
+function onMove(e) {
+  if (!isDrawing) return; const r=canvas.getBoundingClientRect();
+  const x=e.clientX-r.left, y=e.clientY-r.top;
+  const s=strokes[strokes.length-1];
+  if (tool==='pen'||tool==='arrow') s.points.push({x,y});
+  else { s.ex=x; s.ey=y; }
+  drawCanvas(); drawStroke(s);
+}
+function onUp() { isDrawing=false; }
+
+function openAnnotate(pid,iid,idx) {
+  currentProjectId=pid; currentIssueId=iid;
+  showScreen('screen-annotate', 'slideUp');
+  setTimeout(initCanvas, 50);
+}
+
+/* ===================== EVENT LISTENERS ===================== */
+$('fingerprintBtn').addEventListener('click', () => {
+  localStorage.setItem('esa_auth','true');
+  isAuthenticated = true;
+  setTab('projects');
+});
+
+$('backProject').addEventListener('click', () => setTab('projects'));
+$('backIssue').addEventListener('click', () => openProject(currentProjectId));
+$('backAnnotate').addEventListener('click', () => openIssue(currentProjectId, currentIssueId));
+$('backExport').addEventListener('click', () => {
+  if (currentIssueId) openIssue(currentProjectId, currentIssueId);
+  else setTab('settings');
+});
+
+$('exportIssueBtn').addEventListener('click', () => openExport(currentProjectId));
+$('btnExport').addEventListener('click', () => openExport(currentProjectId||1));
+
+$('fabNewIssue').addEventListener('click', () => {
+  alert('New Issue form would open here in the real app.');
+});
+
+$$('.tab-btn').forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
+
+$$('.filter-chip').forEach(c => c.addEventListener('click', () => {
+  currentFilter = c.dataset.filter;
+  $$('.filter-chip').forEach(x=>x.classList.remove('active'));
+  c.classList.add('active');
+  renderProjects();
+}));
+
+$$('.theme-chip').forEach(c => c.addEventListener('click', () => applyTheme(c.dataset.theme)));
+
+$$('.toggle').forEach(t => t.addEventListener('click', () => t.classList.toggle('on')));
+
+$$('.tool-btn').forEach(b => b.addEventListener('click', () => {
+  tool = b.dataset.tool;
+  $$('.tool-btn').forEach(x=>x.classList.remove('active')); b.classList.add('active');
+}));
+
+$$('.color-dot').forEach(d => d.addEventListener('click', () => {
+  color = d.dataset.color;
+  $$('.color-dot').forEach(x=>x.classList.remove('active')); d.classList.add('active');
+}));
+
+$('undoBtn').addEventListener('click', () => {
+  if (!strokes.length) return;
+  redoStack.push(strokes.pop()); drawCanvas();
+});
+$('redoBtn').addEventListener('click', () => {
+  if (!redoStack.length) return;
+  strokes.push(redoStack.pop()); drawCanvas();
+});
+$('saveAnnotBtn').addEventListener('click', () => {
+  alert('Annotation saved.');
+  openIssue(currentProjectId, currentIssueId);
+});
+
+$('btnDownloadPDF').addEventListener('click', () => alert('Downloading PDF…'));
+$('btnSharePDF').addEventListener('click', () => alert('Share sheet would open here.'));
+
+$('clearActivity').addEventListener('click', () => {
+  if(confirm('Clear all activity?')) { $('activityList').innerHTML='<div class="text-tertiary" style="text-align:center;padding:40px 0;">No recent activity</div>'; }
+});
+
+/* ===================== INIT ===================== */
+applyTheme(theme);
+if (isAuthenticated) {
+  showScreen('screen-projects');
+  renderProjects();
+  renderActivity();
+} else {
+  showScreen('screen-lock');
+}
+
+// Lock screen re-auth after 5 min inactivity
+let idleTimer;
+function resetIdle() {
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(() => {
+    if (!$('screen-lock').classList.contains('active')) {
+      localStorage.removeItem('esa_auth');
+      showScreen('screen-lock');
+    }
+  }, 5*60*1000);
+}
+['touchstart','mousedown','keydown'].forEach(e=>document.addEventListener(e,resetIdle));
+resetIdle();
+
+// Responsive canvas resize
+window.addEventListener('resize', () => {
+  if ($('screen-annotate').classList.contains('active')) initCanvas();
+});
+</script>
+</body>
+</html>

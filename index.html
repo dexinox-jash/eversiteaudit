@@ -1,902 +1,508 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>EverSiteAudit — Portfolio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EverSiteAudit — Professional Site Auditing. Completely Offline.</title>
+<meta name="description" content="Offline-first mobile auditing for construction and inspection professionals. Zero cloud dependency.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:           #141413;
-  --bg-elevated:  #1c1c1b;
-  --bg-inset:     #0e0e0d;
-  --text:         #faf9f5;
-  --text-soft:    #b0aea5;
-  --text-mute:    #8a8880;
-  --text-faint:   #5e5c56;
-  --accent:       #d97757;
-  --accent-bright:#e08a6d;
-  --accent-glow:  rgba(217, 119, 87, 0.18);
-  --accent-line:  rgba(217, 119, 87, 0.25);
-  --blue:         #6a9bcc;
-  --green:        #788c5d;
-  --line:         #2a2a28;
-  --line-warm:    #3a3a38;
-  --serif:    'Lora', Georgia, serif;
-  --sans:     'Poppins', system-ui, sans-serif;
-  --mono:     'JetBrains Mono', ui-monospace, monospace;
-  --ease:     cubic-bezier(0.22, 1, 0.36, 1);
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg); color: var(--text-soft);
-  font-family: var(--sans); font-size: 1rem; line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-::selection { background: var(--accent); color: #fff; }
-body::before {
-  content: ''; position: fixed; inset: -10% -10% auto -10%; height: 70vh;
-  background:
-    radial-gradient(ellipse 60% 100% at 50% 0%, rgba(217, 119, 87, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 80% 100% at 20% 10%, rgba(106, 156, 204, 0.04) 0%, transparent 50%);
-  pointer-events: none; z-index: 0;
-}
-body::after {
-  content: ''; position: fixed; inset: 0;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.08   0 0 0 0 0.08   0 0 0 0 0.08   0 0 0 0.04 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-  opacity: 0.3; pointer-events: none; z-index: 1; mix-blend-mode: overlay;
-}
-a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--accent-line); transition: border-color 200ms; }
-a:hover { border-bottom-color: var(--accent-bright); }
-h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; color: var(--text); letter-spacing: -0.01em; }
-.wrap   { max-width: 1100px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 2; }
-section { padding: 9rem 0; position: relative; z-index: 2; }
-section + section { border-top: 1px solid var(--line); }
-.eye {
-  font-family: var(--mono); font-size: 0.72rem;
-  text-transform: uppercase; letter-spacing: 0.22em;
-  color: var(--accent-bright); margin-bottom: 2.5rem;
-  display: flex; align-items: center; gap: 0.85rem;
-}
-.eye::before { content: ''; width: 32px; height: 1px; background: var(--accent-bright); }
-.top {
-  position: sticky; top: 0; z-index: 50;
-  background: rgba(20, 20, 19, 0.75);
-  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--line); padding: 1.1rem 2rem;
-  font-family: var(--mono); font-size: 0.78rem; color: var(--text-mute);
-  display: flex; justify-content: space-between; align-items: center;
-  letter-spacing: 0.02em;
-}
-.top .left, .top .right { display: flex; gap: 1.25rem; align-items: center; }
-.top .name { color: var(--text); font-weight: 600; letter-spacing: 0.08em; }
-.top .live { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent-bright); }
-.top .live::before {
-  content: ''; width: 6px; height: 6px; border-radius: 50%;
-  background: var(--accent-bright); box-shadow: 0 0 8px var(--accent-glow);
-  animation: live 2s ease-in-out infinite;
-}
-@keyframes live { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-.top a { border: none; color: var(--text-mute); }
-.top a:hover { color: var(--text); }
-.reveal {
-  opacity: 0; transform: translateY(24px);
-  transition: opacity 800ms var(--ease), transform 800ms var(--ease);
-}
-.reveal.visible { opacity: 1; transform: none; }
-.reveal.d1 { transition-delay: 80ms; }
-.reveal.d2 { transition-delay: 160ms; }
-.reveal.d3 { transition-delay: 240ms; }
-.reveal.d4 { transition-delay: 320ms; }
+:root{--bg:#08090a;--bg-elev:#0f1113;--bg-card:#131518;--primary:#5e6ad2;--primary-soft:rgba(94,106,210,0.12);--text:#f7f8f8;--text-dim:#a0a3a8;--text-sub:#6b6f76;--border:#1e2024;--success:#3cc77a;--warn:#e8a838;--danger:#e85d5d;--radius:16px;--radius-sm:10px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Lora',serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
+h1,h2,h3,h4,h5,h6{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.15;letter-spacing:-0.02em}
+a{color:var(--primary);text-decoration:none}
+img{max-width:100%;display:block}
+.container{width:92%;max-width:1120px;margin:0 auto}
 
-.hero { padding: 12rem 0 8rem; }
-.hero h1 {
-  font-family: var(--serif); font-weight: 500;
-  font-size: clamp(2.6rem, 7vw, 5.5rem); line-height: 1.05;
-  letter-spacing: -0.025em; max-width: 22ch;
-  margin-bottom: 2.5rem; color: var(--text);
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.6}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes draw{to{stroke-dashoffset:0}}
+.animate{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.animate.visible{opacity:1;transform:translateY(0)}
+.delay-1{transition-delay:.08s}.delay-2{transition-delay:.16s}.delay-3{transition-delay:.24s}.delay-4{transition-delay:.32s}.delay-5{transition-delay:.40s}.delay-6{transition-delay:.48s}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,9,10,.75);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Poppins',sans-serif;font-weight:700;font-size:1.15rem;color:var(--text)}
+.logo-icon{width:30px;height:30px;background:var(--primary);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.logo-icon svg{width:18px;height:18px;color:#fff}
+.nav-links{display:flex;align-items:center;gap:28px;font-family:'Poppins',sans-serif;font-size:.82rem;font-weight:500}
+.nav-links a{color:var(--text-dim);transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--primary);color:#fff;padding:8px 18px;border-radius:var(--radius-sm);font-size:.78rem;font-weight:600;transition:transform .2s,box-shadow .2s}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(94,106,210,.35)}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;pointer-events:none}
+.hero-bg::before{content:'';position:absolute;top:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(94,106,210,.18) 0%,transparent 70%);border-radius:50%}
+.hero-bg::after{content:'';position:absolute;bottom:-10%;left:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(94,106,210,.08) 0%,transparent 70%);border-radius:50%}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--primary-soft);border:1px solid rgba(94,106,210,.2);color:var(--primary);padding:6px 14px;border-radius:999px;font-family:'Poppins',sans-serif;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:24px}
+.hero-badge .dot{width:6px;height:6px;background:var(--primary);border-radius:50%;animation:pulse 2s infinite}
+.hero h1{font-size:clamp(2.4rem,5vw,3.6rem);margin-bottom:20px;color:var(--text)}
+.hero h1 span{color:var(--primary)}
+.hero p{font-size:1.15rem;color:var(--text-dim);max-width:480px;margin-bottom:32px;line-height:1.7}
+.hero-buttons{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:'Poppins',sans-serif;font-weight:600;padding:14px 28px;border-radius:var(--radius-sm);font-size:.9rem;transition:all .25s;cursor:pointer;border:none}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 4px 20px rgba(94,106,210,.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(94,106,210,.45)}
+.btn-secondary{background:var(--bg-elev);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{border-color:var(--primary);color:var(--primary)}
+.btn svg{width:18px;height:18px}
+
+/* Phone mockup */
+.phone-frame{width:280px;height:570px;background:#1a1c20;border-radius:44px;padding:10px;box-shadow:0 40px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.06);margin:0 auto;position:relative;animation:float 6s ease-in-out infinite}
+.phone-notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:100px;height:24px;background:#1a1c20;border-radius:0 0 16px 16px;z-index:5}
+.phone-screen{width:100%;height:100%;background:var(--bg);border-radius:36px;overflow:hidden;position:relative}
+.phone-header{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;padding-top:14px}
+.phone-header h4{font-size:.75rem;color:var(--text);font-weight:600}
+.phone-header .time{font-family:'Poppins',sans-serif;font-size:.65rem;color:var(--text-dim);font-weight:500}
+.phone-body{padding:0 16px 16px;height:calc(100% - 52px);overflow:hidden}
+
+/* Mock screen: projects */
+.mock-search{height:32px;background:var(--bg-card);border-radius:8px;margin-bottom:12px;display:flex;align-items:center;padding:0 10px;gap:6px}
+.mock-search svg{width:12px;height:12px;color:var(--text-sub)}
+.mock-search span{font-size:.6rem;color:var(--text-sub)}
+.mock-project{background:var(--bg-card);border-radius:10px;padding:10px 12px;margin-bottom:8px;border-left:3px solid var(--primary)}
+.mock-project:nth-child(3){border-left-color:var(--warn)}
+.mock-project:nth-child(4){border-left-color:var(--success)}
+.mock-project-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px}
+.mock-project-title{font-family:'Poppins',sans-serif;font-size:.68rem;font-weight:600;color:var(--text)}
+.mock-project-count{font-size:.55rem;color:var(--text-sub);background:var(--bg);padding:2px 6px;border-radius:4px}
+.mock-project-meta{font-size:.55rem;color:var(--text-sub)}
+.mock-fab{position:absolute;bottom:18px;right:18px;width:44px;height:44px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(94,106,210,.4)}
+.mock-fab svg{width:20px;height:20px;color:#fff}
+
+/* Mock screen: issue detail */
+.mock-issue-badge{display:inline-block;font-size:.55rem;font-weight:700;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
+.mock-issue-badge.critical{background:rgba(232,93,93,.15);color:var(--danger)}
+.mock-issue-title{font-family:'Poppins',sans-serif;font-size:.8rem;font-weight:700;margin-bottom:6px}
+.mock-issue-meta{display:flex;gap:10px;margin-bottom:12px}
+.mock-issue-meta span{font-size:.55rem;color:var(--text-sub);display:flex;align-items:center;gap:3px}
+.mock-issue-meta svg{width:10px;height:10px;color:var(--text-sub)}
+.mock-photo{height:110px;background:var(--bg-card);border-radius:10px;margin-bottom:10px;position:relative;overflow:hidden}
+.mock-photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
+.mock-photo-sm{height:70px;background:var(--bg-card);border-radius:8px;position:relative}
+.mock-annotation{position:absolute;top:20%;left:30%;width:40%;height:20%;border:2px solid var(--danger);border-radius:50%;opacity:.8}
+.mock-arrow{position:absolute;top:50%;left:60%;width:20%;height:2px;background:var(--warn);transform:rotate(-30deg)}
+.mock-arrow::after{content:'';position:absolute;right:0;top:-3px;border:4px solid transparent;border-left:6px solid var(--warn)}
+.mock-toolbar{display:flex;gap:8px;justify-content:center;padding:8px;background:var(--bg-card);border-radius:8px}
+.mock-tool{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;background:var(--bg)}
+.mock-tool.active{background:var(--primary-soft)}
+.mock-tool svg{width:12px;height:12px;color:var(--text-dim)}
+.mock-tool.active svg{color:var(--primary)}
+
+/* Mock screen: report */
+.mock-report-header{text-align:center;margin-bottom:12px}
+.mock-report-header h5{font-family:'Poppins',sans-serif;font-size:.72rem;color:var(--primary);margin-bottom:2px}
+.mock-report-header span{font-size:.55rem;color:var(--text-sub)}
+.mock-report-section{background:var(--bg-card);border-radius:8px;padding:8px 10px;margin-bottom:6px}
+.mock-report-label{font-size:.55rem;color:var(--primary);font-weight:600;margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em}
+.mock-report-line{height:4px;background:var(--bg);border-radius:2px;margin-bottom:4px}
+.mock-report-line.half{width:60%}
+.mock-bar{height:6px;background:var(--bg);border-radius:3px;margin-top:6px;overflow:hidden}
+.mock-bar-fill{height:100%;background:var(--primary);border-radius:3px;width:77%}
+.mock-lock{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;padding:8px;background:rgba(94,106,210,.08);border-radius:8px}
+.mock-lock svg{width:12px;height:12px;color:var(--primary)}
+.mock-lock span{font-size:.55rem;color:var(--primary);font-weight:600}
+
+/* Tech bar */
+.tech-bar{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:18px 0;margin-top:60px}
+.tech-inner{display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap}
+.tech-item{display:flex;align-items:center;gap:8px;font-family:'Poppins',sans-serif;font-size:.78rem;font-weight:500;color:var(--text-sub)}
+.tech-item svg{width:16px;height:16px;color:var(--primary)}
+
+/* Features */
+.section{padding:100px 0}
+.section-header{text-align:center;max-width:560px;margin:0 auto 60px}
+.section-header h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:14px}
+.section-header p{color:var(--text-dim);font-size:1.05rem}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
+.feature-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:32px;transition:transform .3s,border-color .3s,box-shadow .3s}
+.feature-card:hover{transform:translateY(-4px);border-color:rgba(94,106,210,.25);box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.feature-icon{width:44px;height:44px;background:var(--primary-soft);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.feature-icon svg{width:22px;height:22px;color:var(--primary)}
+.feature-card h3{font-size:1.05rem;margin-bottom:8px;font-weight:600}
+.feature-card p{font-size:.9rem;color:var(--text-dim);line-height:1.65}
+
+/* Screenshots */
+.screenshots{background:var(--bg-elev);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.screenshots-grid{display:flex;gap:28px;justify-content:center;flex-wrap:wrap}
+.screenshot-item{text-align:center}
+.screenshot-item .phone-frame{animation:none;width:240px;height:490px;margin-bottom:16px}
+.screenshot-item .phone-frame:hover{transform:translateY(-6px);transition:transform .3s}
+.screenshot-item .phone-screen .phone-body{padding:0 14px 14px}
+.screenshot-item label{font-family:'Poppins',sans-serif;font-size:.8rem;font-weight:600;color:var(--text-dim)}
+
+/* Adjust mock sizes for smaller phones */
+.screenshot-item .mock-project{padding:8px 10px}
+.screenshot-item .mock-photo{height:90px}
+.screenshot-item .mock-photo-sm{height:58px}
+.screenshot-item .mock-issue-title{font-size:.72rem}
+
+/* Stats */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.stat-card{text-align:center;padding:32px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);transition:border-color .3s}
+.stat-card:hover{border-color:rgba(94,106,210,.2)}
+.stat-num{font-family:'Poppins',sans-serif;font-size:2.2rem;font-weight:800;color:var(--primary);line-height:1}
+.stat-num span{font-size:1rem;font-weight:600;vertical-align:top;margin-left:2px}
+.stat-label{font-family:'Poppins',sans-serif;font-size:.82rem;color:var(--text-dim);margin-top:8px;font-weight:500}
+
+/* CTA */
+.cta{text-align:center;padding:100px 0}
+.cta-box{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:64px 32px;position:relative;overflow:hidden}
+.cta-box::before{content:'';position:absolute;top:-50%;left:-20%;width:500px;height:500px;background:radial-gradient(circle,rgba(94,106,210,.12) 0%,transparent 70%);border-radius:50%}
+.cta h2{font-size:clamp(1.6rem,4vw,2.4rem);margin-bottom:14px;position:relative}
+.cta p{color:var(--text-dim);margin-bottom:32px;max-width:460px;margin-left:auto;margin-right:auto;position:relative}
+.cta-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative}
+
+/* Footer */
+footer{border-top:1px solid var(--border);padding:40px 0}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-left{display:flex;align-items:center;gap:10px;font-family:'Poppins',sans-serif;font-size:.85rem;color:var(--text-sub)}
+.footer-left .logo-icon{width:24px;height:24px;border-radius:6px}
+.footer-left .logo-icon svg{width:14px;height:14px}
+.footer-links{display:flex;gap:24px;font-family:'Poppins',sans-serif;font-size:.78rem;font-weight:500}
+.footer-links a{color:var(--text-sub);transition:color .2s}
+.footer-links a:hover{color:var(--text)}
+
+/* Responsive */
+@media(max-width:900px){
+.hero-grid{grid-template-columns:1fr;text-align:center}
+.hero p{margin-left:auto;margin-right:auto}
+.hero-buttons{justify-content:center}
+.phone-frame{margin:40px auto 0}
+.stats-grid{grid-template-columns:repeat(2,1fr)}
 }
-.hero h1 em { font-style: italic; font-weight: 400; color: var(--accent-bright); }
-.hero .lede { font-size: 1.25rem; line-height: 1.55; color: var(--text-soft); max-width: 60ch; margin-bottom: 3rem; font-family: var(--serif); }
-.hero .meta {
-  font-family: var(--mono); font-size: 0.78rem; color: var(--text-mute);
-  display: flex; flex-wrap: wrap; gap: 2rem;
-  margin-top: 4rem; padding-top: 2rem;
-  border-top: 1px solid var(--line); letter-spacing: 0.05em;
-}
-.hero .meta div { display: flex; flex-direction: column; gap: 0.4rem; }
-.hero .meta .k { color: var(--text-faint); text-transform: uppercase; font-size: 0.68rem; letter-spacing: 0.18em; }
-.hero .meta .v { color: var(--text); }
-.cta {
-  display: inline-flex; align-items: center; gap: 0.75rem;
-  padding: 1rem 1.75rem; background: var(--accent); color: #fff;
-  font-family: var(--sans); font-size: 1rem; font-weight: 600;
-  border: 1px solid var(--accent); border-radius: 2px;
-  transition: background 200ms, transform 200ms;
-}
-.cta:hover { background: var(--accent-bright); border-color: var(--accent-bright); transform: translateY(-1px); border-bottom: 1px solid var(--accent-bright); }
-.cta::after { content: '→'; transition: transform 200ms; }
-.cta:hover::after { transform: translateX(3px); }
-.cta-ghost {
-  display: inline-flex; align-items: center; gap: 0.6rem;
-  padding: 1rem 0; margin-left: 2rem;
-  color: var(--text-soft); font-family: var(--sans); font-size: 1rem;
-  border: none; border-bottom: 1px solid var(--line);
-}
-.cta-ghost:hover { color: var(--text); border-bottom-color: var(--accent-bright); }
-
-.dual { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 5rem; padding-top: 4rem; border-top: 1px solid var(--line); }
-.dual .card { position: relative; }
-.dual .card::before {
-  content: attr(data-num); font-family: var(--mono); font-size: 0.7rem;
-  letter-spacing: 0.3em; color: var(--accent-bright); text-transform: uppercase;
-  display: block; margin-bottom: 1rem;
-}
-.dual h3 { font-family: var(--serif); font-weight: 500; font-size: 1.5rem; line-height: 1.2; margin-bottom: 1rem; color: var(--text); }
-.dual p { color: var(--text-soft); font-size: 1rem; line-height: 1.65; }
-
-.h2-intro { font-size: clamp(2rem, 4.5vw, 3.5rem); line-height: 1.1; max-width: 22ch; margin-bottom: 1.5rem; }
-.h2-intro + .lede { font-size: 1.15rem; color: var(--text-soft); max-width: 65ch; margin-bottom: 0; font-family: var(--serif); }
-
-.cards { display: grid; gap: 1.5rem; margin-top: 3rem; }
-.cards.c2 { grid-template-columns: 1fr 1fr; }
-.cards.c4 { grid-template-columns: repeat(4, 1fr); }
-.cards.c5 { grid-template-columns: repeat(5, 1fr); }
-.card-block {
-  padding: 2rem; border: 1px solid var(--line); background: var(--bg);
-  border-radius: 2px; transition: border-color 250ms, transform 250ms var(--ease);
-}
-.card-block:hover { border-color: var(--accent-line); transform: translateY(-2px); }
-.card-block .label {
-  font-family: var(--mono); font-size: 0.7rem;
-  text-transform: uppercase; letter-spacing: 0.22em;
-  color: var(--accent-bright); margin-bottom: 1rem;
-}
-.card-block h3 { font-family: var(--serif); font-weight: 500; font-size: 1.2rem; line-height: 1.3; margin-bottom: 0.85rem; color: var(--text); }
-.card-block p { color: var(--text-soft); font-size: 0.98rem; line-height: 1.6; }
-
-.process-meta {
-  margin-top: 2.5rem; padding: 2.5rem 3rem;
-  border-left: 2px solid var(--accent);
-  background: var(--bg-elevated); border-radius: 2px;
-}
-.process-meta .label {
-  font-family: var(--mono); font-size: 0.72rem;
-  letter-spacing: 0.25em; text-transform: uppercase;
-  color: var(--accent-bright); margin-bottom: 1rem;
-}
-.process-meta p {
-  font-family: var(--serif); font-style: italic;
-  font-size: 1.2rem; line-height: 1.55;
-  color: var(--text); letter-spacing: -0.005em;
-}
-.process-meta p code {
-  font-family: var(--mono); font-style: normal; font-size: 0.95rem;
-  background: var(--bg-inset); padding: 1px 7px;
-  border-radius: 2px; color: var(--accent-bright);
-  border: 1px solid var(--line);
-}
-
-.psr { margin-top: 3rem; }
-.psr .step { padding: 3rem 0; display: grid; grid-template-columns: 220px 1fr; gap: 4rem; align-items: start; border-top: 1px solid var(--line); }
-.psr .step:last-child { border-bottom: 1px solid var(--line); }
-.psr .step .label { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent-bright); padding-top: 0.7rem; }
-.psr .step h3 { font-family: var(--serif); font-weight: 500; font-size: 1.85rem; line-height: 1.2; margin-bottom: 1.25rem; }
-.psr .step p { color: var(--text-soft); font-size: 1.0625rem; line-height: 1.65; }
-
-.viz { margin-top: 4rem; padding: 2.5rem; border: 1px solid var(--line); background: linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 100%); border-radius: 2px; overflow-x: auto; }
-.viz-cap { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.22em; margin-bottom: 1.5rem; }
-.viz-svg { display: block; max-width: 100%; height: auto; }
-.arch-svg .col-title { font-family: var(--mono); font-weight: 500; font-size: 11px; fill: var(--text); letter-spacing: 0.3em; }
-.arch-svg .col-sub   { font-family: var(--mono); font-size: 9px;  fill: var(--text-faint); letter-spacing: 0.18em; }
-.arch-svg .layer-name{ font-family: var(--serif); font-weight: 500; font-size: 13px; fill: var(--text); }
-.arch-svg .layer-detail{font-family: var(--mono); font-size: 10px; fill: var(--text-mute); }
-.arch-svg .rect      { fill: var(--bg-inset); stroke: var(--line-warm); stroke-width: 1; }
-.arch-svg .rect.accent{stroke: var(--accent); stroke-width: 1.5; }
-.arch-svg .arrow     { stroke: var(--accent); stroke-width: 1.2; fill: none; opacity: 0.6; marker-end: url(#arrowA); }
-.arch-svg .layer-num { font-family: var(--mono); font-size: 10px; fill: var(--accent-bright); letter-spacing: 0.1em; }
-
-.callout { margin-top: 3rem; padding: 2.5rem 3rem; border-left: 2px solid var(--accent); background: var(--bg-elevated); }
-.callout .label { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-bright); margin-bottom: 1rem; }
-.callout p { font-family: var(--serif); font-style: italic; font-size: 1.2rem; line-height: 1.5; color: var(--text); }
-
-.bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; background: var(--line); margin-top: 4rem; border: 1px solid var(--line); }
-.feat { background: var(--bg); padding: 2.25rem; transition: background 250ms; }
-.feat:hover { background: var(--bg-elevated); }
-.feat .num { font-family: var(--mono); font-size: 0.7rem; color: var(--accent-bright); letter-spacing: 0.22em; margin-bottom: 0.85rem; }
-.feat h3 { font-family: var(--serif); font-weight: 500; font-size: 1.25rem; line-height: 1.25; margin-bottom: 0.85rem; color: var(--text); }
-.feat p { color: var(--text-soft); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem; }
-.feat .tech { display: inline-block; font-family: var(--mono); font-size: 0.7rem; color: var(--text-mute); border: 1px solid var(--line-warm); padding: 0.2rem 0.55rem; border-radius: 2px; margin-bottom: 1rem; }
-.feat .witty { font-family: var(--serif); font-style: italic; font-size: 0.95rem; color: var(--text-mute); border-top: 1px solid var(--line); padding-top: 1rem; }
-.feat.s4 { grid-column: span 4; }
-.feat.s3 { grid-column: span 3; }
-.feat.s2 { grid-column: span 2; }
-.feat.s6 { grid-column: span 6; }
-
-.exhibit { margin-top: 4rem; }
-.exhibit .label { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-bright); margin-bottom: 1rem; }
-.exhibit h3 { font-family: var(--serif); font-weight: 500; font-size: 1.85rem; line-height: 1.2; margin-bottom: 1.25rem; }
-.exhibit .story { color: var(--text-soft); font-size: 1.0625rem; line-height: 1.65; margin-bottom: 2.5rem; max-width: 70ch; }
-.code-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); }
-.code-pair .col { background: var(--bg-inset); padding: 1.5rem; }
-.code-pair .col .tag { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; display: block; }
-.code-pair .before .tag { color: var(--text-faint); }
-.code-pair .after  .tag { color: var(--accent-bright); }
-pre { font-family: var(--mono); font-size: 0.78rem; line-height: 1.7; color: var(--text-soft); background: transparent; white-space: pre; overflow-x: auto; }
-
-.metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 4rem; border: 1px solid var(--line); }
-.metric { padding: 2.5rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg); transition: background 250ms; }
-.metric:hover { background: var(--bg-elevated); }
-.metric:nth-child(4n) { border-right: none; }
-.metric:nth-last-child(-n+4) { border-bottom: none; }
-.metric .lbl { font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.22em; color: var(--text-mute); margin-bottom: 1.25rem; }
-.metric .val { font-family: var(--serif); font-weight: 500; font-size: 3.25rem; line-height: 1; color: var(--text); letter-spacing: -0.03em; }
-.metric .val .unit { font-size: 1.4rem; color: var(--text-mute); margin-left: 0.3rem; font-style: italic; font-weight: 400; }
-.metric .desc { margin-top: 1.25rem; font-size: 0.92rem; color: var(--text-soft); line-height: 1.6; }
-
-.decisions { margin-top: 3rem; }
-details.decision { border-top: 1px solid var(--line); padding: 2rem 0; }
-details.decision:last-of-type { border-bottom: 1px solid var(--line); }
-details.decision summary { cursor: pointer; list-style: none; display: grid; grid-template-columns: 60px 1fr auto; gap: 2rem; align-items: baseline; }
-details.decision summary::-webkit-details-marker { display: none; }
-details.decision .qnum { font-family: var(--mono); font-size: 0.85rem; color: var(--accent-bright); letter-spacing: 0.2em; }
-details.decision .q { font-family: var(--serif); font-weight: 500; font-size: 1.3rem; line-height: 1.3; color: var(--text); }
-details.decision .arrow { font-family: var(--mono); font-size: 0.9rem; color: var(--text-mute); transition: transform 250ms; }
-details.decision[open] .arrow { transform: rotate(45deg); color: var(--accent-bright); }
-details.decision .body { margin-top: 1.5rem; padding-left: calc(60px + 2rem); display: flex; flex-direction: column; gap: 1.25rem; color: var(--text-soft); max-width: 75ch; }
-details.decision .short { font-family: var(--serif); font-style: italic; font-size: 1.1rem; color: var(--accent-bright); line-height: 1.4; }
-details.decision .long { font-size: 1rem; line-height: 1.7; }
-
-.timeline { margin-top: 4rem; }
-.phase { display: grid; grid-template-columns: 240px 1fr; gap: 3rem; padding: 3rem 0; border-top: 1px solid var(--line); align-items: start; }
-.phase:last-child { border-bottom: 1px solid var(--line); }
-.phase .meta { display: flex; flex-direction: column; gap: 0.75rem; }
-.phase .pnum { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.22em; color: var(--accent-bright); text-transform: uppercase; }
-.phase .ptitle { font-family: var(--serif); font-weight: 500; font-size: 1.25rem; line-height: 1.2; color: var(--text); }
-.phase .mood { font-family: var(--mono); font-size: 0.72rem; color: var(--text-mute); letter-spacing: 0.15em; text-transform: uppercase; }
-.phase .story { color: var(--text-soft); font-size: 1.0625rem; line-height: 1.65; margin-bottom: 1rem; }
-.phase .story strong { color: var(--text); font-weight: 500; font-family: var(--serif); font-style: italic; }
-.phase .deliverable { font-family: var(--mono); font-size: 0.85rem; color: var(--accent-bright); border-left: 1px solid var(--accent); padding-left: 1rem; line-height: 1.5; }
-
-.reflection-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
-.reflection-grid .block { padding-top: 1.5rem; border-top: 1px solid var(--accent); }
-.reflection-grid .label { font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent-bright); margin-bottom: 1rem; }
-.reflection-grid h3 { font-family: var(--serif); font-weight: 500; font-size: 1.5rem; line-height: 1.2; color: var(--text); margin-bottom: 1rem; }
-.reflection-grid p { color: var(--text-soft); font-size: 1rem; line-height: 1.65; }
-
-footer.recursive { padding: 10rem 0 6rem; border-top: 1px solid var(--line); position: relative; background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(217, 119, 87, 0.08) 0%, transparent 60%); }
-footer.recursive h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(2rem, 4.5vw, 3.5rem); line-height: 1.15; letter-spacing: -0.025em; max-width: 28ch; margin-bottom: 2rem; }
-footer.recursive .cta-line { color: var(--text-soft); font-size: 1.2rem; line-height: 1.55; margin-bottom: 3rem; max-width: 50ch; font-family: var(--serif); }
-footer.recursive .next { margin-top: 6rem; padding-top: 2rem; border-top: 1px solid var(--line); color: var(--text-mute); font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.05em; }
-
-.integrity { background: var(--bg-inset); padding: 3rem 2rem; font-family: var(--mono); font-size: 0.78rem; color: var(--text-mute); line-height: 1.7; border-top: 1px solid var(--line); }
-.integrity .row { max-width: 1100px; margin: 0 auto; }
-.integrity strong { color: var(--text-soft); font-weight: 500; }
-.integrity em { color: var(--accent-bright); font-style: normal; }
-
-.detector-list { margin-top: 3rem; }
-.detector { display: grid; grid-template-columns: 60px 1fr; gap: 2rem; align-items: baseline; padding: 1.5rem 0; border-top: 1px solid var(--line); transition: padding 250ms var(--ease); }
-.detector:hover { padding-left: 1rem; padding-right: 1rem; background: var(--bg-elevated); }
-.detector:last-child { border-bottom: 1px solid var(--line); }
-.detector .num { font-family: var(--mono); font-size: 0.85rem; color: var(--accent-bright); letter-spacing: 0.15em; }
-.detector h4 { font-family: var(--serif); font-weight: 500; font-size: 1.1rem; color: var(--text); margin-bottom: 0.4rem; }
-.detector .desc { color: var(--text-soft); font-size: 0.95rem; line-height: 1.55; }
-
-@media (max-width: 1000px) {
-  section { padding: 6rem 0; }
-  .hero { padding: 8rem 0 5rem; }
-  .dual, .reflection-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .cards.c4, .cards.c5 { grid-template-columns: 1fr 1fr; }
-  .psr .step, .phase { grid-template-columns: 1fr; gap: 1.5rem; }
-  .detector { grid-template-columns: 50px 1fr; }
-  details.decision summary { grid-template-columns: 50px 1fr; }
-  details.decision .arrow { display: none; }
-  details.decision .body { padding-left: calc(50px + 2rem); }
-  .bento { grid-template-columns: 1fr; }
-  .feat.s4, .feat.s3, .feat.s2, .feat.s6 { grid-column: span 1; }
-  .code-pair { grid-template-columns: 1fr; }
-  .metrics-grid { grid-template-columns: 1fr 1fr; }
-  .metric:nth-child(2n) { border-right: none; }
-  .metric:nth-last-child(-n+4) { border-bottom: 1px solid var(--line); }
-  .metric:nth-last-child(-n+2) { border-bottom: none; }
-}
-@media (max-width: 640px) {
-  .cards.c4, .cards.c5 { grid-template-columns: 1fr; }
-  .metrics-grid { grid-template-columns: 1fr; }
-  .metric { border-right: none; }
-  .metric:not(:last-child) { border-bottom: 1px solid var(--line); }
+@media(max-width:560px){
+.nav-links{display:none}
+.stats-grid{grid-template-columns:1fr}
+.features-grid{grid-template-columns:1fr}
+.phone-frame{width:240px;height:490px}
+.tech-inner{gap:16px}
+.cta-box{padding:48px 20px}
 }
 </style>
 </head>
 <body>
 
-<div class="top">
-  <div class="left">
-    <span class="name">EVERSITEAUDIT</span>
-    <span style="color: var(--text-faint);">·</span>
-    <span>Portfolio piece 05 / 09</span>
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="logo">
+      <span class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+      EverSiteAudit
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#screenshots">Screenshots</a>
+      <a href="#stats">Stats</a>
+      <a href="./simulator/" class="nav-cta">Try Demo</a>
+    </div>
   </div>
-  <div class="right">
-    <span class="live">v1.0.0 shipped</span>
-    <span>React Native · Expo · SQLite</span>
-  </div>
-</div>
+</nav>
 
 <section class="hero">
-  <div class="wrap">
-    <div class="eye reveal">01 · The Hook</div>
-    <h1 class="reveal d1">I built a pocket forensics lab for construction sites — because clipboard plus camera roll is not an <em>audit trail.</em></h1>
-    <p class="lede reveal d2">
-      Solo build of EverSiteAudit Mobile: React Native 0.76 + Expo SDK 52 + TypeScript 5.6 + SQLite WAL.
-      Completely offline-first with zero cloud dependency.
-      Native camera with 5-tool photo annotation and full undo/redo history.
-      AES-256-GCM field encryption with PBKDF2 backup encryption.
-      Biometric authentication with auto-lock.
-      8 branded PDF report templates.
-      676 passing tests, 77% coverage.
-      Design philosophy: Precision Craft — every pixel intentional, every interaction rewarding.
-    </p>
-    <div class="reveal d3">
-      <a class="cta" href="#process">Read the process</a>
-      <a class="cta-ghost" href="#architecture">See the architecture</a>
-    </div>
-    <div class="meta reveal d4">
-      <div><span class="k">Role</span><span class="v">Solo · concept → v1.0.0</span></div>
-      <div><span class="k">Phases</span><span class="v">5 · research → arch → build → harden → ship</span></div>
-      <div><span class="k">Stack</span><span class="v">RN 0.76 · Expo 52 · SQLite · Zustand</span></div>
-      <div><span class="k">Tests</span><span class="v">676 passing · 77% coverage · Jest</span></div>
-    </div>
-    <div class="dual">
-      <div class="card reveal" data-num="For the curious passenger">
-        <h3>Construction site auditing is still clipboard, camera roll, and email threads.</h3>
-        <p>This app replaces all three with a single offline-first tool: create a project, log issues with GPS coordinates and severity ratings, take photos and annotate them directly on-device with arrows, circles, and text, generate professional PDF reports with your company branding, and encrypt everything so proprietary building details stay on-device.</p>
-      </div>
-      <div class="card reveal d1" data-num="For the engineer in the back">
-        <h3>React Native 0.76 with Expo SDK 52, 120 source files, 676 passing tests.</h3>
-        <p>TypeScript 5.6 strict mode, Expo Router file-system navigation, SQLite WAL mode with foreign keys via expo-sqlite, Zustand 5.0 for state management, Tailwind CSS v4 + native StyleSheet hybrid styling, HeroUI Native component system with compound components and semantic variants, FlashList virtualization for large datasets, Poppins + Lora typography. AES-256-GCM field encryption with device-bound keys in expo-secure-store. OWASP ASVS Level 3 alignment.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="eye reveal">02 · The bet</div>
-    <h2 class="reveal d1 h2-intro">Why I picked this fight.</h2>
-    <p class="lede reveal d2">Four short answers to the four questions every project should be able to answer before the first commit.</p>
-    <div class="cards c4">
-      <div class="card-block reveal">
-        <div class="label">Signal</div>
-        <h3>Construction site auditing is still clipboard, camera roll, and email threads.</h3>
-        <p>Existing solutions are either cloud-based SaaS (requires connectivity on a construction site, which is laughable) or desktop software (requires a laptop, which is impractical on scaffolding). The gap is a professional-grade mobile tool that works entirely offline.</p>
-      </div>
-      <div class="card-block reveal d1">
-        <div class="label">Filter</div>
-        <h3>Vertical-specific, not horizontal.</h3>
-        <p>Offline-first is the moat — most competitors assume connectivity. Encryption is the differentiator — site photos contain proprietary building details. Mobile-native is the delivery mechanism — inspectors are on-site, not at desks.</p>
-      </div>
-      <div class="card-block reveal d2">
-        <div class="label">Why now</div>
-        <h3>Post-pandemic infrastructure boom.</h3>
-        <p>More construction sites, more inspections, more documentation requirements. Regulatory pressure for audit trails is increasing. Construction sites have terrible connectivity — basements, steel frames, remote locations. An offline-first tool isn't nice-to-have; it's the only thing that works on-site.</p>
-      </div>
-      <div class="card-block reveal d3">
-        <div class="label">Why me</div>
-        <h3>I've watched contractors try to document issues with personal phones.</h3>
-        <p>Photos scattered across camera rolls, notes in half a dozen apps, no GPS coordinates, no severity tracking, no audit trail. Then hours back at the office trying to assemble a report from fragments.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="eye reveal">03 · No-jargon explainer</div>
-    <h2 class="reveal d1 h2-intro">Problem. Solution. Result.</h2>
-    <div class="psr">
-      <div class="step reveal">
-        <div class="label">01 · Problem</div>
-        <div>
-          <h3>Construction professionals need to document issues, capture evidence, and generate reports — but the workflow is fragmented and insecure.</h3>
-          <p>Photos live in personal camera rolls mixed with family pictures. Notes are scribbled in notebooks or scattered across apps. GPS coordinates are forgotten. Severity is subjective and inconsistent. Reports are assembled manually in Word or Excel hours after the site visit. Sensitive building details are stored on personal devices with no encryption.</p>
+  <div class="hero-bg"></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge animate"><span class="dot"></span>Offline-First Architecture</div>
+        <h1 class="animate delay-1">Professional site auditing.<br><span>Completely offline.</span></h1>
+        <p class="animate delay-2">EverSiteAudit is the inspection tool built for construction professionals who work where the internet doesn't. Zero cloud dependency. Maximum field reliability.</p>
+        <div class="hero-buttons animate delay-3">
+          <a href="./simulator/" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Try Interactive Demo
+          </a>
+          <a href="#" class="btn btn-secondary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            View on GitHub
+          </a>
+        </div>
+        <div class="tech-bar animate delay-4">
+          <div class="tech-inner">
+            <div class="tech-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>React Native 0.76</div>
+            <div class="tech-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Expo SDK 52</div>
+            <div class="tech-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>TypeScript 5.6</div>
+            <div class="tech-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>SQLite WAL</div>
+          </div>
         </div>
       </div>
-      <div class="step reveal">
-        <div class="label">02 · Solution</div>
-        <div>
-          <h3>Build a completely offline-first mobile application purpose-built for site auditing.</h3>
-          <p>Projects group all audit data. Issues capture title, description, category, severity, status, GPS location, assignee, due date, voice notes, and unlimited photos. Photos are captured via native camera then annotated with arrows, circles, rectangles, pen strokes, and text overlays — all with undo/redo history. Four pre-loaded inspection templates auto-generate starter issues. Eight branded PDF report templates generate professional deliverables. AES-256-GCM encrypts sensitive fields. Biometric authentication gates access. Everything stays on-device until the inspector decides to share.</p>
-        </div>
-      </div>
-      <div class="step reveal">
-        <div class="label">03 · Result</div>
-        <div>
-          <h3>EverSiteAudit v1.0.0 shipped. Zero cloud dependency. OWASP-aligned.</h3>
-          <p>120 source files. 676 passing tests across 85 suites, 77% coverage. React Native 0.76 + Expo SDK 52 + TypeScript 5.6 strict. SQLite WAL mode with foreign keys. Zustand state management. Tailwind CSS v4 + native StyleSheet. HeroUI Native components. FlashList virtualization. Deep linking + OS Quick Actions. Excluded from OS cloud backups.</p>
+      <div class="animate delay-2">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-header">
+              <h4>Projects</h4>
+              <span class="time">9:41</span>
+            </div>
+            <div class="phone-body">
+              <div class="mock-search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <span>Search projects...</span>
+              </div>
+              <div class="mock-project">
+                <div class="mock-project-row">
+                  <span class="mock-project-title">Riverside Tower</span>
+                  <span class="mock-project-count">12 issues</span>
+                </div>
+                <div class="mock-project-meta">Last updated 2h ago · 8 resolved</div>
+              </div>
+              <div class="mock-project">
+                <div class="mock-project-row">
+                  <span class="mock-project-title">Metro Station B</span>
+                  <span class="mock-project-count">5 issues</span>
+                </div>
+                <div class="mock-project-meta">Last updated 5h ago · 1 resolved</div>
+              </div>
+              <div class="mock-project">
+                <div class="mock-project-row">
+                  <span class="mock-project-title">Harbor Bridge</span>
+                  <span class="mock-project-count">0 issues</span>
+                </div>
+                <div class="mock-project-meta">Last updated 1d ago · All clear</div>
+              </div>
+              <div class="mock-project">
+                <div class="mock-project-row">
+                  <span class="mock-project-title">Westside Complex</span>
+                  <span class="mock-project-count">3 issues</span>
+                </div>
+                <div class="mock-project-meta">Last updated 3d ago · 2 resolved</div>
+              </div>
+              <div class="mock-fab">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="process">
-  <div class="wrap">
-    <div class="eye reveal">04 · My process</div>
-    <h2 class="reveal d1 h2-intro">How I got here without building the wrong features.</h2>
-    <p class="lede reveal d2">Four habits, applied recursively. The same discipline that kept the build cheap also kept it correct.</p>
-    <div class="cards c2">
-      <div class="card-block reveal">
-        <div class="label">01 · Vertical-first research</div>
-        <h3>The first question wasn't "what should the app do?" but "what does a structural engineer's site visit look like?"</h3>
-        <p>The answer: clipboard in one hand, personal phone in the other, notebook in the back pocket, and a 3-hour report-writing session back at the office. Every feature is downstream of that observation. The annotation canvas exists because inspectors need to circle cracks and draw arrows. The template system exists because every inspection type has a standard checklist. The PDF export exists because clients expect branded deliverables.</p>
-      </div>
-      <div class="card-block reveal d1">
-        <div class="label">02 · Scoped agents per domain</div>
-        <h3>Design system · Data model · Security · Business logic · UI components.</h3>
-        <p>Each agent read the vertical brief first, then the domain spec, then wrote code. The annotation canvas agent had to know the camera API but not the encryption schema. Cross-domain leakage was the biggest risk — each phase's output was the next phase's input, and nothing else.</p>
-      </div>
-      <div class="card-block reveal d2">
-        <div class="label">03 · Knowledge graph as working memory</div>
-        <h3>The vault rendering this page tracked design, security, schema, and exports as separate linked nodes.</h3>
-        <p>A new session picks up the relevant subgraph — e.g., just annotation canvas + camera + photo repository — as prefix context. The graph is the working memory; the agent is the foreground process.</p>
-      </div>
-      <div class="card-block reveal d3">
-        <div class="label">04 · Token efficiency as a value</div>
-        <h3>The FEATURES.md spec was written before the manifest.</h3>
-        <p>Referencing sections by number made every downstream agent self-consistent for free. The annotation tool specification (5 tools, 7 colors, adjustable stroke, undo/redo) was designed in one session, then referenced by section number in the canvas agent, the gesture handler agent, and the export agent.</p>
-      </div>
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-header animate">
+      <h2>Built for the field</h2>
+      <p>Every feature designed around one constraint: zero connectivity. Your data never leaves the device unless you choose to export it.</p>
     </div>
-    <div class="process-meta reveal">
-      <div class="label">▸ The recursive proof</div>
-      <p>This portfolio piece was generated by the same harness pipeline at <code>app/harness/</code> that ingests projects: <strong style="color: var(--accent-bright); font-style: normal;">Ingest → Analysis → Portfolio Writer → Validator</strong>. The vault at <code>vault/</code> graphs every design decision and dependency. The same orchestration pattern that built the app is now extracting it. That's the demo.</p>
-    </div>
-  </div>
-</section>
-
-<section id="architecture">
-  <div class="wrap">
-    <div class="eye reveal">05 · Architecture</div>
-    <h2 class="reveal d1 h2-intro">Five layers. One forensics lab. Zero cloud.</h2>
-    <p class="lede reveal d2">The privacy promise is enforced by architecture — there is no cloud layer to leak from.</p>
-    <div class="viz reveal">
-      <div class="viz-cap">▸ Stack diagram · five vertical layers · data flow shown in burnt orange</div>
-      <svg class="viz-svg arch-svg" viewBox="0 0 900 680" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <marker id="arrowA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#d97757"/>
-          </marker>
-        </defs>
-        <g transform="translate(50, 40)">
-          <rect class="rect" width="800" height="85" rx="2"/>
-          <text class="layer-num" x="16" y="22">L1</text>
-          <text class="layer-name" x="50" y="22">Surface · Expo Router + HeroUI Native</text>
-          <text class="layer-detail" x="16" y="44">Expo Router (file-system tabs/stacks/modals) · HeroUI Native compound components</text>
-          <text class="layer-detail" x="16" y="62">Tailwind CSS v4 + native StyleSheet · Poppins + Lora · FlashList · Gesture Handler</text>
-        </g>
-        <path class="arrow" d="M 450 125 L 450 145"/>
-        <g transform="translate(50, 155)">
-          <rect class="rect" width="800" height="70" rx="2"/>
-          <text class="layer-num" x="16" y="22">L2</text>
-          <text class="layer-name" x="50" y="22">State · Zustand + React Context</text>
-          <text class="layer-detail" x="16" y="44">Zustand 5.0 (projects, issues, UI preferences, theme) · Immer immutable updates</text>
-          <text class="layer-detail" x="16" y="60">Persist middleware · React Context (theme provider, auth state) · No Redux</text>
-        </g>
-        <path class="arrow" d="M 450 225 L 450 245"/>
-        <g transform="translate(50, 255)">
-          <rect class="rect accent" width="800" height="110" rx="2"/>
-          <text class="layer-num" x="16" y="22">L3</text>
-          <text class="layer-name" x="50" y="22">Service Layer · the forensics engine</text>
-          <text class="layer-detail" x="16" y="44">ProjectService · IssueService · PhotoService · AnnotationService (5 tools + undo/redo)</text>
-          <text class="layer-detail" x="16" y="62">ExportService (8 PDF templates + ZIP + JSON + CSV + password encryption + share sheet)</text>
-          <text class="layer-detail" x="16" y="80">SecurityService (AES-256-GCM + PBKDF2 + biometric + auto-lock) · BackupService</text>
-        </g>
-        <path class="arrow" d="M 450 365 L 450 385"/>
-        <g transform="translate(50, 395)">
-          <rect class="rect" width="800" height="95" rx="2"/>
-          <text class="layer-num" x="16" y="22">L4</text>
-          <text class="layer-name" x="50" y="22">Data · SQLite + File System + Secure Store</text>
-          <text class="layer-detail" x="16" y="44">expo-sqlite WAL mode + foreign keys: projects · issues · photos · annotations · templates · exports</text>
-          <text class="layer-detail" x="16" y="62">expo-file-system (photos, not in DB) · expo-secure-store (device-bound encryption keys)</text>
-          <text class="layer-detail" x="16" y="80">📁 Zero cloud dependency · excluded from OS cloud backups · parameterized queries only</text>
-        </g>
-        <path class="arrow" d="M 450 490 L 450 510"/>
-        <g transform="translate(50, 520)">
-          <rect class="rect" width="800" height="70" rx="2"/>
-          <text class="layer-num" x="16" y="22">L5</text>
-          <text class="layer-name" x="50" y="22">Build &amp; Deploy · EAS + jest-expo</text>
-          <text class="layer-detail" x="16" y="44">EAS Build (iOS + Android) · eas-cli submission · jest-expo + @testing-library/react-native</text>
-          <text class="layer-detail" x="16" y="60">TypeScript strict · ESLint + Prettier · precommit hooks · Babel module resolver · Metro</text>
-        </g>
-      </svg>
-    </div>
-  </div>
-</section>
-
-
-<section>
-  <div class="wrap">
-    <div class="eye reveal">06 · Stakeholder views</div>
-    <h2 class="reveal d1 h2-intro">Five people. Five opinions on what this system owes them.</h2>
-    <p class="lede reveal d2">Every feature is a negotiation. Every tradeoff is visible to someone. If I can't explain why it works for all five lenses, the architecture is wrong.</p>
-    <div class="detector-list">
-      <div class="detector reveal">
-        <div class="num">01</div>
-        <div>
-          <h4>Customer (Site Inspector)</h4>
-          <p class="desc">I need to document issues on a construction site where there is no cell signal. I need to take photos, mark them up with arrows and circles, record voice notes when my hands are dirty, and generate a professional report with my company's logo before I leave the site. I need this to work on my phone without an internet connection. And I need to know that photos of proprietary building details aren't syncing to iCloud or Google Photos.</p>
+    <div class="features-grid">
+      <div class="feature-card animate delay-1">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
+        <h3>GPS-Tagged Issue Tracking</h3>
+        <p>Project-based organization with precise GPS coordinates for every issue. Classify severity from cosmetic to critical with custom workflows.</p>
       </div>
-      <div class="detector reveal d1">
-        <div class="num">02</div>
-        <div>
-          <h4>Business (Construction Company)</h4>
-          <p class="desc">Liability is our biggest risk. An incomplete audit trail is a lawsuit waiting to happen. We need every issue documented with GPS coordinates, severity ratings, and timestamps. We need reports that look professional to clients and defensible in court. We need data to stay within our control — not on an inspector's personal camera roll or a SaaS vendor's cloud.</p>
+      <div class="feature-card animate delay-2">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
         </div>
+        <h3>Native Photo Annotation</h3>
+        <p>Capture with the native camera and annotate with 5 precision tools: arrow, circle, rectangle, freehand pen, and text labels.</p>
       </div>
-      <div class="detector reveal d2">
-        <div class="num">03</div>
-        <div>
-          <h4>Operations (Project Manager)</h4>
-          <p class="desc">I need to see which issues are open, which are resolved, and which are critical at a glance. I need to assign issues to contractors and track due dates. I need exports in formats my clients can open — PDF for executives, CSV for spreadsheets, JSON for our internal systems. I need the data to be portable when an inspector gets a new phone.</p>
+      <div class="feature-card animate delay-3">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
         </div>
+        <h3>Pre-Loaded Inspection Templates</h3>
+        <p>4 encrypted inspection templates ready out of the box. Structural, electrical, safety, and environmental checklists with zero setup.</p>
       </div>
-      <div class="detector reveal d3">
-        <div class="num">04</div>
-        <div>
-          <h4>Legal &amp; Privacy</h4>
-          <p class="desc">Site photos often contain proprietary structural details, client information, and safety violations. Storing these on personal devices without encryption is a data breach. Storing them in cloud SaaS creates vendor lock-in and jurisdictional risk. The app must encrypt data at rest, exclude it from OS cloud backups, support biometric access control, and maintain an audit trail.</p>
+      <div class="feature-card animate delay-4">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 13l2 2 4-4"/></svg>
         </div>
+        <h3>Branded PDF Reports</h3>
+        <p>Generate professional reports with 8 branded templates. Password-encrypted PDF output that clients and regulators trust.</p>
       </div>
-      <div class="detector reveal d4">
-        <div class="num">05</div>
-        <div>
-          <h4>Growth</h4>
-          <p class="desc">Network effect within a firm: one inspector adopting the tool creates pressure on colleagues to standardize. White-label potential for engineering firms wanting branded report templates. B2B licensing per firm or per inspector. Template marketplace for specialized inspection types. The offline-first architecture is the moat — competitors assume connectivity; this app works in a basement.</p>
+      <div class="feature-card animate delay-5">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
         </div>
+        <h3>AES-256-GCM Encryption</h3>
+        <p>Field data encrypted at rest with AES-256-GCM. Unlock with biometric authentication — Face ID, fingerprint, or device PIN.</p>
+      </div>
+      <div class="feature-card animate delay-6">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        </div>
+        <h3>Device Migration Wizard</h3>
+        <p>Encrypted backup and restore with a step-by-step migration wizard. Move your entire project history to a new device in minutes.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="wrap">
-    <div class="eye reveal">07 · Feature deep dive</div>
-    <h2 class="reveal d1 h2-intro">Seven core features. Each has a reason. Each has a tradeoff.</h2>
-    <div class="bento">
-      <div class="feat s3 reveal">
-        <div class="num">01 · ORGANIZATION</div>
-        <h3>Project-based audit organization</h3>
-        <p>Site inspection projects are the top-level container for all audit data. Create with name, location, client, and notes. Auto-generate starter issues from 4 pre-loaded reusable templates. Archive with soft-delete recovery.</p>
-        <span class="tech">SQLite · Zustand · FlashList</span>
-        <div class="witty">A construction site without a project folder is just a pile of photos and regret.</div>
+<section class="section screenshots" id="screenshots">
+  <div class="container">
+    <div class="section-header animate">
+      <h2>See it in action</h2>
+      <p>Clean, focused interfaces designed for gloves, bright sunlight, and one-handed operation on site.</p>
+    </div>
+    <div class="screenshots-grid">
+      <div class="screenshot-item animate delay-1">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-header"><h4>Issue #042</h4><span class="time">9:41</span></div>
+            <div class="phone-body">
+              <span class="mock-issue-badge critical">Critical</span>
+              <div class="mock-issue-title">Foundation crack — South wall</div>
+              <div class="mock-issue-meta">
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>40.7128° N, 74.0060° W</span>
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>May 8, 2026</span>
+              </div>
+              <div class="mock-photo">
+                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--text-sub)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                </div>
+                <div class="mock-annotation"></div>
+                <div class="mock-arrow"></div>
+              </div>
+              <div class="mock-photo-grid">
+                <div class="mock-photo-sm" style="display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-sub)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+                <div class="mock-photo-sm" style="display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-sub)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+              </div>
+              <div style="font-size:.6rem;color:var(--text-sub);line-height:1.6;">Vertical crack observed extending approximately 18 inches from grade level. Recommend structural engineer review within 48 hours.</div>
+            </div>
+          </div>
+        </div>
+        <label>Issue Detail</label>
       </div>
-      <div class="feat s3 reveal d1">
-        <div class="num">02 · TRACKING</div>
-        <h3>Issue tracking with GPS and voice notes</h3>
-        <p>Log issues with category, severity, status, GPS location, assignee, due date, voice memos, resolution notes, and unlimited linked photos. Severity ranges from Critical to Low.</p>
-        <span class="tech">expo-location · SQLite · Zustand</span>
-        <div class="witty">If you can't find the crack later, you didn't document it properly.</div>
+      <div class="screenshot-item animate delay-2">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-header"><h4>Annotate</h4><span class="time">9:41</span></div>
+            <div class="phone-body">
+              <div style="height:180px;background:var(--bg-card);border-radius:10px;margin-bottom:10px;position:relative;overflow:hidden;">
+                <div style="position:absolute;inset:0;opacity:.15;background:repeating-linear-gradient(0deg,transparent,transparent 19px,var(--border) 20px)"></div>
+                <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 200 160"><line x1="60" y1="80" x2="100" y2="50" stroke="var(--danger)" stroke-width="2" marker-end="url(#arrow)"/><circle cx="130" cy="90" r="18" fill="none" stroke="var(--primary)" stroke-width="2"/><rect x="40" y="100" width="40" height="30" fill="none" stroke="var(--warn)" stroke-width="2" rx="3"/><text x="100" y="130" fill="var(--text)" font-size="8" font-family="Poppins" font-weight="600">CRACK ZONE</text><defs><marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--danger)"/></marker></defs></svg>
+              </div>
+              <div class="mock-toolbar">
+                <div class="mock-tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+                <div class="mock-tool active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg></div>
+                <div class="mock-tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg></div>
+                <div class="mock-tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
+                <div class="mock-tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h3"/><path d="M20 7V4h-3"/><path d="M4 17v3h3"/><path d="M20 17v3h-3"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-top:10px;">
+                <span style="font-size:.55rem;color:var(--text-sub);">Stroke: 3px</span>
+                <span style="font-size:.55rem;color:var(--text-sub);">Color: #e85d5d</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <label>Photo Annotation</label>
       </div>
-      <div class="feat s2 reveal d2">
-        <div class="num">03 · ANNOTATION</div>
-        <h3>Photo annotation canvas</h3>
-        <p>5 tools, 7 colors, adjustable stroke, full undo/redo history. Arrow, circle, rectangle, pen, text. Photos linked to projects and issues.</p>
-        <span class="tech">expo-camera · Gesture Handler</span>
-        <div class="witty">An unmarked photo is just a picture. A marked photo is evidence.</div>
-      </div>
-      <div class="feat s2 reveal d3">
-        <div class="num">04 · TEMPLATES</div>
-        <h3>Encrypted inspection templates</h3>
-        <p>4 pre-loaded construction templates. AES-256-GCM encrypted at rest. One-tap project creation from template.</p>
-        <span class="tech">AES-256-GCM · expo-secure-store</span>
-        <div class="witty">Every inspection type has a checklist. Most inspectors recreate it from memory.</div>
-      </div>
-      <div class="feat s2 reveal">
-        <div class="num">05 · EXPORTS</div>
-        <h3>Professional exports</h3>
-        <p>8 branded PDF templates, ZIP, JSON, CSV. All formats support optional password encryption. OS-native share sheet.</p>
-        <span class="tech">expo-print · JSZip · expo-sharing</span>
-        <div class="witty">Clients want PDFs. Spreadsheets want CSVs. Developers want JSON. Everyone gets what they want.</div>
-      </div>
-      <div class="feat s3 reveal d1">
-        <div class="num">06 · SECURITY</div>
-        <h3>Biometric lock with auto-lock timeout</h3>
-        <p>Fingerprint / Face ID gate with configurable auto-lock. Device-bound encryption key in expo-secure-store. Fallback to strong credential. No access without biometric — even if the phone is unlocked.</p>
-        <span class="tech">expo-local-authentication · expo-secure-store</span>
-        <div class="witty">Your phone is unlocked. Your audit data is not.</div>
-      </div>
-      <div class="feat s3 reveal d2">
-        <div class="num">07 · RECOVERY</div>
-        <h3>Encrypted backup and device migration</h3>
-        <p>Full encrypted archive of SQLite database + all photos. PBKDF2 + AES-256-GCM. Device migration wizard. Excluded from OS cloud backups.</p>
-        <span class="tech">PBKDF2 · AES-256-GCM · expo-file-system</span>
-        <div class="witty">New phone, same audits. The migration wizard is the unsung hero.</div>
+      <div class="screenshot-item animate delay-3">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-header"><h4>Report Preview</h4><span class="time">9:41</span></div>
+            <div class="phone-body">
+              <div class="mock-report-header">
+                <h5>Site Inspection Report</h5>
+                <span>Riverside Tower · May 2026</span>
+              </div>
+              <div class="mock-report-section">
+                <div class="mock-report-label">Project Summary</div>
+                <div class="mock-report-line"></div>
+                <div class="mock-report-line half"></div>
+              </div>
+              <div class="mock-report-section">
+                <div class="mock-report-label">Issue Breakdown</div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:.55rem;color:var(--text-sub)">Critical</span><span style="font-size:.55rem;color:var(--danger);font-weight:600">2</span></div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:.55rem;color:var(--text-sub)">Major</span><span style="font-size:.55rem;color:var(--warn);font-weight:600">4</span></div>
+                <div style="display:flex;justify-content:space-between;"><span style="font-size:.55rem;color:var(--text-sub)">Minor</span><span style="font-size:.55rem;color:var(--success);font-weight:600">6</span></div>
+              </div>
+              <div class="mock-report-section">
+                <div class="mock-report-label">Completion</div>
+                <div class="mock-bar"><div class="mock-bar-fill"></div></div>
+                <div style="text-align:right;font-size:.55rem;color:var(--text-sub);margin-top:3px;">77% complete</div>
+              </div>
+              <div class="mock-lock">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span>Password Protected PDF</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <label>PDF Report</label>
       </div>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="wrap">
-    <div class="eye reveal">08 · Exhibit</div>
-    <div class="exhibit">
-      <div class="label">▸ Decision · offline precision beats online convenience</div>
-      <h3 class="reveal d1">When a structural engineer needs to circle a crack on a photo, not in Photoshop</h3>
-      <p class="story reveal d2">
-        The most distinctive feature of the app is the annotation canvas. A site inspector takes a photo of a structural crack, then needs to draw an arrow pointing to it, circle the affected area, and add a text label saying "reinforcement required — see report page 7." They do this on a construction site, often with gloves on, on a 3-year-old Android phone, with no internet. The canvas needs 5 tools, 7 colors, adjustable stroke width, and a full undo/redo history because accidentally clearing a complex annotation is a data-loss event. The interesting part isn't the drawing API — it's the product decision that an inspector needs Photoshop-grade markup on a phone, offline, with undo.
-      </p>
-      <div class="code-pair reveal d3">
-        <div class="col before">
-          <span class="tag">BEFORE: no annotation support</span>
-          <pre>function PhotoViewer({ photoUri }) {
-  return (
-    &lt;Image source={{ uri: photoUri }}
-      style={{ width: '100%', height: '100%' }}
-    /&gt;
-  );
-}
-// Inspector opens the photo in a separate app
-// to annotate, loses the link between annotation
-// and issue, forgets which annotation belongs
-// to which photo.</pre>
-        </div>
-        <div class="col after">
-          <span class="tag">AFTER: annotation canvas with undo/redo</span>
-          <pre>interface Stroke {
-  tool: 'arrow' | 'circle' | 'rect'
-       | 'pen' | 'text';
-  points: { x: number; y: number }[];
-  color: string;      // 7 preset colors
-  width: number;      // 1-8 px
-  text?: string;      // for text tool
-}
-
-function addStroke(stroke: Stroke) {
-  const next = [...strokes, stroke];
-  setStrokes(next);
-  // Push to history, truncating forward
-  const nextHistory = [
-    ...history.slice(0, historyIndex + 1),
-    next
-  ];
-  setHistory(nextHistory);
-  setHistoryIndex(nextHistory.length - 1);
-}
-
-function undo() {
-  if (historyIndex &gt; 0) {
-    setHistoryIndex(historyIndex - 1);
-    setStrokes(history[historyIndex - 1]);
-  } else if (historyIndex === 0) {
-    setHistoryIndex(-1);
-    setStrokes([]);
-  }
-}
-
-// Strokes are serializable — survive restarts,
-// export with photos, sync via backup.</pre>
-        </div>
+<section class="section" id="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card animate">
+        <div class="stat-num">676</div>
+        <div class="stat-label">Tests Passing</div>
       </div>
-      <div class="callout reveal d4">
-        <div class="label">▸ Why this matters</div>
-        <p>Including this exhibit because the <em>interesting</em> part is the design choice, not the drawing API. The decision to make annotations serializable (so they survive app restarts and export with photos) and the undo/redo history stack (so 20 strokes of careful markup aren't lost to a single mis-tap) are product decisions that happen to be implemented in TypeScript. The technology is trivial; the design is the story.</p>
+      <div class="stat-card animate delay-1">
+        <div class="stat-num">77<span>%</span></div>
+        <div class="stat-label">Code Coverage</div>
+      </div>
+      <div class="stat-card animate delay-2">
+        <div class="stat-num">120</div>
+        <div class="stat-label">Source Files</div>
+      </div>
+      <div class="stat-card animate delay-3">
+        <div class="stat-num" style="font-size:1.6rem;padding-top:6px;">Zero</div>
+        <div class="stat-label">Cloud Dependency</div>
       </div>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="wrap">
-    <div class="eye reveal">09 · Numbers</div>
-    <h2 class="reveal d1 h2-intro">The numbers that tell the story.</h2>
-    <div class="metrics-grid">
-      <div class="metric reveal">
-        <div class="lbl">Test Suites</div>
-        <div class="val">85</div>
-        <div class="desc">Comprehensive coverage across services, components, stores, and accessibility. Jest + jest-expo + @testing-library/react-native.</div>
-      </div>
-      <div class="metric reveal d1">
-        <div class="lbl">Tests Passing</div>
-        <div class="val">676</div>
-        <div class="desc">All tests green. 77% code coverage reported by jest --coverage.</div>
-      </div>
-      <div class="metric reveal d2">
-        <div class="lbl">Code Coverage</div>
-        <div class="val">77<span class="unit">%</span></div>
-        <div class="desc">Line coverage across 120 source files. Coverage gaps noted in coverage.json.</div>
-      </div>
-      <div class="metric reveal d3">
-        <div class="lbl">Source Files</div>
-        <div class="val">120</div>
-        <div class="desc">TypeScript and TSX files across src/ directory. Modular architecture with repository pattern.</div>
-      </div>
-      <div class="metric reveal">
-        <div class="lbl">Annotation Tools</div>
-        <div class="val">5</div>
-        <div class="desc">Arrow, circle, rectangle, freehand pen, text overlay. 7 preset colors, 1-8px adjustable stroke.</div>
-      </div>
-      <div class="metric reveal d1">
-        <div class="lbl">PDF Templates</div>
-        <div class="val">8</div>
-        <div class="desc">Branded report templates with project summary, issues, and photos. Generated client-side via expo-print.</div>
-      </div>
-      <div class="metric reveal d2">
-        <div class="lbl">Export Formats</div>
-        <div class="val">4</div>
-        <div class="desc">PDF, ZIP, JSON, CSV. All support optional password encryption.</div>
-      </div>
-      <div class="metric reveal d3">
-        <div class="lbl">Cloud Data</div>
-        <div class="val">0</div>
-        <div class="desc">Zero cloud dependency. Completely offline-first. Data excluded from OS cloud backups.</div>
+<section class="cta">
+  <div class="container">
+    <div class="cta-box animate">
+      <h2>Ready to audit offline?</h2>
+      <p>Experience the full interface in the interactive simulator, or explore the source to see how offline-first architecture is done right.</p>
+      <div class="cta-buttons">
+        <a href="./simulator/" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Try Interactive Demo
+        </a>
+        <a href="#" class="btn btn-secondary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          View on GitHub
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="wrap">
-    <div class="eye reveal">10 · Decisions</div>
-    <h2 class="reveal d1 h2-intro">Five questions worth answering slowly.</h2>
-    <p class="lede reveal d2">Short answer first — long answer if you need it.</p>
-    <div class="decisions">
-      <details class="decision reveal">
-        <summary><span class="qnum">Q01</span><span class="q">Why completely offline-first?</span><span class="arrow">+</span></summary>
-        <div class="body">
-          <p class="short">Construction sites have no cell signal in basements, steel frames, and remote locations. An app that requires connectivity fails where inspectors actually work.</p>
-          <p class="long">The offline-first architecture isn't a fallback mode — it's the only mode. All data is stored locally in SQLite. All photos are on the file system. All exports are generated client-side. The app never pings a server for core functionality. This makes it faster (no network latency), more reliable (no connection drops), more private (no data leaves the device), and cheaper (no SaaS subscription). The tradeoff is no real-time collaboration — but structural engineers don't need Slack, they need a tool that works in a basement.</p>
-        </div>
-      </details>
-      <details class="decision reveal d1">
-        <summary><span class="qnum">Q02</span><span class="q">Why SQLite instead of a cloud database?</span><span class="arrow">+</span></summary>
-        <div class="body">
-          <p class="short">SQLite is queryable, transactional, and requires zero network. It's the right database for a device that may not have connectivity for days.</p>
-          <p class="long">Cloud databases require connectivity, have latency, and create vendor lock-in. SQLite is embedded, ACID-compliant, and well-supported on mobile via expo-sqlite. WAL mode improves concurrency. Foreign keys enforce referential integrity. Parameterized queries prevent SQL injection. The database file can be backed up, encrypted, and migrated as a single unit. For a tool that must work without a network, an embedded database isn't a compromise — it's the correct architecture.</p>
-        </div>
-      </details>
-      <details class="decision reveal d2">
-        <summary><span class="qnum">Q03</span><span class="q">Why field-level encryption instead of full-disk?</span><span class="arrow">+</span></summary>
-        <div class="body">
-          <p class="short">Full-disk encryption protects against device theft but not against unlocked-device access. Field-level encryption adds a second gate: even if the phone is unlocked, sensitive data remains encrypted until biometric auth succeeds.</p>
-          <p class="long">Modern phones have full-disk encryption. This protects data at rest if the device is stolen and powered off. But it does nothing if the device is unlocked and an unauthorized user picks it up. Field-level AES-256-GCM encryption with device-bound keys in expo-secure-store means that even on an unlocked phone, template content and backup archives are ciphertext without biometric authentication. The encryption keys never leave the secure enclave. This is defense in depth: disk encryption for theft, field encryption for unauthorized access.</p>
-        </div>
-      </details>
-      <details class="decision reveal d3">
-        <summary><span class="qnum">Q04</span><span class="q">Why React Native instead of Flutter?</span><span class="arrow">+</span></summary>
-        <div class="body">
-          <p class="short">Existing skill graph, component library, and Expo SDK 52 native modules favored React Native without ejecting.</p>
-          <p class="long">Flutter is a valid alternative with excellent performance. React Native was chosen because: (1) existing codebase and team expertise were React/TypeScript-based, (2) Expo SDK 52 provides first-class native modules for every requirement without ejecting, (3) HeroUI Native provided accessible, well-designed primitives, (4) the React Native ecosystem has better support for Skia-based 2D drawing needed for the annotation canvas.</p>
-        </div>
-      </details>
-      <details class="decision reveal d4">
-        <summary><span class="qnum">Q05</span><span class="q">Why dark-first design?</span><span class="arrow">+</span></summary>
-        <div class="body">
-          <p class="short">Construction sites are bright and dusty. Inspectors view screens outdoors in direct sunlight. A dark UI with high-contrast orange accents is more legible in bright conditions.</p>
-          <p class="long">The design philosophy "Precision Craft" rejects generic white-background aesthetics. Construction sites are visually noisy — concrete, steel, dust, bright sunlight. A dark interface with burnt orange accents provides high contrast that's readable in direct sunlight. Dark mode also reduces battery drain on OLED screens and causes less eye strain during all-day site visits. Light mode is available for indoor report review, but dark mode is the default because it's the mode inspectors need most often.</p>
-        </div>
-      </details>
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-left">
+      <span class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+      <span>EverSiteAudit <span style="color:var(--text-sub);font-weight:400">v1.0.0</span></span>
     </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="eye reveal">11 · Timeline</div>
-    <h2 class="reveal d1 h2-intro">Five phases. No phase repeated.</h2>
-    <div class="timeline">
-      <div class="phase reveal">
-        <div class="meta">
-          <div class="pnum">Phase 01</div>
-          <div class="ptitle">Foundation — understanding the vertical</div>
-          <div class="mood">Methodical</div>
-        </div>
-        <div>
-          <p class="story">Started with observation, not code. Interviewed a structural engineer about their site visit workflow. The answer: clipboard in one hand, personal phone in the other, notebook in the back pocket, and a 3-hour report-writing session back at the office. Every feature is downstream of that observation. The annotation canvas exists because inspectors need to circle cracks and draw arrows. The template system exists because every inspection type has a standard checklist.</p>
-          <div class="deliverable">FEATURES.md · design.md · database.md · safety.md · master.md · Complete spec before first component</div>
-        </div>
-      </div>
-      <div class="phase reveal">
-        <div class="meta">
-          <div class="pnum">Phase 02</div>
-          <div class="ptitle">Architecture — security by design</div>
-          <div class="mood">Surgical</div>
-        </div>
-        <div>
-          <p class="story">Wrote the security protocol before writing UI components. Key decision: encrypt at the field level, not just the disk level. SQLite schema designed with required columns on every table: id, created_at, updated_at, sync_status, version. Parameterized queries mandated. Soft deletes enforced. Excluded from cloud backups.</p>
-          <div class="deliverable">safety.md · database.md · OWASP ASVS Level 3 alignment · Encryption schema · Backup architecture</div>
-        </div>
-      </div>
-      <div class="phase reveal">
-        <div class="meta">
-          <div class="pnum">Phase 03</div>
-          <div class="ptitle">Build — React Native + Expo + SQLite</div>
-          <div class="mood">Ambitious</div>
-        </div>
-        <div>
-          <p class="story">Implemented the full stack: React Native 0.76 with Expo SDK 52, Expo Router file-system navigation, SQLite WAL mode with foreign keys, Zustand state management, Tailwind CSS v4 + native StyleSheet hybrid, HeroUI Native components, FlashList virtualization, Poppins + Lora typography. Six core database entities. Native camera integration. Annotation canvas with 5 tools, 7 colors, adjustable stroke, and full undo/redo history.</p>
-          <div class="deliverable">120 source files · SQLite schema · 6 entities · Camera · Annotation canvas · Templates · Issue tracking</div>
-        </div>
-      </div>
-      <div class="phase reveal">
-        <div class="meta">
-          <div class="pnum">Phase 04</div>
-          <div class="ptitle">Hardening — exports, encryption, biometric gate</div>
-          <div class="mood">Determined</div>
-        </div>
-        <div>
-          <p class="story">Added 8 branded PDF report templates generated client-side via expo-print. Added ZIP/JSON/CSV exports with optional password encryption. Implemented AES-256-GCM field encryption with device-bound keys in expo-secure-store. Implemented biometric authentication with configurable auto-lock timeout. Added encrypted backup and device migration wizard. Added deep linking and OS Quick Actions. Comprehensive test suite: 85 suites, 676 tests, 77% coverage.</p>
-          <div class="deliverable">8 PDF templates · 4 export formats · AES-256-GCM · Biometric auth · Encrypted backups · 676 tests</div>
-        </div>
-      </div>
-      <div class="phase reveal">
-        <div class="meta">
-          <div class="pnum">Phase 05</div>
-          <div class="ptitle">Ship — v1.0.0 release</div>
-          <div class="mood">Pragmatic</div>
-        </div>
-        <div>
-          <p class="story">Final pass: type-checking, linting, formatting, full test suite, verification script. CHANGELOG.md written with semantic versioning. EAS Build configured for iOS and Android. Precommit hooks run full verification before every commit. Known limitations documented: coverage gaps in edge-case error paths, large photo galleries may need pagination on very old devices, biometric auth requires hardware support.</p>
-          <div class="deliverable">v1.0.0 release · CHANGELOG.md · EAS Build config · 77% coverage · Known limitations documented</div>
-        </div>
-      </div>
+    <div class="footer-links">
+      <a href="#features">Features</a>
+      <a href="#screenshots">Screenshots</a>
+      <a href="#stats">Stats</a>
+      <a href="./simulator/">Demo</a>
     </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="eye reveal">12 · Reflection</div>
-    <h2 class="reveal d1 h2-intro">What surprised me. What I'd do differently. What's next.</h2>
-    <div class="reflection-grid">
-      <div class="block reveal">
-        <div class="label">Surprised by</div>
-        <h3>How much the annotation canvas mattered.</h3>
-        <p>It was originally a nice-to-have feature, but during early testing, every inspector gravitated to it immediately. The ability to draw an arrow to a crack and circle a problem area turned out to be the feature that made the app feel professional instead of just functional. The undo/redo history stack was added after watching an inspector accidentally clear 12 strokes of careful markup and sigh with frustration. That single interaction changed the priority from P2 to P0.</p>
-      </div>
-      <div class="block reveal d1">
-        <div class="label">Would do differently</div>
-        <h3>Build the export pipeline earlier.</h3>
-        <p>PDF generation with expo-print has platform-specific quirks (page breaks, image scaling, font embedding) that surfaced late in the build. Starting the export service in phase 3 instead of phase 4 would have caught these issues before the UI was fully polished around incorrect assumptions. The template system also needed more user input — the 4 pre-loaded templates are generic, and every firm wanted custom templates from day one.</p>
-      </div>
-      <div class="block reveal d2">
-        <div class="label">What's next</div>
-        <h3>Template marketplace, cloud sync opt-in, iPad optimization.</h3>
-        <p>Custom template marketplace for specialized inspections (electrical, plumbing, structural, safety, environmental). Cloud sync as an opt-in feature for firms that want central data repositories while keeping offline-first as default. iPad optimization for larger annotation canvas. Integration with Bluebeam or AutoCAD for structural drawings. Team collaboration via peer-to-peer sync on local WiFi.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer class="recursive">
-  <div class="wrap">
-    <div class="eye reveal">13 · That's it</div>
-    <h2 class="reveal d1">EverSiteAudit exists because construction professionals deserve better than clipboard chaos and camera roll clutter.</h2>
-    <p class="cta-line reveal d2">The annotation canvas turns photos into evidence. The template system turns checklists into consistency. The export pipeline turns field notes into professional deliverables. The encryption turns liability into confidence. And the offline-first architecture turns a basement with no cell signal into a fully functional workspace.</p>
-    <div class="reveal d3">
-      <a class="cta" href="#architecture">See the architecture again</a>
-    </div>
-    <div class="next reveal">Next: EverTaskTools — the same discipline applied to task management and tooling, where the stakes aren't structural integrity but team productivity and deadline accountability.</div>
   </div>
 </footer>
 
-<div class="integrity">
-  <div class="row">
-    <strong>Verbatim quotes</strong> — Design tokens (colors, typography), encryption specs (AES-256-GCM, PBKDF2), test metrics (676 tests, 77% coverage, 85 suites), stack versions, and offline-first claims are quoted verbatim from source files listed in <code>project.manifest.json</code>. Test framework: <em>Jest + jest-expo</em> (consistent across README and package.json). Known limitations (coverage gaps, large gallery pagination, biometric hardware requirement) listed verbatim from CHANGELOG.md. Zero cloud dependency verified across FEATURES.md, database.md, and CHANGELOG.md.
-  </div>
-</div>
-
 <script>
-(() => {
-  const targets = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  targets.forEach(t => obs.observe(t));
-})();
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:.1});
+document.querySelectorAll('.animate').forEach(el=>observer.observe(el));
 </script>
 </body>
 </html>
